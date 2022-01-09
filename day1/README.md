@@ -7,13 +7,13 @@
 
 - 목차
   * [1. 클라우드 장비에 접속](#1-클라우드-장비에-접속)
-  * [2. Docker 명령어 실습](#3-Docker-명령어-실습)
+  * [2. Docker 명령어 실습](#2-Docker-명령어-실습)
     - [2-1. Docker 기본 명령어](#Docker-기본-명령어)
     - [2-2. Docker 고급 명령어](#Docker-고급-명령어)
-  * [3. Docker Compose 명령어 실습](#4-Docker-Compose-명령어-실습)
+  * [3. Docker Compose 명령어 실습](#3-Docker-Compose-명령어-실습)
     - [3-1. Docker Compose 기본 명령어](#Docker-Compose-기본-명령어)
     - [3-2. Docker Compose 고급 명령어](#Docker-Compose-고급-명령어)
-  * [4. 참고 자료](#8-참고-자료)
+  * [4. 참고 자료](#4-참고-자료)
 <br>
 
 
