@@ -63,7 +63,7 @@ docker rm -f `docker ps -aq`
 cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex1
 ```
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -214,7 +214,7 @@ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9880/test
 > 컨테이너가 종료된 터미널의 프롬프트(도커의 경우 root@2a50c30293829 형식)를 통해 확인할 수 있습니다
 
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -398,7 +398,7 @@ root@7d33f313cc13:~#
 #### 3-3-2. 1번 예제 실습이 모두 종료되었으므로 <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 혹은 <kbd>exit</kbd> 명령으로 컨테이너를 종료합니다
 
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -654,7 +654,7 @@ cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex3
 docker-compose down
 ```
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -835,7 +835,7 @@ done
 #### 5-3-2. 1번 예제 실습이 모두 종료되었으므로 <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 혹은 <kbd>exit</kbd> 명령으로 컨테이너를 종료합니다
 
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -1118,7 +1118,7 @@ docker-compose -f web.yml down --remove-orphans
 #### 6-3-2. 1번 예제 실습이 모두 종료되었으므로 <kbd><samp>ctrl</samp>+<samp>d</samp></kbd> 혹은 <kbd>exit</kbd> 명령으로 컨테이너를 종료합니다
 
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -1224,7 +1224,7 @@ services:
 #### 7-4-2. 1번 예제 실습이 모두 종료되었으므로 <kbd><samp>ctrl</samp>+<samp>d</samp></kbd> 혹은 <kbd>exit</kbd> 명령으로 컨테이너를 종료합니다
 
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -1328,7 +1328,7 @@ cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex7
 docker-compose down
 ```
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -1469,7 +1469,7 @@ docker-compose down
 ```
 
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
@@ -1586,7 +1586,7 @@ docker-compose down
 </details>
 <br>
 
-[목차로 돌아가기](#2일차-트레저데이터-플루언트디-파일-수집)
+[목차로 돌아가기](#2일차-스트림-데이터-수집)
 
 <br>
 <br>
