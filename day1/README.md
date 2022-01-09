@@ -1,6 +1,6 @@
 # 1일차. 데이터 엔지니어링 기본
 
-> 전체 과정에서 사용하는 기본적인 명령어 혹은 서비스(git, docker, docker-compose, linux, hdfs, sql) 등에 대해 실습하고 사용법을 익힙니다.
+> 클라우드 장비에 접속하여 인스턴스를 기동하고, 도커 및 컴포즈를 통한 기본 명령어를 학습합니다
 
 - 범례
   * :green_book: : 기본, :blue_book: : 중급, :closed_book: : 고급
@@ -1183,3 +1183,7 @@ docker-compose down
 * [Docker Cheatsheet](https://dockerlabs.collabnix.com/docker/cheatsheet/)
 * [Docker Compose Cheatsheet](https://devhints.io/docker-compose)
 * [Compose Cheatsheet](https://buildvirtual.net/docker-compose-cheat-sheet/)
+* [Install Docker Desktop on Windows](https://docs.docker.com/desktop/windows/install/)
+> ***Docker Desktop 약관 업데이트*** : 대규모 조직(직원 250명 이상 또는 연간 매출 1천만 달러 이상)에서 Docker Desktop을 전문적으로 사용하려면 유료 Docker 구독이 필요합니다. 본 약관의 발효일은 2021년 8월 31일이지만 유료 구독이 필요한 경우 2022년 1월 31일까지 유예 기간이 있습니다. 자세한 내용은 블로그 Docker is Updating and Extending Our Product Subscriptions 및 Docker Desktop License Agreement를 참조하십시오.
+* [Docker is Updating and Extending Our Product Subscariptions](https://www.docker.com/blog/updating-product-subscriptions/)
+
