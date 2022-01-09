@@ -55,12 +55,12 @@ docker rm -f `docker ps -aq`
 
 ### 1-3. 이번 실습은 예제 별로 다른 컨테이너를 사용합니다
 
-> `cd /home/ubuntu/work/data-engineer-advanced-training/day3/`<kbd>ex1</kbd> 와 같이 마지막 경로가 다른 점에 유의 하시기 바랍니다
+> `cd /home/ubuntu/work/data-engineer-advanced-training/day2/`<kbd>ex1</kbd> 와 같이 마지막 경로가 다른 점에 유의 하시기 바랍니다
 
 * 1번 실습의 경로는 <kbd>ex1</kbd>이므로 아래와 같습니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex1
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex1
 ```
 
 [목차로 돌아가기](#2일차-스트림-데이터-수집)
@@ -81,7 +81,7 @@ cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex1
 
 ### 2-1. 도커 컨테이너 기동
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex1
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex1
 docker-compose pull
 docker-compose up -d
 ```
@@ -237,10 +237,10 @@ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9880/test
 > 이전 실습에서 기동된 컨테이너를 종료 후, 기동합니다.
 
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex1
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex1
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex2
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex2
 docker-compose pull
 docker-compose up -d
 ```
@@ -360,7 +360,7 @@ fluentd
 
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex2
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex2
 docker-compose exec fluentd bash
 ```
 ```bash
@@ -417,10 +417,10 @@ root@7d33f313cc13:~#
 > 이전 실습에서 기동된 컨테이너를 종료 후, 기동합니다.
 
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex2
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex2
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex3
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex3
 docker-compose pull
 docker-compose up -d
 ```
@@ -573,7 +573,7 @@ fluentd
 
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex3
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex3
 docker-compose exec fluentd bash
 ```
 ```bash
@@ -585,7 +585,7 @@ python flush_logs.py
 * 별도의 터미널을 통해 로그가 생성되는지 확인합니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex3
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex3
 docker-compose exec fluentd bash
 ```
 ```
@@ -650,7 +650,7 @@ root@2cf7c79e8367:~# for x in $(seq 1 100); do tree -L 1 /fluentd/source; tree -
 ### 4-4. 컨테이너 정리
 * 테스트 작업이 완료되었으므로 모든 컨테이너를 종료합니다 (한번에 실행중인 모든 컨테이너를 종료합니다)
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex3
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex3
 docker-compose down
 ```
 
@@ -672,10 +672,10 @@ docker-compose down
 > 이전 실습에서 기동된 컨테이너를 종료 후, 기동합니다.
 
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex3
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex3
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex4
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex4
 docker-compose pull
 docker-compose up -d
 ```
@@ -777,7 +777,7 @@ fluentd
 * 별도로 컨테이너에 접속하여 예제로 현재 시간을 넣고 로그를 출력합니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex4
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex4
 docker-compose exec fluentd bash
 ```
 <br>
@@ -859,10 +859,10 @@ done
 > 이전 실습에서 기동된 컨테이너를 종료 후, 기동합니다.
 
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex4
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex4
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex5
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex5
 docker-compose pull
 docker-compose up -d
 ```
@@ -986,7 +986,7 @@ docker-compose logs -f ubuntu
 <br>
 
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex5
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex5
 docker-compose logs -f fluentd
 ```
 > 플루언트디로 전송되어 출력이 되는지 확인합니다
@@ -1131,10 +1131,10 @@ docker-compose -f web.yml down --remove-orphans
 
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex5
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex5
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex6
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex6
 docker-compose pull
 docker-compose up -d
 docker ps
@@ -1238,10 +1238,10 @@ services:
 * `docker` 가 경로를 생성하면 root 권한으로 생성되어 `fluentd`가 파일저장에 실패할 수 있습니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex6
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex6
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex7
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
 mkdir source
 mkdir target
 docker-compose up -d
@@ -1310,12 +1310,12 @@ networks:
 * 첫 번째 프로세스가 파일로 받은 입력을 표준 출력으로 내보내는 프로세스입니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex7
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
 for x in $(seq 1 1000); do sleep 0.1 ; echo "{\"hello\":\"world\"}" >> source/start.log; done
 ```
 * 두 번째 프로세스는 HTTP 로 입력 받은 내용을 표준 출력으로 내보내는 프로세스입니다
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex7
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
 curl -XPOST -d "json={\"hello\":\"world\"}" http://localhost:9880/test
 ```
 <br>
@@ -1324,7 +1324,7 @@ curl -XPOST -d "json={\"hello\":\"world\"}" http://localhost:9880/test
 
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex7
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
 docker-compose down
 ```
 
@@ -1340,10 +1340,10 @@ docker-compose down
 ### 9-1. 서비스를 기동하고 별도의 터미널을 통해서 멀티프로세스 기능을 확인합니다 (반드시 source/target 경로를 호스트에서 생성합니다)
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex7
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex8
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex8
 mkdir source
 mkdir target
 docker-compose up -d
@@ -1480,10 +1480,10 @@ docker-compose down
 ### 10-1. 서비스를 기동합니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex8
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex8
 docker-compose down
 
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex9
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex9
 docker-compose up -d
 ```
 <br>
@@ -1552,7 +1552,7 @@ docker ps
 * WARN: 현재 노드수가 1개밖에 없어서 Replication 오류가 나고 있습니다. 
   - 네임노드가 정상 기동될 때까지 약 30초 정도 대기합니다
 ```bash
-cd /home/ubuntu/work/data-engineer-advanced-training/day3/ex9
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex9
 sleep 30
 ./progress.sh
 ```

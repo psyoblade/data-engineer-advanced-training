@@ -734,8 +734,8 @@ docker rm -f `docker ps -aq`
 ```bash
 # terminal
 cd /home/ubuntu/work
-git clone https://github.com/psyoblade/data-engineer-${course}-training.git
-cd /home/ubuntu/work/data-engineer-${course}-training/day1
+git clone https://github.com/psyoblade/data-engineer-advanced-training.git
+cd /home/ubuntu/work/data-engineer-advanced-training/day1
 ```
 <br>
 
