@@ -1,6 +1,7 @@
 # 5일차. 스트리밍 파이프라인 설계
 
-> 아파치 카프카 및 드루이드를 이용하여 스트리밍 메시지에서 드루이드를 이용한 실시간 데이터 조회까지 실습합니다
+> 플루언트디를 통해 로그를 수집하여 카프카에 저장하고, 카프카에 저장된 데이터를 스파크 스트리밍을 통해 풍부하게(enrich)하여, 카프카에 다시 저장하고, 이를 드루이드 적재기를 통해서 드루이드 테이블로 적재 후, 터닐로를 통해 실시간 지표를 조회하는 실습을 합니다
+> file -> fluentd -> kafka -> spark-streaming -> kafka -> druid -> turnilo
 
 
 ## 1. 최신버전 업데이트 테이블
@@ -23,4 +24,25 @@ docker-compose pull
 docker-compose up -d
 ```
 <br>
+
+
+## 2. 실습 환경 구성
+* file -> fluentd -> kafka
+  - source: movies@csv
+  - target: movies@kafka
+  - fluentd file.in 구성
+  - fluentd kafka.out 플러그인 구성 - https://docs.fluentd.org/output/kafka
+* kafka -> spark-streaming -> kafka
+  - source: movies@kafka
+  - sink: best-movies@kafka
+  - spark-streaming notebook
+* kafka -> druid-kafka-indexer -> druid
+  - source: best-movies@kafka
+  - target: best-movies@druid
+  - druid kafka-indexer config
+* druid -> turnilo
+  - turnilo druid config
+
+
+
 

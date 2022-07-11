@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  fluentd:
+    container_name: fluentd
+    image: psyoblade/data-engineer-fluentd:2.2
+    # user: root
+    tty: true
+    working_dir: /home/root
+    volumes:
+      - ./fluentd/fluent.conf:/etc/fluentd/fluent.conf
+    ports:
+      - 9880:9880
+    # entrypoint: [ "fluentd" ]
+
+networks:
+  default:
+    name: advanced_day5_network
