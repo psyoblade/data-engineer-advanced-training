@@ -27,15 +27,15 @@ docker-compose up -d
 
 
 ## 2. 실습 환경 구성
-* file -> fluentd -> kafka
-  - source: movies@csv
+* [완료] file -> fluentd -> kafka
+  - source: movies@tsv
   - target: movies@kafka
-  - fluentd file.in 구성
+  - fluentd file.in 구성 [tail](https://docs.fluentd.org/input/tail), [tsv](https://docs.fluentd.org/parser/tsv), [parse](https://docs.fluentd.org/configuration/parse-section)
   - fluentd kafka.out 플러그인 구성 - https://docs.fluentd.org/output/kafka
-* kafka -> spark-streaming -> kafka
+* [진행] kafka -> spark-streaming -> kafka
   - source: movies@kafka
   - sink: best-movies@kafka
-  - spark-streaming notebook
+  - spark-streaming notebook : 읽어는 와 졌지만, 해당 값을 다시 카프카로 저장 시에 오류
 * kafka -> druid-kafka-indexer -> druid
   - source: best-movies@kafka
   - target: best-movies@druid

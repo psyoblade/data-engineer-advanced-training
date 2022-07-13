@@ -8,7 +8,10 @@ services:
     tty: true
     working_dir: /home/root
     volumes:
-      - ./fluentd/fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluentd/config/fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluentd/config/file-to-kafka.conf:/etc/fluentd/file-to-kafka.conf
+      - ./fluentd/config/http-to-kafka.conf:/etc/fluentd/http-to-kafka.conf
+      - ./fluentd/source/movies.txt:/fluentd/source/movies.txt
     ports:
       - 9880:9880
     # entrypoint: [ "fluentd" ]
@@ -38,10 +41,24 @@ services:
       KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "events:1:1"
+      KAFKA_CREATE_TOPICS: "movies:1:1"
       KAFKA_HEAP_OPTS: "-Xmx400m -Xms400m"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  notebook:
+    container_name: notebook
+    user: jovyan
+    privileged: true
+    image: psyoblade/data-engineer-notebook:1.7.2
+    restart: always
+    volumes:
+      - ./notebooks/work:/home/jovyan/work
+    environment:
+      - GRANT_SUDO=yes
+    ports:
+      - "4040:4040"
+      - "4041:4041"
+      - "8888:8888"
 
 networks:
   default:
