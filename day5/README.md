@@ -32,17 +32,22 @@ docker-compose up -d
   - target: movies@kafka
   - fluentd file.in 구성 [tail](https://docs.fluentd.org/input/tail), [tsv](https://docs.fluentd.org/parser/tsv), [parse](https://docs.fluentd.org/configuration/parse-section)
   - fluentd kafka.out 플러그인 구성 - https://docs.fluentd.org/output/kafka
-* [진행] kafka -> spark-streaming -> kafka
+* [완료] kafka -> spark-streaming -> kafka
   - source: movies@kafka
-  - sink: best-movies@kafka
+  - sink: korean\_movies@kafka
   - spark-streaming notebook : 읽어는 와 졌지만, 해당 값을 다시 카프카로 저장 시에 오류
-* kafka -> druid-kafka-indexer -> druid
+* [완료] kafka -> druid-kafka-indexer -> druid
   - source: best-movies@kafka
   - target: best-movies@druid
   - druid kafka-indexer config
-* druid -> turnilo
+* [완료] druid -> turnilo
   - turnilo druid config
 
 
-
+## 3. 실습 커맨드라인
+```bash
+cd opt/kafka ; boot="--bootstrap-server localhost:9093"
+./fluentd -c /etc/fluentd/file-to-kafka.conf
+d run turnilo turnilo --druid http://druid:8082 --print-config --with-comments
+```
 
