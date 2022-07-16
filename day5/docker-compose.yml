@@ -28,12 +28,12 @@ services:
     links:
       - zookeeper
     ports:
-      - "9092:9092"
       - "8083:8083"
+      - "9092-9093:9092-9093"
       - "10001-10005:10001-10005"
     expose:
       - "8083"
-      - "9093"
+      - "9092-9093"
       - "10001-10005"
     environment:
       KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
@@ -49,7 +49,7 @@ services:
     container_name: notebook
     user: jovyan
     privileged: true
-    image: psyoblade/data-engineer-notebook:1.7.2
+    image: psyoblade/data-engineer-notebook:1.7.3
     restart: always
     volumes:
       - ./notebooks/work:/home/jovyan/work
