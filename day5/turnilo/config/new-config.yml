@@ -123,35 +123,20 @@ dataCubes:
         kind: time
         formula: $__time
 
-      - name: country
-        title: Country
-        multiValue: true
-        formula: $country
-
-      - name: genre
-        title: Genre
-        multiValue: true
-        formula: $genre
-
       - name: grade
         title: Grade
         multiValue: true
         formula: $grade
 
-      - name: main_actor
-        title: Main Actor
-        multiValue: true
-        formula: $main_actor
-
-      - name: timestamp
-        title: Timestamp
-        multiValue: true
-        formula: $timestamp
-
       - name: title
         title: Title
         multiValue: true
         formula: $title
+
+      - name: title_eng
+        title: Title Eng
+        multiValue: true
+        formula: $title_eng
 
       # This is the place where you might want to add derived dimensions.
       #
@@ -183,18 +168,6 @@ dataCubes:
       - name: count
         title: Count
         formula: $main.sum($count)
-
-      - name: sum_movie
-        title: Sum Movie
-        formula: $main.sum($sum_movie)
-
-      - name: sum_rate
-        title: Sum Rate
-        formula: $main.sum($sum_rate)
-
-      - name: sum_year
-        title: Sum Year
-        formula: $main.sum($sum_year)
 
       # This is the place where you might want to add derived measures (a.k.a Post Aggregators).
       #

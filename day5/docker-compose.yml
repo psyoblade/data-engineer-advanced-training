@@ -11,7 +11,8 @@ services:
       - ./fluentd/config/fluent.conf:/etc/fluentd/fluent.conf
       - ./fluentd/config/file-to-kafka.conf:/etc/fluentd/file-to-kafka.conf
       - ./fluentd/config/http-to-kafka.conf:/etc/fluentd/http-to-kafka.conf
-      - ./fluentd/source/movies.txt:/fluentd/source/movies.txt
+      - ./fluentd/source/movies:/fluentd/source/movies
+      - ./fluentd/source/split.sh:/fluentd/source/split.sh
     ports:
       - 9880:9880
   zookeeper:
