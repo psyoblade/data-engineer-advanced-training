@@ -41,13 +41,13 @@ docker-compose logs notebook
 
 ## 2. 데이터 변환 스트리밍
 
-### [1. Spark Streaming Introduction](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-1-introduction.html)
-### [2. Spark Streaming Basic](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-2-basic.html)
-### [3. Spark Streaming Tools](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-3-tools.html)
-### [4. Spark Streaming External](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-4-external.html)
-### [5. Spark Streaming Aggregation](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-5-aggregation.html)
-### [6. Spark Streaming Join](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-6-join.html)
-### [7. Spark Streaming Questions](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day4/notebooks/lgde-spark-stream/lgde-spark-stream-7-questions.html)
+### [1. Spark Streaming Introduction](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-1-introduction.html)
+### [2. Spark Streaming Basic](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-2-basic.html)
+### [3. Spark Streaming Tools](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-3-tools.html)
+### [4. Spark Streaming External](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-4-external.html)
+### [5. Spark Streaming Aggregation](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-5-aggregation.html)
+### [6. Spark Streaming Join](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-6-join.html)
+### [7. Spark Streaming Questions](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-stream/lgde-spark-stream-7-questions.html)
 
 <br>
 
