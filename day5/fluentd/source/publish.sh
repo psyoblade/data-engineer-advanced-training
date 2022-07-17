@@ -2,7 +2,7 @@
 # prompt yes 인 경우에 수행하며 실행 후에 sleep_secs 만큼 슬립
 # 입력된 파일의 2번째 라인부터 (jump_line 수 만큼, loop_count 수 만큼 반복), 1개 파일 생성
 
-if [[ $# -ne 1 ]]; then echo "illegal args --> ./split.sh movies.txt" ; exit 1 ; fi
+if [[ $# -ne 1 ]]; then echo "illegal args --> ./$0 movies.tsv" ; exit 1 ; fi
 
 input_filename=$1
 if [[ ! -f $input_filename ]]; then echo "illegal filename --> not found $input_filename" ; exit 2 ; fi

@@ -1,7 +1,9 @@
 # Custom
+.idea/
 backup/
 .template
 .DS_Store
+Untitled*.ipynb
 __pycache__/
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
@@ -9,6 +11,7 @@ datanode/
 day3/notebooks/data/
 day3/notebooks/lgde-spark-stream/data/
 day5/fluentd/source/movies/
+day5/fluentd/source/movies.pos
 namenode/
 nodes/
 logs/

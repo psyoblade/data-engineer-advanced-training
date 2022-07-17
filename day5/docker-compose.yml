@@ -3,18 +3,15 @@ version: "3"
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:2.3
     user: root
     tty: true
     working_dir: /home/root
     volumes:
-      - ./fluentd/config/fluent.conf:/etc/fluentd/fluent.conf
-      - ./fluentd/config/file-to-kafka.conf:/etc/fluentd/file-to-kafka.conf
-      - ./fluentd/config/http-to-kafka.conf:/etc/fluentd/http-to-kafka.conf
-      - ./fluentd/source/movies:/fluentd/source/movies
-      - ./fluentd/source/split.sh:/fluentd/source/split.sh
+      - ./fluentd/config:/fluentd/config
+      - ./fluentd/source:/fluentd/source
     ports:
-      - 9880:9880
+      - 9881:9881
   zookeeper:
     container_name: zookeeper
     image: psyoblade/data-engineer-zookeeper:1.0
