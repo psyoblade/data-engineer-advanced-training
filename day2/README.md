@@ -246,7 +246,6 @@ docker-compose up -d
 ```
 <br>
 
-
 #### 3-1-1 도커 컴포즈 파일 구성 `docker-compose.yml`
 
 ```yaml
@@ -435,7 +434,7 @@ version: "3"
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     volumes:
@@ -690,7 +689,7 @@ version: "3"
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     ports:
@@ -892,7 +891,7 @@ services:
         tag: docker.fortune
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     ports:
@@ -1073,7 +1072,7 @@ services:
         tag: docker.{{.Name}}
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     ports:
@@ -1256,7 +1255,7 @@ version: "3"
 services:
   fluentd:
     container_name: multi-process
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     volumes:
       - ./fluent.conf:/etc/fluentd/fluent.conf
@@ -1358,7 +1357,7 @@ version: "3"
 services:
   fluentd:
     container_name: multi-process-ex
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     volumes:
       - ./fluent.conf:/etc/fluentd/fluent.conf
@@ -1495,7 +1494,7 @@ version: "3"
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     depends_on:
       - namenode
       - datanode
