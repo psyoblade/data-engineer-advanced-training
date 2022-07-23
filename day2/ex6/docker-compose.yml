@@ -18,7 +18,7 @@ services:
 
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     volumes:
       - ./fluentd/fluent.conf:/etc/fluentd/fluent.conf
     links:

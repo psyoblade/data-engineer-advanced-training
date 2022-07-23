@@ -100,7 +100,7 @@ version: "3"
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     ports:
@@ -255,7 +255,7 @@ version: "3"
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     ports:
@@ -499,7 +499,7 @@ networks:
   - 로그파일이 새로 작성(log-rotate) 되더라도 최대 5초간 대기합니다
 * 매치 플러그인 설정
   - 즉각적인 확인을 위해 최대한 자주 플러시 하도록 설정 했습니다
-<br>
+  <br>
 
 
 #### 4-1-3. 아파치 로그 생성기 (`flush_logs.py`) 코드를 분석합니다
@@ -751,7 +751,7 @@ networks:
   - lgde 태그를 통해 전송되는 로그에 대해서 '2021-07-18 22:28:00' 포맷으로 변환합니다
   - `filtered_logtime` 컬럼이 추가됩니다
   - 출력 포맷 또한 JSON 이며 현재 시간을 기준으로 출력됩니다
-<br>
+  <br>
 
 
 
@@ -850,7 +850,7 @@ done
 * 설정된 로그 수집기(fluent.conf)를 통해 로그를 출력합니다
 * 하나의 애플리케이션과 전송 에이전트가 하나의 셋트로 배포됩니다
   - **결국 다른 수집기(aggregator)로 전송하여 전체 로그를 집계**하게 됩니다
-<br>
+  <br>
 
 
 
@@ -950,7 +950,7 @@ networks:
 * 필터 플러그인 설정
   - docker 로 시작하는 태그를 모두 필터하고, JSON 포맷만 전달합니다
   - dokcer 로 시작하는 태그 이벤트를 필터하여 docker.{} 에 해당하는 레코드를 추가합니다
-<br>
+  <br>
 
 
 

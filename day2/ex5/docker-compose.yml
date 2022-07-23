@@ -18,7 +18,7 @@ services:
         tag: docker.fortune
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     tty: true
     ports:

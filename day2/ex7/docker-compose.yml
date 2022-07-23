@@ -3,7 +3,7 @@ version: "3"
 services:
   fluentd:
     container_name: multi-process
-    image: psyoblade/data-engineer-fluentd:2.1
+    image: psyoblade/data-engineer-fluentd:2.2
     user: root
     volumes:
       - ./fluent.conf:/etc/fluentd/fluent.conf
