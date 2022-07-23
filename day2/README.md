@@ -112,7 +112,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex1_network
 ```
 > 플루언트디가 9880 포트를 통해 http 웹서버를 기동했기 때문에 컴포즈 파일에서 해당 포트를 노출시킨 점도 확인합니다
 
@@ -266,7 +266,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex2_network
 ```
 > 저장되는 로그를 호스트 장비의 볼륨에 마운트하여 컨테이너가 종료되는 경우에도 유지될 수 있도록 구성합니다
 <br>
@@ -447,7 +447,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex3_network
 ```
 > 아파치 웹서버의 로그가 생성될 source 경로와 수집된 로그가 저장될 target 경로를 호스트 경로에 마운트 되었습니다.
 <br>
@@ -700,7 +700,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex4_network
 
 ```
 > 시간 정보를 담은 JSON 을 전송할 포트를 8080 으로 정했습니다  
@@ -849,9 +849,8 @@ done
 * 설정된 로그 수집기(fluent.conf)를 통해 로그를 출력합니다
 * 하나의 애플리케이션과 전송 에이전트가 하나의 셋트로 배포됩니다
   - **결국 다른 수집기(aggregator)로 전송하여 전체 로그를 집계**하게 됩니다
-  <br>
 
-
+<br>
 
 ### 6-1. 이전 컨테이너 종료 및 컨테이너 기동
 
@@ -903,7 +902,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex5_network
 ```
 > 로그를 생성하는 ubuntu 컨테이너와 로그를 수신하는 fluentd 컨테이너를 기동합니다
 
@@ -1084,7 +1083,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex5_web_network
 ```
 
 * 기존에 떠 있던 컨테이너를 종료하고 `web.yml`을 기동합니다
@@ -1121,8 +1120,6 @@ docker-compose -f web.yml down --remove-orphans
 
 <br>
 <br>
-
-
 
 ## 7. 도커 컴포즈를 통한 로그 전송 구성
 
@@ -1214,6 +1211,10 @@ services:
       - elasticsearch
     ports:
       - 5601:5601
+
+networks:
+  default:
+    name: day2_ex6_network
 ```
 
 ### 7-4. 에이전트 및 컨테이너 종료
@@ -1227,8 +1228,6 @@ services:
 
 <br>
 <br>
-
-
 
 ## 8. 멀티 프로세스를 통한 성능 향상
 
@@ -1269,7 +1268,7 @@ services:
 
 networks:
   defualt:
-    name: default_network
+    name: day2_ex7_network
 ```
 
 ### 8-3. `fluentd.conf` 파일 구성
@@ -1332,8 +1331,6 @@ docker-compose down
 <br>
 <br>
 
-
-
 ## 9. 멀티 프로세스를 통해 하나의 위치에 저장
 
 ### 9-1. 서비스를 기동하고 별도의 터미널을 통해서 멀티프로세스 기능을 확인합니다 (반드시 source/target 경로를 호스트에서 생성합니다)
@@ -1374,7 +1371,7 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex8_network
 ```
 <br>
 
