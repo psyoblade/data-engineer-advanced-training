@@ -72,3 +72,7 @@ services:
 volumes:
   elasticsearchdata:
   elasticsearchlogs:
+
+network:
+  default:
+    name: day2_ex6_network

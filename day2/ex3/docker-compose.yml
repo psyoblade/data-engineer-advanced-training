@@ -16,4 +16,4 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: day2_ex3_network
