@@ -14,18 +14,18 @@
     - [Docker Compose 기본 명령어](#Docker-Compose-기본-명령어)
     - [Docker Compose 고급 명령어](#Docker-Compose-고급-명령어)
   * [4. 참고 자료](#4-참고-자료)
-<br>
+  <br>
 
 
 ## 1. 클라우드 장비에 접속
 
-> 개인 별로 할당 받은 `ubuntu@vm[number].aiffelbiz.co.kr` 에 putty 혹은 terminal 을 이용하여 접속합니다
-
+> 개인 별로 할당 받은 `ubuntu@vm{###}.koreacentral.cloudapp.azure.com` 에 putty 혹은 terminal 을 이용하여 접속합니다
 
 ### 1-1. 원격 서버로 접속합니다
+
 ```bash
 # terminal
-# ssh ubuntu@vm001.aiffelbiz.co.kr
+# ssh ubuntu@vm{###}.koreacentral.cloudapp.azure.com
 # password: ******
 ```
 
@@ -369,7 +369,7 @@ docker pull psyoblade/data-engineer-ubuntu:18.04
 cat > Dockerfile
 ```
 
-* 아래의 내용을 복사해서 붙여넣은 다음 <kbd><samp>Ctrl</samp>+<samp>C</samp></kbd> 명령으로 나오면 파일이 생성됩니다
+* 아래의 내용을 복사해서 붙여넣고, 엔터를 친 다음, <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 명령으로 나오면 파일이 생성됩니다
 ```bash
 FROM ubuntu:18.04
 LABEL maintainer="student@lg.com"
@@ -457,8 +457,8 @@ docker run alpine cat /etc/issue
 ```
 <br>
 
+<details><summary> :blue_book: 9. [중급] 위 명령어 실행으로 생성된 컨테이너는 어떻게 삭제할까요?</summary>
 
-<details><summary> :blue_book: 9. [중급] 위의 세번의 명령어 실행으로 생성된 컨테이너는 어떻게 삭제할까요?</summary>
 
 * 전체 컨테이너 목록(-a 옵션으로 중지된 컨테이너까지 확인) 가운데 alpine 을 포함한 목록의 컨테이너 아이디를 찾아 모두 종료합니다
 ```bash
@@ -857,7 +857,7 @@ docker-compose ps -a
 ```bash
 # docker-compose top <services>
 docker-compose top mysql
-docker-compose top namenode
+docker-compose top ubuntu
 ```
 
 #### 3-2-6. 사용한 모든 컨테이너를 종료합니다
@@ -874,7 +874,7 @@ docker-compose down
 
 ### Docker Compose 고급 명령어
 
-> 도커 컴포즈 파일이 어떻게 구성되어 있는지 이해하고, 직접 수정 및 작성할 수 있습니다
+>  도커 컴포즈 파일을 이용하여, MySQL 기본 설정`my.conf` 파일을 커스터마이징 하고, 임의의 데이터를  `init.sql`파일을 통해서 초기화 할 수 있습니다
 
 ### 3-3. 컴포즈 파일을 통한 실습
 
@@ -924,27 +924,6 @@ cd /home/ubuntu/work/compose-training
 for dir in `echo "custom init"`; do mkdir -p $dir; done
 ```
 <br>
-
-
-#### 3-3-3. 터미널에서 `cat` 명령으로 파일 생성하기
-
-> 아래와 같이 `cat > path/filename` 명령 후에 클립보드 내용을 붙여넣어서, vim 편집기 없이도 파일을 생성할 수 있는 간편한 방법입니다
-
-```bash
-# terminal
-mkdir -p /home/ubuntu/work/compose-training/foo
-cat > foo/bar.txt
-```
-
-* 아래의 내용을 복사해서 붙여넣고 <kbd><samp>Ctrl</samp>+<samp>C</samp></kbd> 명령으로 빠져나오면 생성됩니다
-```bash
-data engineer training intermediate course
-hello world
-```
-
-<br>
-
-
 
 ### 3-4. 외부 볼륨을 통한 환경설정
 
@@ -1055,7 +1034,7 @@ docker-compose up -d
 * MySQL 서버에 접속합니다
 ```bash
 sleep 10
-docker exec -it mysql mysql -uuser -ppass
+docker-compose exec mysql mysql -uuser -ppass
 ```
 ```sql
 use testdb;
@@ -1106,6 +1085,10 @@ services:
     restart: always
     ports:
       - 80:80
+      
+networks:
+  default:
+    name: default_network
 ```
 
 ```bash
@@ -1113,10 +1096,9 @@ services:
 docker-compose up -d
 ```
 
-> phpMyAdmin(http://`vm<number>.aiffelbiz.co.kr`) 사이트에 접속하여 서버: `mysql`, 사용자명: `user`, 암호: `pass` 로 접속합니다
+> phpMyAdmin(http://`vm{###}.koreacentral.cloudapp.azure.com`) 사이트에 접속하여 서버: `mysql`, 사용자명: `user`, 암호: `pass` 로 접속합니다
 
 <br>
-
 
 ### 3-7. MySQL 이 정상적으로 로딩된 이후에 접속하도록 설정합니다
 
@@ -1184,6 +1166,7 @@ docker-compose down
 * [Docker Compose Cheatsheet](https://devhints.io/docker-compose)
 * [Compose Cheatsheet](https://buildvirtual.net/docker-compose-cheat-sheet/)
 * [Install Docker Desktop on Windows](https://docs.docker.com/desktop/windows/install/)
+* [Docker Container Memory Limits](https://www.joinc.co.kr/w/man/12/docker/limits#s-4.)
 > ***Docker Desktop 약관 업데이트*** : 대규모 조직(직원 250명 이상 또는 연간 매출 1천만 달러 이상)에서 Docker Desktop을 전문적으로 사용하려면 유료 Docker 구독이 필요합니다. 본 약관의 발효일은 2021년 8월 31일이지만 유료 구독이 필요한 경우 2022년 1월 31일까지 유예 기간이 있습니다. 자세한 내용은 블로그 Docker is Updating and Extending Our Product Subscriptions 및 Docker Desktop License Agreement를 참조하십시오.
 * [Docker is Updating and Extending Our Product Subscariptions](https://www.docker.com/blog/updating-product-subscriptions/)
 
