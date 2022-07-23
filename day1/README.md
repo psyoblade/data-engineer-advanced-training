@@ -231,7 +231,8 @@ docker exec ubuntu20 /tmp/helloworld.sh
 docker rm -f `docker ps -a | grep -v CONTAINER | awk '{ print $1 }'`
 ```
 
-<details><summary> :blue_book: 6. [중급] `nginx` 컨테이너를 시작 후에 프로세스 확인 및 로그를 출력하고 종료하세요 </summary>
+<details><summary> :blue_book: 1. [중급] `nginx` 컨테이너를 시작 후에 프로세스 확인 및 로그를 출력하고 종료하세요 </summary>
+
 
 > 출력 결과가 오류가 발생하지 않고, 아래와 유사하다면 성공입니다
 
@@ -298,7 +299,8 @@ docker image ls | grep ubuntu | grep hello
 ```
 <br>
 
-<details><summary> :green_book: 7. [기본] ubuntu:hello 이미지를 이용하여 helloworld.sh 을 실행하세요</summary>
+<details><summary> :green_book: 2. [기본] ubuntu:hello 이미지를 이용하여 helloworld.sh 을 실행하세요</summary>
+
 
 > 출력 결과가 오류가 발생하지 않고, 아래와 유사하다면 성공입니다
 
@@ -395,7 +397,8 @@ CMD ["/bin/bash"]
 docker build -t ubuntu:local .
 ```
 
-<details><summary> :green_book: 8. [기본] 도커 이미지를 빌드하고 `echo 'hello world'`를 출력해 보세요</summary>
+<details><summary> :green_book: 3. [기본] 도커 이미지를 빌드하고 `echo 'hello world'`를 출력해 보세요</summary>
+
 
 > 출력 결과가 오류가 발생하지 않고, 아래와 유사하다면 성공입니다
 
@@ -457,7 +460,7 @@ docker run alpine cat /etc/issue
 ```
 <br>
 
-<details><summary> :blue_book: 9. [중급] 위 명령어 실행으로 생성된 컨테이너는 어떻게 삭제할까요?</summary>
+<details><summary> :blue_book: 4. [중급] 위 명령어 실행으로 생성된 컨테이너는 어떻게 삭제할까요?</summary>
 
 
 * 전체 컨테이너 목록(-a 옵션으로 중지된 컨테이너까지 확인) 가운데 alpine 을 포함한 목록의 컨테이너 아이디를 찾아 모두 종료합니다
@@ -525,8 +528,8 @@ docker stats ubuntu_500m
 ```
 > <kbd><samp>Ctrl</samp>+<samp>C</samp></kbd> 명령으로 종료합니다
 
+<details><summary> :blue_book: 5. [중급] 메모리 제약을 주지 않은 컨테이너`ubuntu_unlimited`를 기동하고 컨테이너 상태를 확인해 보세요</summary>
 
-<details><summary> :blue_book: 10. [중급] 메모리 제약을 주지 않은 컨테이너`ubuntu_unlimited`를 기동하고 컨테이너 상태를 확인해 보세요</summary>
 
 > 출력 결과가 오류가 발생하지 않고, 아래와 유사하다면 성공입니다
 
@@ -542,7 +545,8 @@ docker stats `docker ps | grep ubuntu_unlimited | awk '{ print $1 }'`
 
 </details>
 
-<details><summary> :blue_book: 11. [중급] 바로 위의 실습 정답을 활용해서 ubuntu 문자열이 포함된 모든 컨테이너를 종료해 보세요</summary>
+<details><summary> :blue_book: 6. [중급] 바로 위의 실습 정답을 활용해서 ubuntu 문자열이 포함된 모든 컨테이너를 종료해 보세요</summary>
+
 
 > 출력 결과가 오류가 발생하지 않고, 아래와 유사하다면 성공입니다
 
@@ -599,7 +603,8 @@ docker rm -f mysql-volatile
 docker volume ls
 ```
 
-<details><summary> :blue_book: 12. [중급] mysql-volatile 컨테이너를 다시 생성하고 테이블을 확인해 보세요</summary>
+<details><summary> :blue_book: 7. [중급] mysql-volatile 컨테이너를 다시 생성하고 테이블을 확인해 보세요</summary>
+
 
 > 테이블이 존재하지 않는다면 정답입니다.
 
@@ -639,7 +644,8 @@ docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
 
 #### 2-9-2. 볼륨 확인 실습
 
-<details><summary> :closed_book: 13. [고급] mysql-persist 컨테이너를 강제 종료하고, 동일한 설정으로 다시 생성하여 테이블이 존재하는지 확인해 보세요</summary>
+<details><summary> :closed_book: 8. [고급] mysql-persist 컨테이너를 강제 종료하고, 동일한 설정으로 다시 생성하여 테이블이 존재하는지 확인해 보세요</summary>
+
 
 > 테이블이 존재하고 데이터가 있다면 정답입니다
 
@@ -770,8 +776,8 @@ docker-compose down
 ```
 <br>
 
+<details><summary> :closed_book: 9. [고급] 컴포즈 명령어(--scale)를 이용하여 우분투 컨테이너를 3개 띄워보세요  </summary>
 
-<details><summary> :closed_book: 14. [고급] 컴포즈 명령어(--scale)를 이용하여 우분투 컨테이너를 3개 띄워보세요  </summary>
 
 > 아래와 유사하게 작성 및 실행했다면 정답입니다
 
