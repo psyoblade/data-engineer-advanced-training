@@ -450,9 +450,8 @@ networks:
     name: day2_ex3_network
 ```
 > 아파치 웹서버의 로그가 생성될 source 경로와 수집된 로그가 저장될 target 경로를 호스트 경로에 마운트 되었습니다.
+
 <br>
-
-
 
 #### 4-1-2 플루언트디 파일 구성 `fluent.conf`
 
@@ -560,9 +559,8 @@ docker-compose exec fluentd bash
 fluentd
 ```
 > 플루언트디의 경우 기동 시에 오류가 없었다면 정상적으로 기동 되었다고 보시면 됩니다
+
 <br>
-
-
 
 #### 4-2-2. 시스템 로그를 임의로 생성
 
@@ -703,9 +701,9 @@ networks:
     name: day2_ex4_network
 
 ```
-> 시간 정보를 담은 JSON 을 전송할 포트를 8080 으로 정했습니다  
-<br>
+> 시간 정보를 담은 JSON 을 전송할 포트를 8080 으로 정했습니다
 
+<br>
 
 #### 5-1-2 플루언트디 파일 구성 `fluent.conf`
 
@@ -750,9 +748,8 @@ networks:
   - lgde 태그를 통해 전송되는 로그에 대해서 '2021-07-18 22:28:00' 포맷으로 변환합니다
   - `filtered_logtime` 컬럼이 추가됩니다
   - 출력 포맷 또한 JSON 이며 현재 시간을 기준으로 출력됩니다
-  <br>
 
-
+<br>
 
 ### 5-2. 에이전트 기동 및 확인
 
@@ -948,9 +945,8 @@ networks:
 * 필터 플러그인 설정
   - docker 로 시작하는 태그를 모두 필터하고, JSON 포맷만 전달합니다
   - dokcer 로 시작하는 태그 이벤트를 필터하여 docker.{} 에 해당하는 레코드를 추가합니다
-  <br>
 
-
+<br>
 
 #### 6-1-3 포츈텔러 파일 구성 `fortune_teller.sh`
 
@@ -981,6 +977,7 @@ docker-compose up -d
 docker-compose logs -f ubuntu
 ```
 > 애플리케이션에서 로그가 잘 전송되고 있는지 확인합니다
+
 <br>
 
 ```bash
@@ -1030,8 +1027,8 @@ fluentd  | 2021-07-18 17:03:11.177728881 +0000 docker.fortune: {"container_id":"
 | {{.ImageName}} | The name of the image used by the container. |
 | {{.DaemonName}} | The name of the docker program (docker). |
 
+<details><summary> :blue_book: 7. [중급] 기존 `docker-compose.yml` 파일을 활용하여, ubuntu 서비스를 web 으로 변경하여 새롭게 복사하고 tag 를 `docker.{{.Name}}}`로 출력하는 `web.yml`을 작성하고 기동하여, ubuntu, web, fluentd 이렇게 3개의 컨테이너 서비스가 운영되는 web.yml 파일을 생성하고 기동합니다 </summary>
 
-<details><summary> :blue_book: 7. [중급] 기존 ubuntu 컨테이너를 그대로 복사하여, 이름을 web 으로 tag 를 `docker.{{.Name}}}`로 출력하는 `web.yml`을 작성하고 기동하여, ubuntu, web, fluentd 이렇게 3개의 컨테이너 서비스가 운영되는 web.yml 파일을 생성하고 기동합니다 </summary>
 
 > `web.yml` 파일을 아래와 같이 작성하셨다면 정답입니다
 
@@ -1092,7 +1089,7 @@ docker-compose down
 docker-compose -f web.yml up -d
 ```
 
-* 개별 서비스들의 로그를 확인합니다
+* 개별 서비스들의 로그를 하나 하나 확인해 봅니다
 ```bash
 docker-compose -f web.yml logs -f ubuntu
 docker-compose -f web.yml logs -f web
@@ -1106,14 +1103,6 @@ docker-compose -f web.yml down --remove-orphans
 ```
 
 </details>
-<br>
-
-
-### 6-3. 에이전트 및 컨테이너 종료
-
-#### 6-3-1. 실습이 끝났으므로 플루언트디 에이전트를 컨테이너 화면에서 <kbd><samp>ctrl</samp>+<samp>c</samp></kbd> 명령으로 종료합니다
-
-#### 6-3-2. 1번 예제 실습이 모두 종료되었으므로 <kbd><samp>ctrl</samp>+<samp>d</samp></kbd> 혹은 <kbd>exit</kbd> 명령으로 컨테이너를 종료합니다
 
 
 [목차로 돌아가기](#2일차-스트림-데이터-수집)
@@ -1139,14 +1128,14 @@ docker ps
 ### 7-2. 키바나를 통해 엘라스틱 서치를 구성합니다
 
 * 키바나 사이트에 접속하여 색인을 생성
-  * 1. http://vm[number].aiffelbiz.co.kr:5601 사이트에 접속 (모든 컴포넌트 기동에 약 3~5분 정도 소요됨)
+  * 1. `http://vm{###}.koreacentral.cloudapp.azure.com:5601` 사이트에 접속 (모든 컴포넌트 기동에 약 3~5분 정도 소요됨)
   * 2. Explorer on my Own 선택 후, 좌측 "Discover" 메뉴 선택
   * 3. Step1 of 2: Create Index with 'fluentd-\*' 까지 치면 아래에 색인이 뜨고 "Next step" 클릭
   * 4. Step2 of 2: Configure settings 에서 @timestamp 필드를 선택하고 "Create index pattern" 클릭
   * 5. Discover 메뉴로 이동하면 전송되는 로그를 실시간으로 확인할 수 있음
 
 * 웹 사이트에 접속을 시도 (초기 기동 시에 시간이 걸립니다)
-  * 1. http://vm[number].aiffelbiz.co.kr 사이트에 접속하면 It works! 가 뜨면 정상
+  * 1. `http://vm{###}.koreacentral.cloudapp.azure.com` 사이트에 접속하면 It works! 가 뜨면 정상
   * 2. 다시 Kibana 에서 Refresh 버튼을 누르면 접속 로그가 전송됨을 확인
 
 ### 7-3. Fluentd 구성 파일 `docker-compose.yml`
@@ -1176,6 +1165,7 @@ services:
     ports:
       - 24224:24224
       - 24224:24224/udp
+    entrypoint: [ "fluentd" ]
   elasticsearch:
     container_name: elasticsearch
     image: elasticsearch:7.8.0
@@ -1210,19 +1200,12 @@ services:
     links:
       - elasticsearch
     ports:
-      - 5601:5601
+      - 8080:5601
 
 networks:
   default:
     name: day2_ex6_network
 ```
-
-### 7-4. 에이전트 및 컨테이너 종료
-
-#### 7-4-1. 실습이 끝났으므로 플루언트디 에이전트를 컨테이너 화면에서 <kbd><samp>ctrl</samp>+<samp>c</samp></kbd> 명령으로 종료합니다
-
-#### 7-4-2. 1번 예제 실습이 모두 종료되었으므로 <kbd><samp>ctrl</samp>+<samp>d</samp></kbd> 혹은 <kbd>exit</kbd> 명령으로 컨테이너를 종료합니다
-
 
 [목차로 돌아가기](#2일차-스트림-데이터-수집)
 
@@ -1317,14 +1300,6 @@ cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
 curl -XPOST -d "json={\"hello\":\"world\"}" http://localhost:9880/test
 ```
 <br>
-
-### 8-5. 기동된 Fluentd 를 종료합니다
-
-```bash
-# terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex7
-docker-compose down
-```
 
 [목차로 돌아가기](#2일차-스트림-데이터-수집)
 
@@ -1428,12 +1403,13 @@ networks:
 ```
 <br>
 
+### 9-4. 별도의 터미널에서 아래의 명령을 수행합니다
 
-### 9-4. 별도의 터미널에서 아래의 명령
 * 멀티 프로세스를 통해 하나의 경로에 저장되는 것을 확인합니다
 
 ```bash
 # terminal
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex8
 tree target
 ```
 <br>
@@ -1458,12 +1434,6 @@ tree
 
 <br>
 
-### 9-4. 실습이 끝났으므로 플루언트디 에이전트를 컨테이너 화면에서 <kbd><samp>Ctrl</samp>+<samp>C</samp></kbd> 명령으로 종료합니다
-```bash
-# terminal
-docker-compose down
-```
-
 
 [목차로 돌아가기](#2일차-스트림-데이터-수집)
 
@@ -1481,6 +1451,7 @@ docker-compose down
 
 cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex9
 docker-compose up -d
+docker-compose logs -f
 ```
 <br>
 
@@ -1537,15 +1508,16 @@ services:
 
 ```bash
 # terminal
+cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex9
 docker ps
 ```
 <br>
 
 ### 10-5. HTTP 로 전송하고 해당 데이터가 하둡에 저장되는지 확인합니다
 
-> http://vm[number].aiffelbiz.co.kr:50070/explorer.html 에 접속하여 확인하거나, namenode 에 설치된 hadoop client 로 확인 합니다
+> http://vm{###}.koreacentral.cloudapp.azure.com:50070/explorer.html 에 접속하여 확인하거나, namenode 에 설치된 hadoop client 로 확인 합니다
 
-* WARN: 현재 노드수가 1개밖에 없어서 Replication 오류가 나고 있습니다. 
+* WARN: 현재 노드수가 1개밖에 없어서 발생하는 Replication 오류는 무시해도 됩니다
   - 네임노드가 정상 기동될 때까지 약 30초 정도 대기합니다
 ```bash
 cd /home/ubuntu/work/data-engineer-advanced-training/day2/ex9

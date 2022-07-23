@@ -38,7 +38,7 @@ services:
     depends_on:
       - elasticsearch
     ports:
-      - 5601:5601
+      - 8080:5601
 
   elasticsearch:
     container_name: elasticsearch
@@ -73,6 +73,6 @@ volumes:
   elasticsearchdata:
   elasticsearchlogs:
 
-network:
+networks:
   default:
     name: day2_ex6_network
