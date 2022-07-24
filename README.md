@@ -35,3 +35,10 @@ alias gp="git pull"
 <IP> vm<number>.koreacentral.cloudapp.azure.com vm<number>
 ```
 
+> 도커 컨테이너에 문제가 생겼을 때에 도커 서비스 상태 확인 및 재시작 하는 방법
+
+```bash
+sudo systemctl status docker.service
+sudo systemctl restart docker.service
+```
+
