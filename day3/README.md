@@ -144,7 +144,12 @@ spark
 > 아래와 유사하게 작성하고, 결과가 같다면 성공입니다
 
 ```python
-user = spark.read.option("inferSchema", "true").option("header", "true").csv("data/tbl_user.csv")
+user = (
+  spark.read
+  .option("inferSchema", "true")
+  .option("header", "true")
+  .csv("data/tbl_user.csv")
+)
 user.printSchema()
 display(user)
 ```
