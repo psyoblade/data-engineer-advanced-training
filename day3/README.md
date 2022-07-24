@@ -542,11 +542,11 @@ p_amount	p_id	p_name	p_time	p_uid	u_family_name	u_gender	u_given_name	u_id	u_reg
 
 <br>
 
-### 3-8 :closed_book: 데이터 조회하기
+### 3-7 :closed_book: 데이터 조회하기
 
 > fact_daily_json 데이터를 상품별 매출 금액의 합계를 구하고 `최대 매출 상품이름`을 확인하세요
 
-#### 3-8-1. Spark SQL 통해 한 번에 조회하기
+#### 3-7-1. Spark SQL 통해 한 번에 조회하기
 
 * 아래의 조건에 따라 수행하세요
 
@@ -596,7 +596,7 @@ LG Gram	5300000
 
 <br>
 
-#### 3-8-2. Structured API 통해 한 번에 조회하기
+#### 3-7-2. Structured API 통해 한 번에 조회하기
 
 * 아래의 조건에 따라 수행하세요
 
