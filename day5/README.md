@@ -104,7 +104,7 @@ curl -X POST -d 'json={"message":"hello"}' localhost:9881/debug
 ```
 
 ### 2-3. kafka 플러그인을 활용하여 movies 토픽으로 메시지를 전송합니다
-> 파일소스의 태그를 `debug` 에서 `info`로 변경하고 `kafka` 플러그인 설정을 `/fluentd/config/fluent-2-3.conf` 파일을 작성합니다  
+> 파일소스의 태그를 `debug` 에서 `info`로 변경하고 `kafka` 플러그인 설정을 `/fluentd/config/fluent-2-3.conf` 파일을 작성합니다  그리고 `/fluentd/source/movies.pos` 파일을 삭제해야 이전 상태가 초기화 되어 수집됩니다.
 
 * kafka 브로커는 `kafka:9093` 으로 전송되어야 하며, 생성 시에 `movies` 토픽이 생성되어 있으므로 그 쪽으로 전송하면 됩니다.
 ```xml
@@ -397,7 +397,7 @@ kafkaQuery.stop()
   - 모든 색인 및 백그라운드 작업은 `Tasks` 탭에서 수행됩니다
 
 * 정상적으로 작업이 적재되었다면 조회가 가능합니다
-![query](images/druid-14-query.png)
+  ![query](images/druid-14-query.png)
   - 대상 테이블을 선택하고 실시간 테이블 조회가 가능합니다
 
 

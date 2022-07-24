@@ -11,3 +11,12 @@
 ## [4일차. 스파크 스트리밍 처리](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day4/README.md)
 
 ## [5일차. 스트리밍 파이프라인 설계](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day5/README.md)
+
+
+
+* 코드 내에서 열려 있어야 하는 포트
+  * kibana 서비스 : 8080
+  * druid 매니저 : 8088
+  * jupyter 노트북 : 8888
+  * turnilo 서비스 : 9091
+

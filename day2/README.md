@@ -1558,3 +1558,241 @@ docker-compose down
 
 <br>
 <br>
+
+## 11. 연습문제
+
+>  모든 퀴즈는 기존의 컨테이너 들은 모두 종료 되어 있어야 정상 동작하며, 반드시 `quiz<number>` 경로로 이동 후,  `docker-compose.yml` 파일을 이용하여 컨테이너 기동 후, `fluentd` 명령으로 수행하여 퀴즈를 푸시면 됩니다.
+
+### 참고 사이트
+
+* [Parse data  types](https://docs.fluentd.org/configuration/parse-section#types-parameter)
+
+* [Record transformer](https://docs.fluentd.org/filter/record_transformer)
+
+* ```bash
+  # cURL 명령어 통한 POST 전송 예제
+  # -i, --include : 프로토콜 반환 값의 헤더를 출력합니다
+  # -X, --request <command> : 리퀘스트 타입을 지정합니다
+  # -d, --data <data> : HTTP POST 데이터
+  
+  curl -i -X POST -d '{"column1":"1","column2":"hello-world","column3":20220722,"logtime":1593379470}' http://localhost:8080/lgde
+  ```
+
+* [Customize log driver output](https://docs.docker.com/config/containers/logging/log_tags/)
+* [Docker run reference](https://docs.docker.com/engine/reference/run/)
+
+* ```bash
+  # docker run 명령을 통한 컨테이너 1회성 실행
+  # --rm : 컨테이너 종료시에 관련 파일 시스템 및 메타 정보를 같이 삭제합니다
+  # --name container_name : 컨테이너의 이름을 지정합니다
+  # --log-driver=driver_name : 도커 컨테이너의 로그 드라이버를 지정
+  # --log-opt key=value : 로그 드라이버에 전달하는 추가 옵션을 지정
+  
+  docker run --rm --name 'container_name' --log-driver=fluentd --log-opt tag=tag.markup ubuntu echo '{"message":"send message with name"}' 
+  ```
+
+<br>
+
+<details><summary> Quiz 1. 컨테이너를 기동하고, 'send_http.sh' 실행 시에 발생하는 오류를 해결하세요</summary>
+
+
+>  `docker-compose logs -f fluetnd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
+
+```bash
+2022-07-24 02:19:23.844319643 +0000 debug: {"action":"login","user":2}
+```
+
+> 아래와 유사하게 `send_http.sh` 파일이 수정하시면 됩니다
+
+```bash
+#!/bin/bash
+curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9881/debug
+```
+
+</details>
+
+<br>
+
+<details><summary> Quiz 2. fluentd 프로세스를 기동하면 source 에 존재하는 모든 파일이 수집되어 더 이상 수집되지 않습니다. 누군가가 실수로 target 경로를 모두 삭제하여 장애가 발생하고 있습니다. 다행스럽게도 source 경로의 파일은 존재하여 다시 수집할 수 있는 상황입니다. 다시 원본 데이터를 target 경로에 수집할 수 있도록 장애 복구를 해주세요. </summary>
+
+
+> 아래와 같이 수집 완료된 로그가 모두 1만 라인이면 성공입니다.
+
+```bash
+cat target/weblog.info/*/* | wc -l
+10000
+```
+
+>  아래와 유사하게 `fluent.conf` 파일이 수정하고, `/fluentd/source/fluent.pos` 파일 삭제 후 `fluentd` 에이전트를 재기동 하면 됩니다
+
+```xml
+<source>
+    @type tail
+    @log_level info
+    path /fluentd/source/accesslogs*
+    pos_file /fluentd/source/fluent.pos
+    refresh_interval 5
+    multiline_flush_interval 5
+    rotate_wait 5
+    open_on_every_update true
+    emit_unmatched_lines true
+    read_from_head true
+    tag weblog.info
+    <parse>
+        @type apache2
+    </parse>
+</source>
+
+<match weblog.info>
+    @type file
+    @log_level info
+    add_path_suffix true
+    path_suffix .log
+    path /fluentd/target/${tag}/%Y%m%d/accesslog.%Y%m%d.%H
+    <buffer time,tag>
+        timekey 1h
+        timekey_use_utc false
+        timekey_wait 10s
+        timekey_zone +0900
+        flush_mode immediate
+        flush_thread_count 8
+    </buffer>
+</match>
+```
+
+</details>
+
+<br>
+
+<details><summary> Quiz 3. 'fluent.conf' 파일을 수정하여 최종 출력 로그가 debug 태그는 target/debug/yyyyMM 경로에, info 태그는 target/info/yyyyMM 경로로 저장되도록 변경 후, fluentd 프로세스를 다시 시작해서 확인해 보세요</summary>
+
+
+>  `docker-compose logs -f fluetnd` 실행 결과에서 `tree target` 명령 결과가 아래와 유사하다면 성공입니다
+
+```bash
+target
+├── ${table_name}
+│   └── %Y%m
+│       └── part-%Y%m%d.%H%M
+│           ├── buffer.b5e483bf0275ce4fc70afdad5df8ffec9.log
+│           ├── buffer.b5e483bf0275ce4fc70afdad5df8ffec9.log.meta
+│           ├── buffer.b5e483bf0282f98cf6e06eb2e265b890f.log
+│           └── buffer.b5e483bf0282f98cf6e06eb2e265b890f.log.meta
+├── debug
+│   └── 202207
+│       └── part-20220724.1122_0.log
+└── info
+    └── 202207
+        ├── part-20220724.1121_0.log
+        └── part-20220724.1122_0.log
+```
+
+> 아래와 유사하게 `fluent.conf` 파일이 수정되면 됩니다
+
+```xml
+<source>
+    @type dummy
+    tag lgde.info
+    size 5
+    rate 1
+    auto_increment_key seq
+    dummy {"info":"hello-world"}
+</source>
+
+<source>
+    @type dummy
+    tag lgde.debug
+    size 3
+    rate 1
+    dummy {"debug":"hello-world"}
+</source>
+
+<filter lgde.*>
+    @type record_transformer
+    <record>
+        table_name ${tag_parts[1]}
+    </record>
+</filter>
+
+<match lgde.*>
+    @type file
+    path_suffix .log
+    path /fluentd/target/${table_name}/%Y%m/part-%Y%m%d.%H%M
+    <buffer time,table_name>
+        timekey 1m
+        timekey_wait 10s
+        timekey_use_utc false
+        timekey_zone +0900
+    </buffer>
+</match>
+```
+
+</details>
+
+<br>
+
+<details><summary> Quiz 4. 초기에 전송되던 로그의 포맷이 변경되어 column2 다음에 column3 (integer) 가 추가되었다고 합니다. 'fluentd' 에이전트 로그에서 신규 컬럼이 출력되도록 'fluent.conf' 파일을 변경하고 fluentd 에이전트를 재기동하여 테스트 해보세요
+ </summary>
+
+
+>  `docker-compose logs -f fluetnd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
+
+```bash
+{"column1":1,"column2":"hello-world","column3":20220722,"logtime":1593379470,"filtered_logtime":"2020-06-28 21:24:30"}
+```
+
+> `fluent.conf` 파일이 아래와 같으면 정답입니다
+
+```xml
+<source>
+    @type http
+    port 8080
+    <parse>
+        @type json
+        time_type float
+        time_key logtime
+        types column1:integer,column2:string,column3:integer,logtime:time:unixtime
+        localtime true
+        keep_time_key true
+    </parse>
+</source>
+
+<filter lgde>
+    @type record_transformer
+    enable_ruby
+    <record>
+        filtered_logtime ${Time.at(time).strftime('%Y-%m-%d %H:%M:%S')}
+    </record>
+</filter>
+
+<match lgde>
+    @type stdout
+    <format>
+        @type json
+        time_format %Y-%m-%d %H:%M:%S.%L
+        timezone +09:00
+    </format>
+</match>
+```
+
+</details>
+
+<br>
+
+<details><summary> Quiz 5. 컨테이너를 기동하고, 'docker run' 명령을 통해서 컨테이너 이름을 'quiz5-container'로 지정하고 'table_name' 항목으로 출력 되도록 컨테이너를 실행해 보세요</summary>
+
+
+>  `docker-compose logs -f fluetnd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
+
+```bash
+fluentd  | 2022-07-24 05:29:17.802640130 +0000 docker.quiz5-container: {"container_id":"f996791c6897cd00d72376ae24d2052936b0964b65f8edc266a17b51131ba02c","container_name":"/quiz5-container","source":"stdout","log":"{\"message\":\"send message with name\"}","message":"send message with name","table_name":"quiz5-container"}
+```
+
+> 아래와 유사하게 `send_http.sh` 파일이 수정하시면 됩니다
+
+```bash
+docker run --rm --log-driver=fluentd --name 'quiz5-container' --log-opt tag=docker.{{.Name}} ubuntu echo '{"message":"send message with name"}'
+```
+
+</details>
+
