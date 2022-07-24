@@ -482,7 +482,7 @@ u_gender	sum
 
   - 포맷 : <kbd>json</kbd>
 
-  - 옵션 : <kbd>overwrite=true</kbd>
+  - 모드 : <kbd>overwrite</kbd>
 
 * 아래의 예제를 활용하세요
 
@@ -505,7 +505,7 @@ u_gender	sum
 
 ```python
 json_path = "data/fact_daily/dt=20220727"
-fact_daily_na.write.option("overwrite", "true").json(json_path)
+fact_daily_na.write.mode("overwrite").json(json_path)
 fact_daily_json = spark.read.json(json_path)
 fact_daily_json.printSchema()
 display(fact_daily_json)
