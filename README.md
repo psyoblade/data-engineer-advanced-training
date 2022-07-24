@@ -14,9 +14,24 @@
 
 
 
-* 코드 내에서 열려 있어야 하는 포트
-  * kibana 서비스 : 8080
-  * druid 매니저 : 8088
-  * jupyter 노트북 : 8888
-  * turnilo 서비스 : 9091
+>  자주 사용하는 `.bashrc` 설정입니다
+
+```bash
+# cat ~/.bashrc
+
+export EDITOR="vim"
+alias d="docker-compose"
+alias gl="git log --all --graph --oneline --decorate"
+alias gs="git status"
+alias gd="git diff"
+alias gb="git branch"
+alias gp="git pull"
+```
+
+> `/etc/hosts` 파일에 등록된 내용이며, `<IP>` 항목과 `vm<number>` 항목을 변경해 두시면 접속 시에 편합니다
+
+```bash
+...
+<IP> vm<number>.koreacentral.cloudapp.azure.com vm<number>
+```
 

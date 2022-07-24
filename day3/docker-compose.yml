@@ -33,12 +33,6 @@ services:
     privileged: true
     image: psyoblade/data-engineer-notebook:1.6
     restart: always
-    depends_on:
-      - mysql
-      - mongo
-    links:
-      - mysql
-      - mongo
     volumes:
       - ./notebooks:/home/jovyan/work
     environment:
