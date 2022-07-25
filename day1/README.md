@@ -382,6 +382,35 @@ EXPOSE 22 873
 CMD ["/bin/bash"]
 ```
 
+* `ENTRYPOINT` 와 `CMD`의 차이점 비교
+
+```bash
+FROM ubuntu:18.04
+LABEL maintainer="student@lg.com"
+
+RUN apt-get update && apt-get install -y rsync tree
+
+EXPOSE 22 873
+
+# 기본 우분투 서버기동 아무런 엔트리가 없음
+# ENTRYPOINT []
+# CMD []
+
+# 커맨드는 의미가 없음 entrypoint 가 없고, 커맨드는 덮어쓰여지므로
+# ENTRYPOINT []
+# CMD ["/bin/echo"]
+
+# 정상적으로 프로그램을 기동하고 - 옵션을 CMD
+# ENTRYPOINT ["/bin/echo"]
+# CMD ["hello"]
+
+# 정상적인 프로그램 기동 시에 필수 옵션을 넣고, 옵셔널 옵션을 CMD
+# ENTRYPOINT ["/bin/echo", "mandatory-options"]
+# CMD ["lg"]
+```
+
+>  `docker build -t ubuntu:local . ; docker run --rm -it ubuntu:local` 통해서 설정 변경 후 테스트
+
 #### 2-6-2. 이미지 빌드
 
 > 위의 이미지를 통해서 베이스라인 우분투 이미지에 rsync 와 tree 가 설치된 새로운 이미지를 생성할 수 있습니다
