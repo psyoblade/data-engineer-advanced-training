@@ -1546,8 +1546,8 @@ docker exec -it namenode hadoop fs -ls /user/fluent/webhdfs/
 ```
 <br>
 
-
 ### 10-5. 실습이 끝났으므로 플루언트디 에이전트를 컨테이너 화면에서 <kbd><samp>Ctrl</samp>+<samp>C</samp></kbd> 명령으로 종료합니다
+
 ```bash
 # terminal
 docker-compose down
@@ -1608,7 +1608,7 @@ docker-compose down
 2022-07-24 02:19:23.844319643 +0000 debug: {"action":"login","user":2}
 ```
 
-> 아래와 유사하게 `send_http.sh` 파일이 수정하시면 됩니다
+> 아래와 유사하게 `send_http.sh` 파일을 수정하시면 됩니다
 
 ```bash
 #!/bin/bash
@@ -1735,9 +1735,8 @@ cat target/weblog.info/*/* | wc -l
 
 <br>
 
-<details><summary> :closed_book: Quiz 4. 초기에 전송되던 로그의 포맷이 변경되어 column2 다음에 column3 (integer) 가 추가되었다고 합니다. 'fluentd' 에이전트 로그에서 신규 컬럼이 출력되도록 'fluent.conf' 파일을 변경하고 fluentd 에이전트를 재기동하여 테스트 해보세요
+<details><summary> :closed_book: Quiz 4. 초기에 전송되던 로그의 포맷이 변경되어 column2 다음에 column3 (integer) 가 추가되었다고 합니다. 'fluentd' 에이전트 로그에서 신규 컬럼이 출력되도록 'fluent.conf' 파일을 변경하고 fluentd 에이전트를 재기동하여 curl 명령으로 column3 이 추가된 데이터 전송을하고, `curl -X POST -d '{"column1":"1","column2":"hello-world","column3":20220722,"logtime":1593379470}' http://localhost:8080/lgde` 결과가 잘 나오는지 확인해 보세요
  </summary>
-
 
 >  `docker-compose logs -f fluentd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
 
@@ -1792,7 +1791,7 @@ cat target/weblog.info/*/* | wc -l
 fluentd  | 2022-07-24 05:29:17.802640130 +0000 docker.quiz5-container: {"container_id":"f996791c6897cd00d72376ae24d2052936b0964b65f8edc266a17b51131ba02c","container_name":"/quiz5-container","source":"stdout","log":"{\"message\":\"send message with name\"}","message":"send message with name","table_name":"quiz5-container"}
 ```
 
-> 아래와 유사하게 `send_http.sh` 파일이 수정하시면 됩니다
+> 아래와 유사하게 `send_http.sh` 파일을 수정하시면 됩니다
 
 ```bash
 docker run --rm --log-driver=fluentd --name 'quiz5-container' --log-opt tag=docker.{{.Name}} ubuntu echo '{"message":"send message with name"}'

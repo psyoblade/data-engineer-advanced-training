@@ -50,9 +50,14 @@ docker-compose logs notebook
 
 ## 2. 데이터 변환 기본
 
+>  데이터 엔지니어 중급 과정을 수강하지 않으신 분들을 위한 노트북 환경입니다. `lgde-spark-core` 경로에 포함된 노트북을 열어 "1. 기본" ~ "3. 데이터 타입" 까지 3강을 직접 타이핑 하면서 실습하시고, :green_book: 연습 문제만 직접 풀어보시기 바랍니다
+
 ### [1. 아파치 스파크 기본](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-1-basic.html)
+
 ### [2. 아파치 스파크 연산자](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-2-operators.html)
-### [3. 아파치 스파크 데이타입](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-3-data-types.html)
+
+### [3. 아파치 스파크 데이터타입](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-3-data-types.html)
+
 ### [4. 아파치 스파크 조인](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-4-join.html)
 ### [5. 아파치 스파크 집계](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-5-aggregation.html)
 ### [6. 아파치 스파크 JDBC to MySQL](http://htmlpreview.github.io/?https://github.com/psyoblade/data-engineer-advanced-training/blob/master/day3/notebooks/lgde-spark-core/lgde-spark-core-6-jdbc-mysql.html)
