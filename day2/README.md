@@ -1619,59 +1619,7 @@ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9881/debu
 
 <br>
 
-<details><summary> :blue_book: Quiz 2. fluentd 프로세스를 기동하면 source 에 존재하는 모든 파일이 수집되어 더 이상 수집되지 않습니다. 누군가가 실수로 target 경로를 모두 삭제하여 장애가 발생하고 있습니다. 다행스럽게도 source 경로의 파일은 존재하여 다시 수집할 수 있는 상황입니다. 다시 원본 데이터를 target 경로에 수집할 수 있도록 장애 복구를 해주세요. </summary>
-
-
-> 아래와 같이 수집 완료된 로그가 모두 1만 라인이면 성공입니다.
-
-```bash
-cat target/weblog.info/*/* | wc -l
-10000
-```
-
->  아래와 유사하게 `fluent.conf` 파일이 수정하고, `/fluentd/source/fluent.pos` 파일 삭제 후 `fluentd` 에이전트를 재기동 하면 됩니다
-
-```xml
-<source>
-    @type tail
-    @log_level info
-    path /fluentd/source/accesslogs*
-    pos_file /fluentd/source/fluent.pos
-    refresh_interval 5
-    multiline_flush_interval 5
-    rotate_wait 5
-    open_on_every_update true
-    emit_unmatched_lines true
-    read_from_head true
-    tag weblog.info
-    <parse>
-        @type apache2
-    </parse>
-</source>
-
-<match weblog.info>
-    @type file
-    @log_level info
-    add_path_suffix true
-    path_suffix .log
-    path /fluentd/target/${tag}/%Y%m%d/accesslog.%Y%m%d.%H
-    <buffer time,tag>
-        timekey 1h
-        timekey_use_utc false
-        timekey_wait 10s
-        timekey_zone +0900
-        flush_mode immediate
-        flush_thread_count 8
-    </buffer>
-</match>
-```
-
-</details>
-
-<br>
-
-<details><summary> :closed_book: Quiz 3. 'fluent.conf' 파일을 수정하여 최종 출력 로그가 debug 태그는 target/debug/yyyyMM 경로에, info 태그는 target/info/yyyyMM 경로로 저장되도록 변경 후, fluentd 프로세스를 다시 시작해서 확인해 보세요</summary>
-
+<details><summary> :closed_book: Quiz 2. 'fluent.conf' 파일을 수정하여 최종 출력 로그가 debug 태그는 target/debug/yyyyMM 경로에, info 태그는 target/info/yyyyMM 경로로 저장되도록 변경 후, fluentd 프로세스를 다시 시작해서 확인해 보세요</summary>
 
 >  `docker-compose logs -f fluetnd` 실행 결과에서 `tree target` 명령 결과가 아래와 유사하다면 성공입니다
 
@@ -1729,6 +1677,56 @@ target
         timekey_wait 10s
         timekey_use_utc false
         timekey_zone +0900
+    </buffer>
+</match>
+```
+
+</details>
+
+<br>
+
+<details><summary> :blue_book: Quiz 3. fluentd 프로세스를 기동하면 source 에 존재하는 모든 파일이 수집되어 더 이상 수집되지 않습니다. 누군가가 실수로 target 경로를 모두 삭제하여 장애가 발생하고 있습니다. 다행스럽게도 source 경로의 파일은 존재하여 다시 수집할 수 있는 상황입니다. 다시 원본 데이터를 target 경로에 수집할 수 있도록 장애 복구를 해주세요. </summary>
+
+> 아래와 같이 수집 완료된 로그가 모두 1만 라인이면 성공입니다.
+
+```bash
+cat target/weblog.info/*/* | wc -l
+10000
+```
+
+>  아래와 유사하게 `fluent.conf` 파일이 수정하고, `/fluentd/source/fluent.pos` 파일 삭제 후 `fluentd` 에이전트를 재기동 하면 됩니다
+
+```xml
+<source>
+    @type tail
+    @log_level info
+    path /fluentd/source/accesslogs*
+    pos_file /fluentd/source/fluent.pos
+    refresh_interval 5
+    multiline_flush_interval 5
+    rotate_wait 5
+    open_on_every_update true
+    emit_unmatched_lines true
+    read_from_head true
+    tag weblog.info
+    <parse>
+        @type apache2
+    </parse>
+</source>
+
+<match weblog.info>
+    @type file
+    @log_level info
+    add_path_suffix true
+    path_suffix .log
+    path /fluentd/target/${tag}/%Y%m%d/accesslog.%Y%m%d.%H
+    <buffer time,tag>
+        timekey 1h
+        timekey_use_utc false
+        timekey_wait 10s
+        timekey_zone +0900
+        flush_mode immediate
+        flush_thread_count 8
     </buffer>
 </match>
 ```
