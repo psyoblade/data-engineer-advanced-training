@@ -1602,7 +1602,7 @@ docker-compose down
 <details><summary> :blue_book: Quiz 1. 컨테이너를 기동하고, 'send_http.sh' 실행 시에 발생하는 오류를 해결하세요</summary>
 
 
->  `docker-compose logs -f fluetnd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
+>  `docker-compose logs -f fluentd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
 
 ```bash
 2022-07-24 02:19:23.844319643 +0000 debug: {"action":"login","user":2}
@@ -1621,7 +1621,7 @@ curl -i -X POST -d 'json={"action":"login","user":2}' http://localhost:9881/debu
 
 <details><summary> :closed_book: Quiz 2. 'fluent.conf' 파일을 수정하여 최종 출력 로그가 debug 태그는 target/debug/yyyyMM 경로에, info 태그는 target/info/yyyyMM 경로로 저장되도록 변경 후, fluentd 프로세스를 다시 시작해서 확인해 보세요</summary>
 
->  `docker-compose logs -f fluetnd` 실행 결과에서 `tree target` 명령 결과가 아래와 유사하다면 성공입니다
+>  `docker-compose logs -f fluentd` 실행 결과에서 `tree target` 명령 결과가 아래와 유사하다면 성공입니다
 
 ```bash
 target
@@ -1739,7 +1739,7 @@ cat target/weblog.info/*/* | wc -l
  </summary>
 
 
->  `docker-compose logs -f fluetnd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
+>  `docker-compose logs -f fluentd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
 
 ```bash
 {"column1":1,"column2":"hello-world","column3":20220722,"logtime":1593379470,"filtered_logtime":"2020-06-28 21:24:30"}
@@ -1786,7 +1786,7 @@ cat target/weblog.info/*/* | wc -l
 <details><summary> :closed_book: Quiz 5. 컨테이너를 기동하고, 'docker run' 명령을 통해서 컨테이너 이름을 'quiz5-container'로 지정하고 'table_name' 항목으로 출력 되도록 컨테이너를 실행해 보세요</summary>
 
 
->  `docker-compose logs -f fluetnd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
+>  `docker-compose logs -f fluentd` 실행 결과에서 아래와 같이 메시지가 출력되면 성공입니다
 
 ```bash
 fluentd  | 2022-07-24 05:29:17.802640130 +0000 docker.quiz5-container: {"container_id":"f996791c6897cd00d72376ae24d2052936b0964b65f8edc266a17b51131ba02c","container_name":"/quiz5-container","source":"stdout","log":"{\"message\":\"send message with name\"}","message":"send message with name","table_name":"quiz5-container"}
