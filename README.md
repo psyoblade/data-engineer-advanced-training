@@ -21,6 +21,9 @@
 
 export EDITOR="vim"
 alias d="docker-compose"
+alias dps="docker ps -a"
+alias drm="docker rm -f `docker ps -aq`"
+
 alias gl="git log --all --graph --oneline --decorate"
 alias gs="git status"
 alias gd="git diff"
