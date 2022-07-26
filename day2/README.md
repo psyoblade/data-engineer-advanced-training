@@ -1130,7 +1130,7 @@ docker ps
 ### 7-2. 키바나를 통해 엘라스틱 서치를 구성합니다
 
 * 키바나 사이트에 접속하여 색인을 생성
-  * 1. `http://vm{###}.koreacentral.cloudapp.azure.com:5601` 사이트에 접속 (모든 컴포넌트 기동에 약 3~5분 정도 소요됨)
+  * 1. `http://vm{###}.koreacentral.cloudapp.azure.com:8080` 사이트에 접속 (모든 컴포넌트 기동에 약 3~5분 정도 소요됨)
   * 2. Explorer on my Own 선택 후, 좌측 "Discover" 메뉴 선택
   * 3. Step1 of 2: Create Index with 'fluentd-\*' 까지 치면 아래에 색인이 뜨고 "Next step" 클릭
   * 4. Step2 of 2: Configure settings 에서 @timestamp 필드를 선택하고 "Create index pattern" 클릭

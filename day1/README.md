@@ -382,7 +382,7 @@ EXPOSE 22 873
 CMD ["/bin/bash"]
 ```
 
-* `ENTRYPOINT` 와 `CMD`의 차이점 비교
+* [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint)와 `CMD`의 차이점 비교
 
 ```bash
 FROM ubuntu:18.04
@@ -752,6 +752,26 @@ docker exec -it mysql-bind mysql --port=3308 -uuser -ppass
 ```bash
 docker rm -f `docker ps -aq`
 ```
+
+<br>
+
+### 2-11 기타 예외적인 상황
+
+>  경우에 따라서 포트가 충돌이 나서 실행이 되지 않는 경우가 있으므로 이전에 구성되어 있는 서버나 호스트 장비에 이미 서비스 되고 있는 포트를 확인해보면 좋습니다
+
+```bash
+netstat -a | grep LISTEN | grep -V LISTENING
+```
+
+* 위의 결과에서 보여주는 모든 `LISTEN` 포트는 사용 중이므로 주의가 필요합니다.
+
+```python
+# 파이썬 버전 별 심플 웹서버
+python -m SimpleHTTPServer 8080
+python3 -m http.server 8080
+```
+
+* 기존 서버를 종료하거나, 현재 컨테이너의 포트를 변경하는 방법이 있습니다
 
 [목차로 돌아가기](#1일차-데이터-엔지니어링-고급)
 
