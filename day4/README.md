@@ -51,3 +51,15 @@ docker-compose logs notebook
 
 <br>
 
+## 3. 스파크 스트리밍 질문과 답변
+
+### 3-5. 스트리밍 집계 연산
+
+#### Q1. `Watermark` 가 명시 되지 않은 경우, 어떻게 동작하나요?
+
+>  <kbd>답변</kbd> : `watermark`가 명시되지 않은 `Unbounded Table` 경우 전체 범위에 대해 업데이트 됩니다. 결국 `watermark` 처리는 원하지 않는 데이터를 `drop` 하기 위한 용도로 사용한다고 말할 수 있으며, `backfill` 문제점을 회피하는 용도로 사용한다고 말할 수 있습니다. `virtual table`을 사용하는 관점에서 본다면 기본 설정은 해당 테이블 전체 범위를 조회할 수 있는 것이 당연할 것이며, `watermark` 라는 `filter` 를 적용하여 원하는 대상에 대해서만 조건부 검색을 통해 `sink`한다고 말할 수도 있겠습니다. 무엇보다도 `outputMode` 가 `update`인 경우는 해당 `window` 범위 내의 데이터만 처리하기 때문에 큰 문제가 없지만, `complete`인 경우는 모든 데이터를 유지하기 때문에 `OutOfMemory` 문제가 발생할 수 있다는 점에 유의하여 개발, 운영되어야 합니다
+
+#### Q 2.
+
+
+
