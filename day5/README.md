@@ -241,6 +241,7 @@ kafkaSchema = (
     .add(StructField("year", IntegerType()))
     .add(StructField("grade", StringType()))
     .add(StructField("time", StringType()))
+    .add(StructField("timestamp", StringType()))
 )
 # root
 #  |-- key: binary (nullable = true)
