@@ -63,10 +63,10 @@ git version 2.17.1
 
 ```bash
 # terminal
-cd /home/ubuntu/work
-rm -rf /home/ubuntu/work/helloworld
+cd ~/work
+rm -rf ~/work/helloworld
 git clone https://github.com/psyoblade/helloworld.git
-cd /home/ubuntu/work/helloworld
+cd ~/work/helloworld
 ```
 <br>
 
@@ -788,9 +788,9 @@ python3 -m http.server 8080
 
 ```bash
 # terminal
-cd /home/ubuntu/work
+cd ~/work
 git clone https://github.com/psyoblade/data-engineer-advanced-training.git
-cd /home/ubuntu/work/data-engineer-advanced-training/day1
+cd ~/work/data-engineer-advanced-training/day1
 ```
 <br>
 
@@ -971,8 +971,8 @@ cat docker-compose.yml | grep -ia20 'mysql:' docker-compose.yml
 
 ```bash
 # terminal
-mkdir -p /home/ubuntu/work/compose-training
-cd /home/ubuntu/work/compose-training
+mkdir -p ~/work/compose-training
+cd ~/work/compose-training
 ```
 * `custom`, `init` 2개의 경로를 생성합니다
 ```bash

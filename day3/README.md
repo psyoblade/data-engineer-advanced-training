@@ -10,7 +10,7 @@
 ### 1-1. 최신 소스를 내려 받습니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training
+cd ~/work/data-engineer-advanced-training
 git pull
 ```
 <br>
@@ -21,7 +21,7 @@ git pull
 
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3
+cd ~/work/data-engineer-advanced-training/day3
 docker-compose pull
 docker-compose up -d notebook
 ```

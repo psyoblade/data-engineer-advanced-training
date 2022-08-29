@@ -10,7 +10,7 @@
 ### 1-1. 최신 소스를 내려 받습니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training
+cd ~/work/data-engineer-advanced-training
 git pull
 ```
 <br>
@@ -18,7 +18,7 @@ git pull
 ### 1-2. 실습을 위한 이미지를 내려받고 컨테이너를 기동합니다
 ```bash
 # terminal
-cd /home/ubuntu/work/data-engineer-advanced-training/day3
+cd ~/work/data-engineer-advanced-training/day3
 docker-compose pull
 docker-compose up -d
 ```
