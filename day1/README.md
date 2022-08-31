@@ -392,14 +392,6 @@ RUN apt-get update && apt-get install -y rsync tree
 
 EXPOSE 22 873
 
-# 기본 우분투 서버기동 아무런 엔트리가 없음
-# ENTRYPOINT []
-# CMD []
-
-# 커맨드는 의미가 없음 entrypoint 가 없고, 커맨드는 덮어쓰여지므로
-# ENTRYPOINT []
-# CMD ["/bin/echo"]
-
 # 정상적으로 프로그램을 기동하고 - 옵션을 CMD
 # ENTRYPOINT ["/bin/echo"]
 # CMD ["hello"]
@@ -407,6 +399,14 @@ EXPOSE 22 873
 # 정상적인 프로그램 기동 시에 필수 옵션을 넣고, 옵셔널 옵션을 CMD
 # ENTRYPOINT ["/bin/echo", "mandatory-options"]
 # CMD ["lg"]
+
+# 기본 우분투 서버기동 아무런 엔트리가 없음
+# ENTRYPOINT []
+# CMD []
+
+# 커맨드는 의미가 없음 entrypoint 가 없고, 커맨드는 덮어쓰여지므로
+# ENTRYPOINT []
+# CMD ["/bin/echo"]
 ```
 
 >  `docker build -t ubuntu:local . ; docker run --rm -it ubuntu:local` 통해서 설정 변경 후 테스트
