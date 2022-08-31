@@ -804,6 +804,15 @@ cd ~/work/data-engineer-advanced-training/day1
 * [The Compose Specification](https://github.com/psyoblade/compose-spec/blob/master/spec.md)
 * [Deployment Support](https://github.com/psyoblade/compose-spec/blob/master/deploy.md)
 
+```bash
+# .bashrc 혹은 .zshrc 파일에 추가하고 source ~/.bashrc 로 등록합니다
+# 또는 직접 터미널에서 아래의 명령어를 실행하셔도 됩니다
+
+alias d="docker-compose"
+```
+
+> 자주 사용하는 명령어 `docker-compose`를 리눅스 `alias` 명령을 이용하여 등록합니다 
+
 <br>
 
 #### 3-1-1. up : `docker-compose.yml` 파일을 이용하여 컨테이너를 이미지 다운로드(pull), 생성(create) 및 시작(start) 시킵니다
