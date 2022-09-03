@@ -104,6 +104,7 @@ services:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 9880:9880
@@ -257,6 +258,7 @@ services:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 9880:9880
@@ -438,6 +440,7 @@ services:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     volumes:
       - ./apache_logs:/home/root/apache_logs
@@ -691,6 +694,7 @@ services:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 8080:8080
@@ -875,6 +879,7 @@ services:
   ubuntu:
     container_name: ubuntu
     image: psyoblade/data-engineer-ubuntu:20.04
+    stdin_open: true
     tty: true
     restart: always
     volumes:
@@ -885,12 +890,14 @@ services:
     logging:
       driver: "fluentd"
       options:
+        fluentd-async: "true"
         fluentd-address: localhost:24224
         tag: docker.fortune
   fluentd:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 24224:24224
@@ -909,9 +916,9 @@ networks:
 * fortune 명령을 1000회 반복하는 `fortune_teller.sh` 을 기동
 * logging 설정을 통해 docker.fortune 태그를 생성하여 전송합니다
 * fluentd 에이전트 또한 entrypoint 통해 같이 수행 되어야 합니다
+* fluentd 에이전트가 기동되기 전에 접근을 하면 오류가 발생하므로 `fluentd-async: "true"` 옵션을 통해 비동기 접속을 설정합니다
+
 <br>
-
-
 
 #### 6-1-2 플루언트디 파일 구성 `fluent.conf`
 
@@ -1041,6 +1048,7 @@ services:
   ubuntu:
     container_name: ubuntu
     image: psyoblade/data-engineer-ubuntu:20.04
+    stdin_open: true
     tty: true
     restart: always
     volumes:
@@ -1056,6 +1064,7 @@ services:
   web:
     container_name: web
     image: psyoblade/data-engineer-ubuntu:20.04
+    stdin_open: true
     tty: true
     restart: always
     volumes:
@@ -1072,6 +1081,7 @@ services:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 24224:24224
@@ -1130,14 +1140,14 @@ docker ps
 ### 7-2. 키바나를 통해 엘라스틱 서치를 구성합니다
 
 * 키바나 사이트에 접속하여 색인을 생성
-  * 1. `http://vm{###}.koreacentral.cloudapp.azure.com:8080` 사이트에 접속 (모든 컴포넌트 기동에 약 3~5분 정도 소요됨)
+  * 1. `http://my-cloud.host.com:8080` 사이트에 접속 (모든 컴포넌트 기동에 약 3~5분 정도 소요됨)
   * 2. Explorer on my Own 선택 후, 좌측 "Discover" 메뉴 선택
   * 3. Step1 of 2: Create Index with 'fluentd-\*' 까지 치면 아래에 색인이 뜨고 "Next step" 클릭
   * 4. Step2 of 2: Configure settings 에서 @timestamp 필드를 선택하고 "Create index pattern" 클릭
   * 5. Discover 메뉴로 이동하면 전송되는 로그를 실시간으로 확인할 수 있음
 
 * 웹 사이트에 접속을 시도 (초기 기동 시에 시간이 걸립니다)
-  * 1. `http://vm{###}.koreacentral.cloudapp.azure.com` 사이트에 접속하면 It works! 가 뜨면 정상
+  * 1. `http://my-cloud.host.com` 혹은 `localhost`에 접속하여 It works! 가 뜨면 정상입니다
   * 2. 다시 Kibana 에서 Refresh 버튼을 누르면 접속 로그가 전송됨을 확인
 
 ### 7-3. Fluentd 구성 파일 `docker-compose.yml`
@@ -1469,6 +1479,7 @@ services:
       - namenode
       - datanode
     user: root
+    stdin_open: true
     tty: true
     volumes:
       - ./fluentd/fluent.conf:/etc/fluentd/fluent.conf
@@ -1517,7 +1528,7 @@ docker ps
 
 ### 10-5. HTTP 로 전송하고 해당 데이터가 하둡에 저장되는지 확인합니다
 
-> http://vm{###}.koreacentral.cloudapp.azure.com:50070/explorer.html 에 접속하여 확인하거나, namenode 에 설치된 hadoop client 로 확인 합니다
+> http://my-cloud.host.com:50070/explorer.html 에 접속하여 확인하거나, namenode 에 설치된 hadoop client 로 확인 합니다
 
 * WARN: 현재 노드수가 1개밖에 없어서 발생하는 Replication 오류는 무시해도 됩니다
   - 네임노드가 정상 기동될 때까지 약 30초 정도 대기합니다

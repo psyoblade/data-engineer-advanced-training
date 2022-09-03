@@ -19,7 +19,7 @@
 
 ## 1. 클라우드 장비에 접속
 
-> 개인 별로 할당 받은 `ubuntu@vm{###}.koreacentral.cloudapp.azure.com` 에 putty 혹은 terminal 을 이용하여 접속합니다
+> 개인 별로 할당 받은 `ubuntu@my-cloud.host.com` 에 putty 혹은 terminal 을 이용하여 접속합니다
 
 ### 1-1. 원격 서버로 접속합니다
 
