@@ -5,6 +5,7 @@ services:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 9880:9880

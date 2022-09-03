@@ -13,6 +13,7 @@ services:
     logging:
       driver: fluentd
       options:
+        fluentd-async: "true"
         fluentd-address: localhost:24224
         tag: httpd.access
 

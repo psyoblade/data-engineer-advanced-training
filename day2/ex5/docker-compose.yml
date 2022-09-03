@@ -4,6 +4,7 @@ services:
   ubuntu:
     container_name: ubuntu
     image: psyoblade/data-engineer-ubuntu:20.04
+    stdin_open: true
     tty: true
     restart: always
     volumes:
@@ -14,12 +15,14 @@ services:
     logging:
       driver: "fluentd"
       options:
+        fluentd-async: "true"
         fluentd-address: localhost:24224
         tag: docker.fortune
   fluentd:
     container_name: fluentd
     image: psyoblade/data-engineer-fluentd:2.2
     user: root
+    stdin_open: true
     tty: true
     ports:
       - 24224:24224
