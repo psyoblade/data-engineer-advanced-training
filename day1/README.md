@@ -392,14 +392,6 @@ RUN apt-get update && apt-get install -y rsync tree
 
 EXPOSE 22 873
 
-# 기본 우분투 서버기동 아무런 엔트리가 없음
-# ENTRYPOINT []
-# CMD []
-
-# 커맨드는 의미가 없음 entrypoint 가 없고, 커맨드는 덮어쓰여지므로
-# ENTRYPOINT []
-# CMD ["/bin/echo"]
-
 # 정상적으로 프로그램을 기동하고 - 옵션을 CMD
 # ENTRYPOINT ["/bin/echo"]
 # CMD ["hello"]
@@ -407,6 +399,14 @@ EXPOSE 22 873
 # 정상적인 프로그램 기동 시에 필수 옵션을 넣고, 옵셔널 옵션을 CMD
 # ENTRYPOINT ["/bin/echo", "mandatory-options"]
 # CMD ["lg"]
+
+# 기본 우분투 서버기동 아무런 엔트리가 없음
+# ENTRYPOINT []
+# CMD []
+
+# 커맨드는 의미가 없음 entrypoint 가 없고, 커맨드는 덮어쓰여지므로
+# ENTRYPOINT []
+# CMD ["/bin/echo"]
 ```
 
 >  `docker build -t ubuntu:local . ; docker run --rm -it ubuntu:local` 통해서 설정 변경 후 테스트
@@ -803,6 +803,15 @@ cd ~/work/data-engineer-advanced-training/day1
 
 * [The Compose Specification](https://github.com/psyoblade/compose-spec/blob/master/spec.md)
 * [Deployment Support](https://github.com/psyoblade/compose-spec/blob/master/deploy.md)
+
+```bash
+# .bashrc 혹은 .zshrc 파일에 추가하고 source ~/.bashrc 로 등록합니다
+# 또는 직접 터미널에서 아래의 명령어를 실행하셔도 됩니다
+
+alias d="docker-compose"
+```
+
+> 자주 사용하는 명령어 `docker-compose`를 리눅스 `alias` 명령을 이용하여 등록합니다 
 
 <br>
 
