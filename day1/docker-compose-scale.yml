@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  ubuntu:
+    image: psyoblade/data-engineer-ubuntu:20.04
+    restart: always
+    tty: true
+
+networks:
+  default:
+    name: advanced_day1_scale_network
