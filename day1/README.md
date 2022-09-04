@@ -25,7 +25,7 @@
 
 ```bash
 # terminal
-# ssh ubuntu@vm{###}.koreacentral.cloudapp.azure.com
+# ssh ubuntu@my-cloud.host.com
 # password: ******
 ```
 

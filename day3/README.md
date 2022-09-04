@@ -38,7 +38,7 @@ docker-compose ps
 sleep 10
 docker-compose logs notebook
 ```
-> `http://127.0.0.1:8888/?token=87e758a1fac70558a6c4b4c5dd499d420654c509654c6b01` 이러한 형식의 URL 에서 `127.0.0.1` 을 자신의 호스트 이름(`vm{###}.koreacentral.cloudapp.azure.com`)으로 변경하여 접속합니다
+>  클라우드에서 실습을 하는 경우에는 `http://127.0.0.1:8888/?token=87e758a1fac70558a6c4b4c5dd499d420654c509654c6b01` 이러한 형식의 URL 에서 `127.0.0.1` 을 자신의 호스트 이름(`my-cloud.host.com`)으로 변경하여 접속합니다
 
 <br>
 
@@ -113,8 +113,6 @@ spark
 ```
 
 <details><summary> 정답확인</summary>
-
-
 > 스파크 엔진의 버전 `v3.1.2`이 출력되면 성공입니다
 
 </details>
