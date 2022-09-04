@@ -38,10 +38,7 @@ services:
     environment:
       - GRANT_SUDO=yes
     ports:
-      - "4040:4040"
-      - "4041:4041"
-      - "4042:4042"
-      - "4043:4043"
+      - "4040-4049:4040-4049"
       - "8080:8080"
       - "8888:8888"
   zookeeper:
@@ -53,8 +50,6 @@ services:
     container_name: kafka
     image: psyoblade/data-engineer-kafka:1.0
     depends_on:
-      - zookeeper
-    links:
       - zookeeper
     ports:
       - "9092:9092"
