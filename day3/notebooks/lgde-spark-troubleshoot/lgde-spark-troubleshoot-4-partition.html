@@ -14049,7 +14049,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="5%EC%9D%BC%EC%B0%A8-4%EA%B5%90%EC%8B%9C---Spark-Partitioning">5&#51068;&#52264; 4&#44368;&#49884; - Spark Partitioning<a class="anchor-link" href="#5%EC%9D%BC%EC%B0%A8-4%EA%B5%90%EC%8B%9C---Spark-Partitioning">&#182;</a></h1><blockquote><p>스파크에서 성능을 개선하는 다양한 방법 가운데 파티셔닝과 버킷팅이 있습니다. 이 두가지 기법은 데이터를 저장하는 방법이며, 자주 혹은 함께 읽어지는 데이터 혹은 그룹을 저장 시에 함께 저장해둔다는 개념입니다. 데이터베이스와는 다르게 인덱스를 여러개 가지기 힘든 파일저장 구조의 한계를 극복하기 위해 가장 많이 사용하는 키 혹은 그룹의 정보를 파티셔닝이라는 방식으로 디렉토리를 구분하여 저장할 수 있습니다.</p>
+<h1 id="3%EC%9D%BC%EC%B0%A8-4%EA%B5%90%EC%8B%9C---Spark-Partitioning">3&#51068;&#52264; 4&#44368;&#49884; - Spark Partitioning<a class="anchor-link" href="#3%EC%9D%BC%EC%B0%A8-4%EA%B5%90%EC%8B%9C---Spark-Partitioning">&#182;</a></h1><blockquote><p>스파크에서 성능을 개선하는 다양한 방법 가운데 파티셔닝과 버킷팅이 있습니다. 이 두가지 기법은 데이터를 저장하는 방법이며, 자주 혹은 함께 읽어지는 데이터 혹은 그룹을 저장 시에 함께 저장해둔다는 개념입니다. 데이터베이스와는 다르게 인덱스를 여러개 가지기 힘든 파일저장 구조의 한계를 극복하기 위해 가장 많이 사용하는 키 혹은 그룹의 정보를 파티셔닝이라는 방식으로 디렉토리를 구분하여 저장할 수 있습니다.</p>
 </blockquote>
 <h3 id="%EB%AA%A9%EC%B0%A8">&#47785;&#52264;<a class="anchor-link" href="#%EB%AA%A9%EC%B0%A8">&#182;</a></h3><ul>
 <li><a href="#1.-&#39;파티셔닝&#39;-이란?">1. '파티셔닝' 이란?</a></li>
@@ -14113,7 +14113,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 09:03:06 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/09/04 08:48:17 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -14136,7 +14136,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://36066668d2b9:4040">Spark UI</a></p>
+            <p><a href="http://c7f7ce8f1708:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14238,7 +14238,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Number of partitions: 3
+<pre>Number of partitions: 6
 Partitioner: None
 </pre>
 </div>
@@ -14251,7 +14251,7 @@ Partitioner: None
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 0:&gt;                                                          (0 + 3) / 3]</pre>
+<pre>[Stage 0:&gt;                                                          (0 + 6) / 6]</pre>
 </div>
 </div>
 
@@ -14262,7 +14262,7 @@ Partitioner: None
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Partitions structure: [[1], [2, 3], [4, 5]]
+<pre>Partitions structure: [[], [1], [2], [3], [4], [5]]
 </pre>
 </div>
 </div>
@@ -14285,6 +14285,7 @@ Partitioner: None
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <h3 id="2.-'%ED%8C%8C%ED%8B%B0%EC%85%94%EB%8B%9D'-%EC%9E%98-%ED%95%98%EB%8A%94-%EB%B2%95">2. '&#54028;&#54000;&#49492;&#45789;' &#51096; &#54616;&#45716; &#48277;<a class="anchor-link" href="#2.-'%ED%8C%8C%ED%8B%B0%EC%85%94%EB%8B%9D'-%EC%9E%98-%ED%95%98%EB%8A%94-%EB%B2%95">&#182;</a></h3><blockquote><p>셔플이 발생하는 다양한 변환작업 중에 skew 가 발생한 특정 노드에 셔플 블락이 2GB 이상 집중되는 경우, 자바의 바이트 버퍼 제한으로 실행에 실패합니다</p>
 </blockquote>
 <ul>
@@ -14307,6 +14308,7 @@ Partitioner: None
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
 <h3 id="3.-%ED%8C%8C%ED%8B%B0%EC%85%98-%EB%8B%A4%EB%A3%A8%EA%B8%B0">3. &#54028;&#54000;&#49496; &#45796;&#47336;&#44592;<a class="anchor-link" href="#3.-%ED%8C%8C%ED%8B%B0%EC%85%98-%EB%8B%A4%EB%A3%A8%EA%B8%B0">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14402,7 +14404,7 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">flight</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/troubleshoot4&quot;</span><span class="p">)</span>
@@ -14436,7 +14438,7 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">united_states</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/troubleshoot4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME=&#39;United States&#39;&quot;</span><span class="p">)</span>
@@ -14453,17 +14455,6 @@ only showing top 10 rows
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
 
 <div class="jp-OutputArea-child">
 
@@ -14504,7 +14495,7 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">flight</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;ORIGIN_COUNTRY_NAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/troubleshoot4&quot;</span><span class="p">)</span>
@@ -14538,7 +14529,7 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">us_sk</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/troubleshoot4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME=&#39;United States&#39; and ORIGIN_COUNTRY_NAME=&#39;South Korea&#39;&quot;</span><span class="p">)</span>
@@ -14596,7 +14587,548 @@ only showing top 10 rows
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="4.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%98-%ED%8A%B9%EC%A7%95">4. &#54028;&#54000;&#49496;&#51032; &#53945;&#51669;<a class="anchor-link" href="#4.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%98-%ED%8A%B9%EC%A7%95">&#182;</a></h3><ul>
+<p><br></p>
+<h3 id="4.-%ED%8C%8C%ED%8B%B0%EC%85%94%EB%8B%9D-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90">4. &#54028;&#54000;&#49492;&#45789; &#51452;&#51032;&#54624; &#51216;<a class="anchor-link" href="#4.-%ED%8C%8C%ED%8B%B0%EC%85%94%EB%8B%9D-%EC%A3%BC%EC%9D%98%ED%95%A0-%EC%A0%90">&#182;</a></h3><blockquote><p>파티션 구성 시에 데이터의 크기에 따른 파티션 선정이 중요한데 너무 작은 데이터 파티션에서 너무 다양한 파티션 값을 가진 경우 오히려 성능이 떨어지는 경우도 발생할 수 있습니다.</p>
+</blockquote>
+<ul>
+<li>파티션의 수가 너무 많은 경우 성능이 떨어지는 예제</li>
+<li>파티션의 수에 따라 파일 I/O가 달라지는 예제</li>
+</ul>
+<blockquote><p>로컬 환경에서 수백MB 데이터 예제 수행 시에 정상적으로 동작하지 않기 때문에 성능이 더 좋아지는 예제를 포함하지 못한 점 양해 부탁 드립니다.</p>
+</blockquote>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">normal</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/flight-data/json&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">normal</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/part_v1&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">normal</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/part_v2&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">normal</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/part_v1&quot;</span><span class="p">)</span>
+<span class="n">normal_expr</span> <span class="o">=</span> <span class="n">normal</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">expr</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME = &#39;United States&#39;&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;ORIGIN_COUNTRY_NAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">normal_expr</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<span class="n">normal_expr</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>== Physical Plan ==
+*(2) HashAggregate(keys=[ORIGIN_COUNTRY_NAME#368], functions=[count(1)])
++- Exchange hashpartitioning(ORIGIN_COUNTRY_NAME#368, 5), ENSURE_REQUIREMENTS, [id=#432]
+   +- *(1) HashAggregate(keys=[ORIGIN_COUNTRY_NAME#368], functions=[partial_count(1)])
+      +- *(1) Project [ORIGIN_COUNTRY_NAME#368]
+         +- *(1) Filter (isnotnull(DEST_COUNTRY_NAME#367) AND (DEST_COUNTRY_NAME#367 = United States))
+            +- *(1) ColumnarToRow
+               +- FileScan parquet [DEST_COUNTRY_NAME#367,ORIGIN_COUNTRY_NAME#368] Batched: true, DataFilters: [isnotnull(DEST_COUNTRY_NAME#367), (DEST_COUNTRY_NAME#367 = United States)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/target/part_v1], PartitionFilters: [], PushedFilters: [IsNotNull(DEST_COUNTRY_NAME), EqualTo(DEST_COUNTRY_NAME,United States)], ReadSchema: struct&lt;DEST_COUNTRY_NAME:string,ORIGIN_COUNTRY_NAME:string&gt;
+
+
++-------------------+-----+
+|ORIGIN_COUNTRY_NAME|count|
++-------------------+-----+
+|Ireland            |6    |
++-------------------+-----+
+only showing top 1 row
+
+CPU times: user 4.19 ms, sys: 1.15 ms, total: 5.34 ms
+Wall time: 294 ms
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">partitioned</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/part_v2&quot;</span><span class="p">)</span>
+<span class="n">partitioned_expr</span> <span class="o">=</span> <span class="n">partitioned</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">expr</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME = &#39;United States&#39;&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;ORIGIN_COUNTRY_NAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">partitioned_expr</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
+<span class="n">partitioned_expr</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>== Physical Plan ==
+*(2) HashAggregate(keys=[ORIGIN_COUNTRY_NAME#391], functions=[count(1)])
++- Exchange hashpartitioning(ORIGIN_COUNTRY_NAME#391, 5), ENSURE_REQUIREMENTS, [id=#498]
+   +- *(1) HashAggregate(keys=[ORIGIN_COUNTRY_NAME#391], functions=[partial_count(1)])
+      +- *(1) Project [ORIGIN_COUNTRY_NAME#391]
+         +- *(1) ColumnarToRow
+            +- FileScan parquet [ORIGIN_COUNTRY_NAME#391,DEST_COUNTRY_NAME#393] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/target/part_v2], PartitionFilters: [isnotnull(DEST_COUNTRY_NAME#393), (DEST_COUNTRY_NAME#393 = United States)], PushedFilters: [], ReadSchema: struct&lt;ORIGIN_COUNTRY_NAME:string&gt;
+
+
++-------------------+-----+
+|ORIGIN_COUNTRY_NAME|count|
++-------------------+-----+
+|Ireland            |6    |
++-------------------+-----+
+only showing top 1 row
+
+CPU times: user 5.92 ms, sys: 4.35 ms, total: 10.3 ms
+Wall time: 1.91 s
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">activity</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/activity-data&quot;</span><span class="p">)</span>
+<span class="n">activity</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">activity</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>[Stage 21:&gt;                                                         (0 + 6) / 6]</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- Arrival_Time: long (nullable = true)
+ |-- Creation_Time: long (nullable = true)
+ |-- Device: string (nullable = true)
+ |-- Index: long (nullable = true)
+ |-- Model: string (nullable = true)
+ |-- User: string (nullable = true)
+ |-- gt: string (nullable = true)
+ |-- x: double (nullable = true)
+ |-- y: double (nullable = true)
+ |-- z: double (nullable = true)
+
++-------------+-------------------+--------+-----+------+----+-----+------------+-----------+-----------+
+|Arrival_Time |Creation_Time      |Device  |Index|Model |User|gt   |x           |y          |z          |
++-------------+-------------------+--------+-----+------+----+-----+------------+-----------+-----------+
+|1424686734964|1424688581018556031|nexus4_2|1    |nexus4|g   |stand|-0.001449585|0.035491943|0.027999878|
++-------------+-------------------+--------+-----+------+----+-----+------------+-----------+-----------+
+only showing top 1 row
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">activity</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/normal&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">activity</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;User&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/partition&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/normal&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;User = &#39;e&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;gt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 2 ms, sys: 2.68 ms, total: 4.69 ms
+Wall time: 120 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<table border='1'>
+<tr><th>gt</th><th>count</th></tr>
+<tr><td>sit</td><td>8364</td></tr>
+<tr><td>stand</td><td>8058</td></tr>
+<tr><td>stairsdown</td><td>5995</td></tr>
+<tr><td>walk</td><td>9480</td></tr>
+<tr><td>null</td><td>10476</td></tr>
+<tr><td>stairsup</td><td>6557</td></tr>
+<tr><td>bike</td><td>8688</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/partition&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;User = &#39;e&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;gt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 2.32 ms, sys: 1.35 ms, total: 3.68 ms
+Wall time: 266 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<table border='1'>
+<tr><th>gt</th><th>count</th></tr>
+<tr><td>sit</td><td>8364</td></tr>
+<tr><td>stand</td><td>8058</td></tr>
+<tr><td>stairsdown</td><td>5995</td></tr>
+<tr><td>walk</td><td>9480</td></tr>
+<tr><td>null</td><td>10476</td></tr>
+<tr><td>stairsup</td><td>6557</td></tr>
+<tr><td>bike</td><td>8688</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+<span class="n">activity</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+<span class="n">activity</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;User = &#39;e&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;gt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>CPU times: user 2.4 ms, sys: 1.85 ms, total: 4.25 ms
+Wall time: 13.2 ms
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[43]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<table border='1'>
+<tr><th>gt</th><th>count</th></tr>
+<tr><td>sit</td><td>4182</td></tr>
+<tr><td>stand</td><td>4029</td></tr>
+<tr><td>stairsdown</td><td>2997</td></tr>
+<tr><td>walk</td><td>4740</td></tr>
+<tr><td>null</td><td>5238</td></tr>
+<tr><td>stairsup</td><td>3279</td></tr>
+<tr><td>bike</td><td>4344</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<h3 id="5.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%98-%ED%8A%B9%EC%A7%95">5. &#54028;&#54000;&#49496;&#51032; &#53945;&#51669;<a class="anchor-link" href="#5.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%98-%ED%8A%B9%EC%A7%95">&#182;</a></h3><ul>
 <li>Number of Tasks on per stage basis = Number of partitions<ul>
 <li>특정 스테이지의 타스크 수는 파티션 수와 같습니다</li>
 <li>즉, </li>
@@ -14611,6 +15143,20 @@ only showing top 10 rows
 </ul>
 
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 

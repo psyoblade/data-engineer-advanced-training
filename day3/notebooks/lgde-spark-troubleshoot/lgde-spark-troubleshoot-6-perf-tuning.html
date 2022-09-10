@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>lgde-spark-core-8-perf-tuning</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>lgde-spark-troubleshoot-6-perf-tuning</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14049,7 +14049,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="7%EA%B5%90%EC%8B%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%ED%8A%9C%EB%8B%9D-%EB%B0%8F-%EC%B5%9C%EC%A0%81%ED%99%94">7&#44368;&#49884; &#49828;&#54028;&#53356; &#50528;&#54540;&#47532;&#52992;&#51060;&#49496; &#53916;&#45789; &#48143; &#52572;&#51201;&#54868;<a class="anchor-link" href="#7%EA%B5%90%EC%8B%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%ED%8A%9C%EB%8B%9D-%EB%B0%8F-%EC%B5%9C%EC%A0%81%ED%99%94">&#182;</a></h1><blockquote><p>6장에서는 스파크가 어떻게 메모리 관리를 하고, 고급 API 를 통해서 데이터셋을 구성하는 지에 대해 학습했으며, 이번 장에서는 최적화를 위한 스파크 설정과, 조인 전략들을 살펴보고, 스파크 UI 를 통해 안좋은 영향을 줄 수 있는 것들에 대한 힌트를 얻고자 합니다.</p>
+<h1 id="3%EC%9D%BC%EC%B0%A8-6%EA%B5%90%EC%8B%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%ED%8A%9C%EB%8B%9D-%EB%B0%8F-%EC%B5%9C%EC%A0%81%ED%99%94">3&#51068;&#52264; 6&#44368;&#49884; &#49828;&#54028;&#53356; &#50528;&#54540;&#47532;&#52992;&#51060;&#49496; &#53916;&#45789; &#48143; &#52572;&#51201;&#54868;<a class="anchor-link" href="#3%EC%9D%BC%EC%B0%A8-6%EA%B5%90%EC%8B%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%ED%8A%9C%EB%8B%9D-%EB%B0%8F-%EC%B5%9C%EC%A0%81%ED%99%94">&#182;</a></h1><blockquote><p>6장에서는 스파크가 어떻게 메모리 관리를 하고, 고급 API 를 통해서 데이터셋을 구성하는 지에 대해 학습했으며, 이번 장에서는 최적화를 위한 스파크 설정과, 조인 전략들을 살펴보고, 스파크 UI 를 통해 안좋은 영향을 줄 수 있는 것들에 대한 힌트를 얻고자 합니다.</p>
 </blockquote>
 
 </div>
@@ -14068,8 +14068,24 @@ a.anchor-link {
     <span class="n">SparkSession</span>
     <span class="o">.</span><span class="n">builder</span>
     <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.sql.session.timeZone&quot;</span><span class="p">,</span> <span class="s2">&quot;Asia/Seoul&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;deploy-mode&quot;</span><span class="p">,</span> <span class="s2">&quot;client&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.cores&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.driver.memory&quot;</span><span class="p">,</span> <span class="s2">&quot;1g&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.cores&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.executor.memory&quot;</span><span class="p">,</span> <span class="s2">&quot;1g&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.num.executors&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.dynamicAllocation.enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.dynamicAllocation.shuffleTracking.enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.dynamicAllocation.minExecutors&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.dynamicAllocation.maxExecutors&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.dynamicAllocation.schedulerBacklogTimeout&quot;</span><span class="p">,</span> <span class="s2">&quot;1m&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.dynamicAllocation.executorIdleTimeout&quot;</span><span class="p">,</span> <span class="s2">&quot;2m&quot;</span><span class="p">)</span>
     <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
 <span class="p">)</span>
+
+<span class="c1"># 셔플트래킹은 익스큐터가 생성한 셔플파일을 삭제하지 않고도 익스큐터가 제거되는 것을 허용하는 옵션이며, 클러스터 매니저 별로 셔플 서비스는 다르지만 활성화는 간단하다</span>
+<span class="c1"># .config(&quot;spark.dynamicAllocation.shuffleTracking.enabled&quot;, True) # 3.x 버전 셔플 서비스</span>
+<span class="c1"># .config(&quot;spark.shuffle.service.enabled&quot;, True)                   # 1.x 버전 셔플 서비스</span>
 
 <span class="c1"># 노트북에서 테이블 형태로 데이터 프레임 출력을 위한 설정을 합니다</span>
 <span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.repl.eagerEval.enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># display enabled</span>
@@ -14104,7 +14120,8 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 09:10:02 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>Warning: Ignoring non-Spark config property: deploy-mode
+22/09/05 14:15:39 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -14127,7 +14144,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://36066668d2b9:4040">Spark UI</a></p>
+            <p><a href="http://04ed21dd4b13:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14152,9 +14169,9 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="7.1-Optimizing-and-Tuning-Spark-for-Efficiency">7.1 Optimizing and Tuning Spark for Efficiency<a class="anchor-link" href="#7.1-Optimizing-and-Tuning-Spark-for-Efficiency">&#182;</a></h2><blockquote><p>스파크는 <a href="https://spark.apache.org/docs/latest/tuning.html">튜닝</a>을 위한 다양한 설정을 제공하며, <a href="https://spark.apache.org/docs/latest/configuration.html">설정</a>값을 통해 확인할 수 있습니다</p>
+<h2 id="6.1-Optimizing-and-Tuning-Spark-for-Efficiency">6.1 Optimizing and Tuning Spark for Efficiency<a class="anchor-link" href="#6.1-Optimizing-and-Tuning-Spark-for-Efficiency">&#182;</a></h2><blockquote><p>스파크는 <a href="https://spark.apache.org/docs/latest/tuning.html">튜닝</a>을 위한 다양한 설정을 제공하며, <a href="https://spark.apache.org/docs/latest/configuration.html">설정</a>값을 통해 확인할 수 있습니다</p>
 </blockquote>
-<h3 id="7.1.1-Viewing-and-Setting-Apache-Spark-Configurations">7.1.1 Viewing and Setting Apache Spark Configurations<a class="anchor-link" href="#7.1.1-Viewing-and-Setting-Apache-Spark-Configurations">&#182;</a></h3><blockquote><p>아래의 순서대로 스파크는 설정값을 읽어들이며, 가장 마지막에 변경된 값이 반영됩니다</p>
+<h3 id="6.1.1-Viewing-and-Setting-Apache-Spark-Configurations">6.1.1 Viewing and Setting Apache Spark Configurations<a class="anchor-link" href="#6.1.1-Viewing-and-Setting-Apache-Spark-Configurations">&#182;</a></h3><blockquote><p>아래의 순서대로 스파크는 설정값을 읽어들이며, 가장 마지막에 변경된 값이 반영됩니다</p>
 </blockquote>
 <h4 id="1.-%EC%84%A4%EC%B9%98%EB%90%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EA%B2%BD%EB%A1%9C%EC%9D%98-conf/spark-default.conf-%ED%8C%8C%EC%9D%BC%EC%9D%84-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%88%98%EC%A0%95">1. &#49444;&#52824;&#46108; &#49828;&#54028;&#53356; &#44221;&#47196;&#51032; conf/spark-default.conf &#54028;&#51068;&#51012; &#49373;&#49457; &#48143; &#49688;&#51221;<a class="anchor-link" href="#1.-%EC%84%A4%EC%B9%98%EB%90%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EA%B2%BD%EB%A1%9C%EC%9D%98-conf/spark-default.conf-%ED%8C%8C%EC%9D%BC%EC%9D%84-%EC%83%9D%EC%84%B1-%EB%B0%8F-%EC%88%98%EC%A0%95">&#182;</a></h4><h4 id="2.-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%8B%A4%ED%96%89-%EC%8B%9C%EC%97%90-%EC%98%B5%EC%85%98%EC%9D%84-%EC%A7%80%EC%A0%95%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">2. &#49828;&#54028;&#53356; &#49892;&#54665; &#49884;&#50640; &#50741;&#49496;&#51012; &#51648;&#51221;&#54616;&#45716; &#48169;&#48277;<a class="anchor-link" href="#2.-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%8B%A4%ED%96%89-%EC%8B%9C%EC%97%90-%EC%98%B5%EC%85%98%EC%9D%84-%EC%A7%80%EC%A0%95%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">&#182;</a></h4><div class="highlight"><pre><span></span>$ spark-submit --conf spark.sql.shuffle.partitions<span class="o">=</span><span class="m">5</span> --conf <span class="s2">&quot;spark.executor.memory=2g&quot;</span> --class main.scala.chapter7.SparkConfig_7_1 jars/mainscala-chapter7_2.12-1.0.jar
 </pre></div>
@@ -14196,19 +14213,31 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(&#39;spark.app.id&#39;, &#39;local-1629537003980&#39;)
+<pre>(&#39;deploy-mode&#39;, &#39;client&#39;)
+(&#39;spark.app.id&#39;, &#39;local-1662387340566&#39;)
 (&#39;spark.app.name&#39;, &#39;pyspark-shell&#39;)
-(&#39;spark.app.startTime&#39;, &#39;1629537002952&#39;)
+(&#39;spark.app.startTime&#39;, &#39;1662387339823&#39;)
+(&#39;spark.driver.cores&#39;, &#39;1&#39;)
 (&#39;spark.driver.extraJavaOptions&#39;, &#39;-Dio.netty.tryReflectionSetAccessible=true&#39;)
-(&#39;spark.driver.host&#39;, &#39;36066668d2b9&#39;)
-(&#39;spark.driver.port&#39;, &#39;36767&#39;)
+(&#39;spark.driver.host&#39;, &#39;04ed21dd4b13&#39;)
+(&#39;spark.driver.memory&#39;, &#39;1g&#39;)
+(&#39;spark.driver.port&#39;, &#39;38433&#39;)
+(&#39;spark.dynamicAllocation.enabled&#39;, &#39;True&#39;)
+(&#39;spark.dynamicAllocation.executorIdleTimeout&#39;, &#39;2m&#39;)
+(&#39;spark.dynamicAllocation.maxExecutors&#39;, &#39;4&#39;)
+(&#39;spark.dynamicAllocation.minExecutors&#39;, &#39;2&#39;)
+(&#39;spark.dynamicAllocation.schedulerBacklogTimeout&#39;, &#39;1m&#39;)
+(&#39;spark.dynamicAllocation.shuffleTracking.enabled&#39;, &#39;True&#39;)
+(&#39;spark.executor.cores&#39;, &#39;1&#39;)
 (&#39;spark.executor.extraJavaOptions&#39;, &#39;-Dio.netty.tryReflectionSetAccessible=true&#39;)
 (&#39;spark.executor.id&#39;, &#39;driver&#39;)
+(&#39;spark.executor.memory&#39;, &#39;1g&#39;)
 (&#39;spark.master&#39;, &#39;local[*]&#39;)
+(&#39;spark.num.executors&#39;, &#39;2&#39;)
 (&#39;spark.rdd.compress&#39;, &#39;True&#39;)
 (&#39;spark.serializer.objectStreamReset&#39;, &#39;100&#39;)
 (&#39;spark.sql.session.timeZone&#39;, &#39;Asia/Seoul&#39;)
-(&#39;spark.sql.warehouse.dir&#39;, &#39;file:/home/jovyan/work/lgde-spark-core/spark-warehouse/&#39;)
+(&#39;spark.sql.warehouse.dir&#39;, &#39;file:/home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/&#39;)
 (&#39;spark.submit.deployMode&#39;, &#39;client&#39;)
 (&#39;spark.submit.pyFiles&#39;, &#39;&#39;)
 (&#39;spark.ui.showConsoleProgress&#39;, &#39;true&#39;)
@@ -14315,10 +14344,112 @@ only showing top 5 rows
 
 </div>
 
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">queryName</span> <span class="o">=</span> <span class="s2">&quot;memory_flight&quot;</span>
+<span class="o">!</span>rm -rf <span class="nv">$flightCheckpointLocation</span>
+<span class="n">flightCheckpointLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/tmp/</span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 파일을 읽어서 스키마를 확인하고</span>
+<span class="n">flightPath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/flight-data/json&quot;</span>
+<span class="n">flightJson</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">flightPath</span><span class="p">)</span>
+<span class="n">flightJson</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+
+<span class="c1"># 커스텀 스키마를 생성하고</span>
+<span class="n">flightSchema</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StructType</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;ORIGIN_COUNTRY_NAME&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flightSchema</span><span class="p">)</span>
+
+<span class="c1"># 데이터 소스를 스트림으로 읽어서</span>
+<span class="n">flightReader</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span>
+    <span class="o">.</span><span class="n">readStream</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">flightSchema</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;maxFilesPerTrigger&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">flightPath</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 변환 로직을 계산하고</span>
+<span class="n">flightCounter</span> <span class="o">=</span> <span class="n">flightReader</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;DEST_COUNTRY_NAME&quot;</span><span class="p">,</span> <span class="s2">&quot;ORIGIN_COUNTRY_NAME&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">))</span>
+
+<span class="c1"># 싱크 테이블을 메모리로 설정하고</span>
+<span class="n">flightWriter</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">flightCounter</span>
+    <span class="o">.</span><span class="n">writeStream</span>
+    <span class="o">.</span><span class="n">queryName</span><span class="p">(</span><span class="n">queryName</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;memory&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;update&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 트리거 설정을 하고</span>
+<span class="n">flightTrigger</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">flightWriter</span>
+    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span> <span class="o">=</span> <span class="s2">&quot;5 seconds&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="n">flightCheckpointLocation</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># 애플리케이션을 기동합니다</span>
+<span class="n">flightQuery</span> <span class="o">=</span> <span class="n">flightTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">flightQuery</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">flightQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- DEST_COUNTRY_NAME: string (nullable = true)
+ |-- ORIGIN_COUNTRY_NAME: string (nullable = true)
+ |-- count: long (nullable = true)
+
+StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGIN_COUNTRY_NAME,StringType,true),StructField(count,LongType,true)))
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="7.1.2-Scaling-Spark-for-Large-Workloads">7.1.2 Scaling Spark for Large Workloads<a class="anchor-link" href="#7.1.2-Scaling-Spark-for-Large-Workloads">&#182;</a></h3><h4 id="1.-%EC%A0%95%EC%A0%81-vs-%EB%8F%99%EC%A0%81-%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%A0%EB%8B%B9%EC%9D%98-%EC%84%A0%ED%83%9D">1. &#51221;&#51201; vs &#46041;&#51201; &#47532;&#49548;&#49828; &#54624;&#45817;&#51032; &#49440;&#53469;<a class="anchor-link" href="#1.-%EC%A0%95%EC%A0%81-vs-%EB%8F%99%EC%A0%81-%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%A0%EB%8B%B9%EC%9D%98-%EC%84%A0%ED%83%9D">&#182;</a></h4><blockquote><p>CPU 및 Memory 사용을 애플리케이션에 따라 지정하는 정적 리소스 할당과 동적 리소스 할당은 처리해야 할 데이터의 특성에 따라 선택할 수 있으며, 환경설정을 다르게 구성해야 합니다.</p>
+<h3 id="6.1.2-Scaling-Spark-for-Large-Workloads">6.1.2 Scaling Spark for Large Workloads<a class="anchor-link" href="#6.1.2-Scaling-Spark-for-Large-Workloads">&#182;</a></h3><h4 id="1.-%EC%A0%95%EC%A0%81-vs-%EB%8F%99%EC%A0%81-%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%A0%EB%8B%B9%EC%9D%98-%EC%84%A0%ED%83%9D">1. &#51221;&#51201; vs &#46041;&#51201; &#47532;&#49548;&#49828; &#54624;&#45817;&#51032; &#49440;&#53469;<a class="anchor-link" href="#1.-%EC%A0%95%EC%A0%81-vs-%EB%8F%99%EC%A0%81-%EB%A6%AC%EC%86%8C%EC%8A%A4-%ED%95%A0%EB%8B%B9%EC%9D%98-%EC%84%A0%ED%83%9D">&#182;</a></h4><blockquote><p>CPU 및 Memory 사용을 애플리케이션에 따라 지정하는 정적 리소스 할당과 동적 리소스 할당은 처리해야 할 데이터의 특성에 따라 선택할 수 있으며, 환경설정을 다르게 구성해야 합니다.</p>
 </blockquote>
 <ul>
 <li>데이터의 크기가 일정하지 않고, 유동적</li>
@@ -14408,7 +14539,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">numDF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">repartition</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
@@ -14428,7 +14559,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -14446,9 +14577,9 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="7.2-Caching-and-Persistence-of-Data">7.2 Caching and Persistence of Data<a class="anchor-link" href="#7.2-Caching-and-Persistence-of-Data">&#182;</a></h2><blockquote><p>cache() 와 persist() 는 거의 동일하지만, persist() 의 경우 persistent level 을 결정할 수 있습니다 (메모리, 디스크, 직렬화, 비직렬화 등)</p>
+<h2 id="6.2-Caching-and-Persistence-of-Data">6.2 Caching and Persistence of Data<a class="anchor-link" href="#6.2-Caching-and-Persistence-of-Data">&#182;</a></h2><blockquote><p>cache() 와 persist() 는 거의 동일하지만, persist() 의 경우 persistent level 을 결정할 수 있습니다 (메모리, 디스크, 직렬화, 비직렬화 등)</p>
 </blockquote>
-<h3 id="7.2.1-DataFrame.cache()">7.2.1 DataFrame.cache()<a class="anchor-link" href="#7.2.1-DataFrame.cache()">&#182;</a></h3><ul>
+<h3 id="6.2.1-DataFrame.cache()">6.2.1 DataFrame.cache()<a class="anchor-link" href="#6.2.1-DataFrame.cache()">&#182;</a></h3><ul>
 <li>DataFrame 은 부분적으로 캐시가 가능하지만, 파티션은 그렇지 못 합니다. 예를 들어 8개의 파티션 중 4.5개 정도를 사용할 메모리가 있는 경우 4개의 파티션만 캐시됩니다<ul>
 <li>캐시되지 않은 데이터를 읽는 데에는 문제가 없지만, 모두 다시 계산되어야 하는 비용이 발생합니다</li>
 </ul>
@@ -14465,7 +14596,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 반복적으로 수행하는 경우 노트북 프로그램의 캐싱될 수 있기 때문에, 매번 다른 프로그램 수행을 위해서 랜덤 시드숫자를 매번 더해줍니다.</span>
@@ -14497,7 +14628,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>seed number is 46
+<pre>seed number is 60
 </pre>
 </div>
 </div>
@@ -14509,7 +14640,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 0:&gt;                                                          (0 + 3) / 3]</pre>
+<pre>[Stage 14:&gt;                                                         (0 + 6) / 6]</pre>
 </div>
 </div>
 
@@ -14520,7 +14651,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>3.911931276321411
+<pre>3.3583695888519287
 </pre>
 </div>
 </div>
@@ -14568,7 +14699,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0.13873028755187988
+<pre>0.10658431053161621
 </pre>
 </div>
 </div>
@@ -14580,7 +14711,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="7.2.2-DataFrame.persist()">7.2.2 DataFrame.persist()<a class="anchor-link" href="#7.2.2-DataFrame.persist()">&#182;</a></h3><p><img src="images/table.7-2.png" alt="table.7-2">
+<h3 id="6.2.2-DataFrame.persist()">6.2.2 DataFrame.persist()<a class="anchor-link" href="#6.2.2-DataFrame.persist()">&#182;</a></h3><p><img src="images/table.7-2.png" alt="table.7-2">
 <img src="images/figure.7-5.png" alt="figure.7-5"></p>
 <ul>
 <li>테이블 캐시를 사용하는 경우도 cache() 와 동일한 결과를 보여줍니다
@@ -14624,7 +14755,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>seed number is 57
+<pre>seed number is 13
 </pre>
 </div>
 </div>
@@ -14636,7 +14767,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 4:&gt;                                                          (0 + 3) / 3]</pre>
+<pre>[Stage 4:&gt;                                                          (0 + 6) / 6]</pre>
 </div>
 </div>
 
@@ -14647,7 +14778,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>1.837291955947876
+<pre>2.232617139816284
 </pre>
 </div>
 </div>
@@ -14695,7 +14826,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0.16534972190856934
+<pre>0.20181655883789062
 </pre>
 </div>
 </div>
@@ -14740,7 +14871,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>seed number is 25
+<pre>seed number is 70
 </pre>
 </div>
 </div>
@@ -14752,7 +14883,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 8:&gt;                                                          (0 + 3) / 3]</pre>
+<pre>[Stage 8:=================================================&gt;         (5 + 1) / 6]</pre>
 </div>
 </div>
 
@@ -14763,7 +14894,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>1.994640827178955
+<pre>1.8168272972106934
 </pre>
 </div>
 </div>
@@ -14811,7 +14942,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0.014763832092285156
+<pre>0.015091180801391602
 </pre>
 </div>
 </div>
@@ -14823,7 +14954,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="7.2.3-When-to-Cache-and-Persist">7.2.3 When to Cache and Persist<a class="anchor-link" href="#7.2.3-When-to-Cache-and-Persist">&#182;</a></h3><blockquote><p>대용량 테이블을 자주 쿼리하는 경우 혹은 변환에 활용되는 경우에 사용합니다</p>
+<h3 id="6.2.3-When-to-Cache-and-Persist">6.2.3 When to Cache and Persist<a class="anchor-link" href="#6.2.3-When-to-Cache-and-Persist">&#182;</a></h3><blockquote><p>대용량 테이블을 자주 쿼리하는 경우 혹은 변환에 활용되는 경우에 사용합니다</p>
 <ul>
 <li>기계학습 훈련 시와 같이 반복 적인 데이터프레임의 조회</li>
 <li>ETL 데이터 파이프라인의 변환작업에 빈번하게 사용되는 공통 테이블의 사용</li>
@@ -14834,7 +14965,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="7.2.4-When-Not-to-Cache-and-Persist">7.2.4 When Not to Cache and Persist<a class="anchor-link" href="#7.2.4-When-Not-to-Cache-and-Persist">&#182;</a></h3><blockquote><p>너무 크거나, 자주 사용되지 않는 테이블의 경우는 지양합니다. 왜냐하면 데이터의 직렬화, 역직렬화에 따른 비용이 상당하기 때문에 오히려 전체적인 처리시간에 악영향을 줄 수 있습니다.</p>
+<h3 id="6.2.4-When-Not-to-Cache-and-Persist">6.2.4 When Not to Cache and Persist<a class="anchor-link" href="#6.2.4-When-Not-to-Cache-and-Persist">&#182;</a></h3><blockquote><p>너무 크거나, 자주 사용되지 않는 테이블의 경우는 지양합니다. 왜냐하면 데이터의 직렬화, 역직렬화에 따른 비용이 상당하기 때문에 오히려 전체적인 처리시간에 악영향을 줄 수 있습니다.</p>
 <ul>
 <li>메모리에 들어가지 않을 만큼 큰 데이터</li>
 <li>크기에 비해서 자주 사용되지 않는 데이터</li>
@@ -14842,24 +14973,10 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 </blockquote>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="7.3-A-Family-of-Spark-Joins">7.3 A Family of Spark Joins<a class="anchor-link" href="#7.3-A-Family-of-Spark-Joins">&#182;</a></h2><div class="highlight"><pre><span></span>/**
+<h2 id="6.3-A-Family-of-Spark-Joins">6.3 A Family of Spark Joins<a class="anchor-link" href="#6.3-A-Family-of-Spark-Joins">&#182;</a></h2><div class="highlight"><pre><span></span>/**
    * Select the proper physical plan for join based on join strategy hints, the availability of
    * equi-join keys and the sizes of joining relations. Below are the existing join strategies,
    * their characteristics and their limitations.
@@ -14894,7 +15011,7 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
    *     Supports only inner like joins.
    */
 </pre></div>
-<h3 id="7.3.1-Broadcast-Hash-Join">7.3.1 Broadcast Hash Join<a class="anchor-link" href="#7.3.1-Broadcast-Hash-Join">&#182;</a></h3><blockquote><p>드라이버 혹은 익스큐터의 메모리 보다 충분히 작은 경우에 해당 데이터를 broadcast 변수에 담아, 상대적으로 큰 데이터가 존재하는 노드로 변수를 전달하기 때문에 map 단계에서 join 이 일어나게 되어 <em>map-side-join</em> 이라고 부르며, 조인 성능에 가장 큰 영향을 미치는 셔플이 발생하지 않게 되어 성능이 좋습니다.</p>
+<h3 id="6.3.1-Broadcast-Hash-Join">6.3.1 Broadcast Hash Join<a class="anchor-link" href="#6.3.1-Broadcast-Hash-Join">&#182;</a></h3><blockquote><p>드라이버 혹은 익스큐터의 메모리 보다 충분히 작은 경우에 해당 데이터를 broadcast 변수에 담아, 상대적으로 큰 데이터가 존재하는 노드로 변수를 전달하기 때문에 map 단계에서 join 이 일어나게 되어 <em>map-side-join</em> 이라고 부르며, 조인 성능에 가장 큰 영향을 미치는 셔플이 발생하지 않게 되어 성능이 좋습니다.</p>
 </blockquote>
 <h4 id="When-to-use-a-broadcast-hash-join">When to use a broadcast hash join<a class="anchor-link" href="#When-to-use-a-broadcast-hash-join">&#182;</a></h4><ul>
 <li>작고 큰 데이터 집합의 개별 키가 스파크에 의해서 같은 파티션에 해시되어 있는 경우<ul>
@@ -14935,6 +15052,17 @@ spark.dynamicAllocation.executorIdleTimeout 2min</code></pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 
 <div class="jp-OutputArea-child">
 
@@ -15120,7 +15248,7 @@ Join condition: None
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="7.3.2-Shuffle-Sort-Merge-Join">7.3.2 Shuffle Sort Merge Join<a class="anchor-link" href="#7.3.2-Shuffle-Sort-Merge-Join">&#182;</a></h3><blockquote><p>두개의 대용량 데이터 집합을 조인하는 가장 효과적인 알고리즘이며, 기본 설정은 spark.sql.join.preferSortMergeJoin 은 enabled 된 상태입니다.</p>
+<h3 id="6.3.2-Shuffle-Sort-Merge-Join">6.3.2 Shuffle Sort Merge Join<a class="anchor-link" href="#6.3.2-Shuffle-Sort-Merge-Join">&#182;</a></h3><blockquote><p>두개의 대용량 데이터 집합을 조인하는 가장 효과적인 알고리즘이며, 기본 설정은 spark.sql.join.preferSortMergeJoin 은 enabled 된 상태입니다.</p>
 </blockquote>
 
 </div>
@@ -15240,26 +15368,26 @@ Join condition: None
 <pre>+--------------+--------+--------+-------+-----+-----+---+-------+----------------------+----------+
 |transaction_id|quantity|users_id|amount |state|items|uid|login  |email                 |user_state|
 +--------------+--------+--------+-------+-----+-----+---+-------+----------------------+----------+
-|3582          |3582    |0       |7164.0 |MI   |SKU-0|0  |user_0 |user_0@databricks.com |CA        |
-|4135          |4135    |4       |8270.0 |CA   |SKU-5|4  |user_4 |user_4@databricks.com |CO        |
-|541           |541     |16      |1082.0 |AZ   |SKU-5|16 |user_16|user_16@databricks.com|CO        |
-|5919          |5919    |18      |11838.0|CA   |SKU-5|18 |user_18|user_18@databricks.com|CO        |
-|241           |241     |20      |482.0  |MI   |SKU-3|20 |user_20|user_20@databricks.com|CO        |
-|5188          |5188    |26      |10376.0|NY   |SKU-3|26 |user_26|user_26@databricks.com|MI        |
-|2971          |2971    |29      |5942.0 |CA   |SKU-4|29 |user_29|user_29@databricks.com|TX        |
-|5728          |5728    |29      |11456.0|MI   |SKU-4|29 |user_29|user_29@databricks.com|TX        |
-|6176          |6176    |29      |12352.0|TX   |SKU-0|29 |user_29|user_29@databricks.com|TX        |
-|5981          |5981    |32      |11962.0|CA   |SKU-4|32 |user_32|user_32@databricks.com|TX        |
-|744           |744     |36      |1488.0 |CA   |SKU-0|36 |user_36|user_36@databricks.com|CO        |
-|494           |494     |40      |988.0  |TX   |SKU-4|40 |user_40|user_40@databricks.com|MI        |
-|1207          |1207    |40      |2414.0 |AZ   |SKU-1|40 |user_40|user_40@databricks.com|MI        |
-|2537          |2537    |43      |5074.0 |AZ   |SKU-5|43 |user_43|user_43@databricks.com|CA        |
-|1423          |1423    |47      |2846.0 |CA   |SKU-1|47 |user_47|user_47@databricks.com|CO        |
-|8706          |8706    |53      |17412.0|TX   |SKU-0|53 |user_53|user_53@databricks.com|CO        |
-|9413          |9413    |53      |18826.0|MI   |SKU-0|53 |user_53|user_53@databricks.com|CO        |
-|2630          |2630    |61      |5260.0 |MI   |SKU-2|61 |user_61|user_61@databricks.com|CO        |
-|7284          |7284    |64      |14568.0|MI   |SKU-2|64 |user_64|user_64@databricks.com|AZ        |
-|1010          |1010    |68      |2020.0 |NY   |SKU-1|68 |user_68|user_68@databricks.com|TX        |
+|1211          |1211    |16      |2422.0 |AZ   |SKU-1|16 |user_16|user_16@databricks.com|TX        |
+|2442          |2442    |18      |4884.0 |CO   |SKU-2|18 |user_18|user_18@databricks.com|TX        |
+|4739          |4739    |20      |9478.0 |MI   |SKU-4|20 |user_20|user_20@databricks.com|TX        |
+|6224          |6224    |20      |12448.0|MI   |SKU-0|20 |user_20|user_20@databricks.com|TX        |
+|2259          |2259    |27      |4518.0 |MI   |SKU-4|27 |user_27|user_27@databricks.com|AZ        |
+|4553          |4553    |27      |9106.0 |CO   |SKU-4|27 |user_27|user_27@databricks.com|AZ        |
+|9183          |9183    |27      |18366.0|AZ   |SKU-1|27 |user_27|user_27@databricks.com|AZ        |
+|6725          |6725    |29      |13450.0|MI   |SKU-5|29 |user_29|user_29@databricks.com|CA        |
+|3067          |3067    |43      |6134.0 |NY   |SKU-1|43 |user_43|user_43@databricks.com|MI        |
+|5731          |5731    |43      |11462.0|TX   |SKU-3|43 |user_43|user_43@databricks.com|MI        |
+|7239          |7239    |53      |14478.0|TX   |SKU-3|53 |user_53|user_53@databricks.com|AZ        |
+|1181          |1181    |61      |2362.0 |CA   |SKU-1|61 |user_61|user_61@databricks.com|TX        |
+|3044          |3044    |63      |6088.0 |NY   |SKU-2|63 |user_63|user_63@databricks.com|NY        |
+|5003          |5003    |63      |10006.0|CA   |SKU-0|63 |user_63|user_63@databricks.com|NY        |
+|5050          |5050    |63      |10100.0|NY   |SKU-4|63 |user_63|user_63@databricks.com|NY        |
+|9096          |9096    |64      |18192.0|CA   |SKU-0|64 |user_64|user_64@databricks.com|CO        |
+|3038          |3038    |68      |6076.0 |NY   |SKU-2|68 |user_68|user_68@databricks.com|AZ        |
+|6808          |6808    |70      |13616.0|NY   |SKU-2|70 |user_70|user_70@databricks.com|CA        |
+|9651          |9651    |70      |19302.0|CA   |SKU-3|70 |user_70|user_70@databricks.com|CA        |
+|7111          |7111    |74      |14222.0|AZ   |SKU-1|74 |user_74|user_74@databricks.com|CA        |
 +--------------+--------+--------+-------+-----+-----+---+-------+----------------------+----------+
 only showing top 20 rows
 
@@ -15452,30 +15580,30 @@ Join condition: None
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+--------------+--------+--------+-------+-----+-----+---+--------+-----------------------+----------+
-|transaction_id|quantity|users_id|amount |state|items|uid|login   |email                  |user_state|
-+--------------+--------+--------+-------+-----+-----+---+--------+-----------------------+----------+
-|4774          |4774    |2       |9548.0 |MI   |SKU-2|2  |user_2  |user_2@databricks.com  |CO        |
-|4417          |4417    |12      |8834.0 |TX   |SKU-4|12 |user_12 |user_12@databricks.com |TX        |
-|3673          |3673    |26      |7346.0 |CA   |SKU-4|26 |user_26 |user_26@databricks.com |CA        |
-|149           |149     |28      |298.0  |AZ   |SKU-0|28 |user_28 |user_28@databricks.com |AZ        |
-|8754          |8754    |42      |17508.0|CO   |SKU-3|42 |user_42 |user_42@databricks.com |CO        |
-|4794          |4794    |48      |9588.0 |CO   |SKU-2|48 |user_48 |user_48@databricks.com |AZ        |
-|1556          |1556    |48      |3112.0 |TX   |SKU-5|48 |user_48 |user_48@databricks.com |AZ        |
-|3972          |3972    |67      |7944.0 |TX   |SKU-0|67 |user_67 |user_67@databricks.com |CO        |
-|8104          |8104    |73      |16208.0|AZ   |SKU-1|73 |user_73 |user_73@databricks.com |CA        |
-|5598          |5598    |88      |11196.0|AZ   |SKU-0|88 |user_88 |user_88@databricks.com |CA        |
-|6380          |6380    |91      |12760.0|AZ   |SKU-1|91 |user_91 |user_91@databricks.com |TX        |
-|4639          |4639    |91      |9278.0 |MI   |SKU-4|91 |user_91 |user_91@databricks.com |TX        |
-|8877          |8877    |93      |17754.0|MI   |SKU-1|93 |user_93 |user_93@databricks.com |CA        |
-|7928          |7928    |93      |15856.0|TX   |SKU-1|93 |user_93 |user_93@databricks.com |CA        |
-|7452          |7452    |93      |14904.0|CA   |SKU-3|93 |user_93 |user_93@databricks.com |CA        |
-|1153          |1153    |151     |2306.0 |MI   |SKU-5|151|user_151|user_151@databricks.com|MI        |
-|8380          |8380    |152     |16760.0|MI   |SKU-3|152|user_152|user_152@databricks.com|MI        |
-|5062          |5062    |152     |10124.0|CO   |SKU-5|152|user_152|user_152@databricks.com|MI        |
-|8813          |8813    |156     |17626.0|AZ   |SKU-4|156|user_156|user_156@databricks.com|AZ        |
-|3043          |3043    |156     |6086.0 |NY   |SKU-3|156|user_156|user_156@databricks.com|AZ        |
-+--------------+--------+--------+-------+-----+-----+---+--------+-----------------------+----------+
+<pre>+--------------+--------+--------+-------+-----+-----+----+---------+------------------------+----------+
+|transaction_id|quantity|users_id|amount |state|items|uid |login    |email                   |user_state|
++--------------+--------+--------+-------+-----+-----+----+---------+------------------------+----------+
+|8307          |8307    |2040    |16614.0|AZ   |SKU-1|2040|user_2040|user_2040@databricks.com|NY        |
+|984           |984     |2050    |1968.0 |TX   |SKU-0|2050|user_2050|user_2050@databricks.com|CO        |
+|2139          |2139    |2054    |4278.0 |AZ   |SKU-5|2054|user_2054|user_2054@databricks.com|TX        |
+|8111          |8111    |2060    |16222.0|AZ   |SKU-2|2060|user_2060|user_2060@databricks.com|AZ        |
+|8958          |8958    |2068    |17916.0|CO   |SKU-4|2068|user_2068|user_2068@databricks.com|NY        |
+|9155          |9155    |2085    |18310.0|CA   |SKU-2|2085|user_2085|user_2085@databricks.com|CO        |
+|6267          |6267    |2111    |12534.0|CO   |SKU-1|2111|user_2111|user_2111@databricks.com|CO        |
+|3333          |3333    |2114    |6666.0 |AZ   |SKU-4|2114|user_2114|user_2114@databricks.com|MI        |
+|5892          |5892    |2127    |11784.0|MI   |SKU-4|2127|user_2127|user_2127@databricks.com|AZ        |
+|2523          |2523    |2127    |5046.0 |CO   |SKU-4|2127|user_2127|user_2127@databricks.com|AZ        |
+|5663          |5663    |2140    |11326.0|MI   |SKU-3|2140|user_2140|user_2140@databricks.com|TX        |
+|1382          |1382    |2140    |2764.0 |CA   |SKU-3|2140|user_2140|user_2140@databricks.com|TX        |
+|6497          |6497    |2144    |12994.0|CA   |SKU-2|2144|user_2144|user_2144@databricks.com|TX        |
+|9985          |9985    |2145    |19970.0|AZ   |SKU-3|2145|user_2145|user_2145@databricks.com|MI        |
+|7110          |7110    |2145    |14220.0|TX   |SKU-2|2145|user_2145|user_2145@databricks.com|MI        |
+|9016          |9016    |2155    |18032.0|CO   |SKU-0|2155|user_2155|user_2155@databricks.com|MI        |
+|9182          |9182    |2169    |18364.0|AZ   |SKU-3|2169|user_2169|user_2169@databricks.com|TX        |
+|2792          |2792    |2169    |5584.0 |CO   |SKU-0|2169|user_2169|user_2169@databricks.com|TX        |
+|238           |238     |2188    |476.0  |MI   |SKU-5|2188|user_2188|user_2188@databricks.com|NY        |
+|6429          |6429    |2189    |12858.0|TX   |SKU-0|2189|user_2189|user_2189@databricks.com|MI        |
++--------------+--------+--------+-------+-----+-----+----+---------+------------------------+----------+
 only showing top 20 rows
 
 </pre>
@@ -15505,7 +15633,7 @@ only showing top 20 rows
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="7.4-Inspecting-the-Spark-UI">7.4 Inspecting the Spark UI<a class="anchor-link" href="#7.4-Inspecting-the-Spark-UI">&#182;</a></h2><h3 id="7.4.1-Journey-Through-the-Spark-UI-Tabs">7.4.1 Journey Through the Spark UI Tabs<a class="anchor-link" href="#7.4.1-Journey-Through-the-Spark-UI-Tabs">&#182;</a></h3>
+<h2 id="6.4-Inspecting-the-Spark-UI">6.4 Inspecting the Spark UI<a class="anchor-link" href="#6.4-Inspecting-the-Spark-UI">&#182;</a></h2><h3 id="6.4.1-Journey-Through-the-Spark-UI-Tabs">6.4.1 Journey Through the Spark UI Tabs<a class="anchor-link" href="#6.4.1-Journey-Through-the-Spark-UI-Tabs">&#182;</a></h3>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -15533,7 +15661,7 @@ only showing top 20 rows
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="7.5-Summary">7.5 Summary<a class="anchor-link" href="#7.5-Summary">&#182;</a></h2>
+<h2 id="6.5-Summary">6.5 Summary<a class="anchor-link" href="#6.5-Summary">&#182;</a></h2>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">

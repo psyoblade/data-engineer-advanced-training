@@ -14049,7 +14049,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="5%EC%9D%BC%EC%B0%A8-5%EA%B5%90%EC%8B%9C---Spark-Bucketing">5&#51068;&#52264; 5&#44368;&#49884; - Spark Bucketing<a class="anchor-link" href="#5%EC%9D%BC%EC%B0%A8-5%EA%B5%90%EC%8B%9C---Spark-Bucketing">&#182;</a></h1><blockquote><p>스파크에서 버킷팅 기법이란 조인 혹은 집계 연산 시에 가장 성능을 떨어뜨리는 셔플을 피하기 위해 저장 시에 예상되는 파티션 그룹 키를 기반으로 미리 그룹핑 해서 저장해 두는 방법을 말합니다. spark.sql.sources.bucketing.enabled 를 통해 제어할 수 있고 기본 설정은 true 입니다. 결국 저장 시에 추가적인 고민과 시간이 필요하다는 의미이며, 그렇게 해서라도 충분히 리소스 사용을 상쇄할 수 있다고 판단되는 경우에만 사용하는 것을 추천 드립니다. Write Once Read Many 인 경우가 그러합니다.</p>
+<h1 id="3%EC%9D%BC%EC%B0%A8-5%EA%B5%90%EC%8B%9C---Spark-Bucketing">3&#51068;&#52264; 5&#44368;&#49884; - Spark Bucketing<a class="anchor-link" href="#3%EC%9D%BC%EC%B0%A8-5%EA%B5%90%EC%8B%9C---Spark-Bucketing">&#182;</a></h1><blockquote><p>스파크에서 버킷팅 기법이란 조인 혹은 집계 연산 시에 가장 성능을 떨어뜨리는 셔플을 피하기 위해 저장 시에 예상되는 파티션 그룹 키를 기반으로 미리 그룹핑 해서 저장해 두는 방법을 말합니다. spark.sql.sources.bucketing.enabled 를 통해 제어할 수 있고 기본 설정은 true 입니다. 결국 저장 시에 추가적인 고민과 시간이 필요하다는 의미이며, 그렇게 해서라도 충분히 리소스 사용을 상쇄할 수 있다고 판단되는 경우에만 사용하는 것을 추천 드립니다. Write Once Read Many 인 경우가 그러합니다.</p>
 </blockquote>
 <h3 id="%EB%AA%A9%EC%B0%A8">&#47785;&#52264;<a class="anchor-link" href="#%EB%AA%A9%EC%B0%A8">&#182;</a></h3><ul>
 <li><a href="#1.-&#39;버킷팅&#39;이란?">1. '버킷팅'이란?</a></li>
@@ -14112,7 +14112,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 09:04:00 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/09/04 09:47:36 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -14135,7 +14135,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://36066668d2b9:4040">Spark UI</a></p>
+            <p><a href="http://c7f7ce8f1708:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14188,8 +14188,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="3.1.-%EA%B7%B8%EB%8C%80%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%A0%84%EC%B2%B4-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%A9%EB%8B%88%EB%8B%A4.">3.1. &#44536;&#45824;&#47196; &#51200;&#51109; &#49884;&#50640;&#45716; &#51204;&#52404; &#49492;&#54540;&#51060; &#48156;&#49373;&#54633;&#45768;&#45796;.<a class="anchor-link" href="#3.1.-%EA%B7%B8%EB%8C%80%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%A0%84%EC%B2%B4-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%A9%EB%8B%88%EB%8B%A4.">&#182;</a></h4><p><img src="images/bucket-1.png" alt="bucket1"></p>
-
+<h4 id="3.1.-%EA%B7%B8%EB%8C%80%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%A0%84%EC%B2%B4-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%A9%EB%8B%88%EB%8B%A4.">3.1. &#44536;&#45824;&#47196; &#51200;&#51109; &#49884;&#50640;&#45716; &#51204;&#52404; &#49492;&#54540;&#51060; &#48156;&#49373;&#54633;&#45768;&#45796;.<a class="anchor-link" href="#3.1.-%EA%B7%B8%EB%8C%80%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%A0%84%EC%B2%B4-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%A9%EB%8B%88%EB%8B%A4.">&#182;</a></h4><!-- ![bucket1](images/bucket-1.png) -->
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14197,7 +14196,10 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/t1&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 브로드캐스팅에 의해 혼란을 줄이기 위해 브로드캐스팅을 발생하지 않도록 강제합니다.</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/t1&quot;</span><span class="p">)</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/t2&quot;</span><span class="p">)</span>
 <span class="n">c12</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="p">[</span><span class="n">s1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">make</span><span class="p">])</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">registration</span><span class="p">,</span> <span class="n">s2</span><span class="o">.</span><span class="n">sale_price</span><span class="p">)</span>
 <span class="n">c12</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
@@ -14254,6 +14256,54 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+-------------+-----+
+|make         |count|
++-------------+-----+
+|NISSAN       |5495 |
+|SKODA        |5495 |
+|MERCEDED_BENZ|5561 |
+|HYUNDAI      |5521 |
+|SUZUKI       |5628 |
+|KIA          |5495 |
+|VAUXHALL     |5696 |
+|FORD         |55579|
+|FIAT         |5530 |
++-------------+-----+
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 <span class="n">c2</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
@@ -14288,12 +14338,11 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">c12</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
-<span class="n">c12</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;sale_price &gt; 2000.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">c12</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;make IN (&#39;FORD&#39;, &#39;KIA&#39;, &#39;HYUNDAI&#39;) and sale_price &gt; 2000.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14314,15 +14363,18 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>== Physical Plan ==
-*(2) Project [make#1, model#2, engine_size#3, registration#0, sale_price#11]
-+- *(2) BroadcastHashJoin [make#1], [make#8], Inner, BuildLeft, false
-   :- BroadcastExchange HashedRelationBroadcastMode(List(input[1, string, false]),false), [id=#87]
-   :  +- *(1) Filter isnotnull(make#1)
-   :     +- *(1) ColumnarToRow
-   :        +- FileScan parquet [registration#0,make#1,model#2,engine_size#3] Batched: true, DataFilters: [isnotnull(make#1)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/t1], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-   +- *(2) Filter isnotnull(make#8)
-      +- *(2) ColumnarToRow
-         +- FileScan parquet [make#8,sale_price#11] Batched: true, DataFilters: [isnotnull(make#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/t2], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;make:string,sale_price:double&gt;
+*(5) Project [make#1, model#2, engine_size#3, registration#0, sale_price#11]
++- *(5) SortMergeJoin [make#1], [make#8], Inner
+   :- *(2) Sort [make#1 ASC NULLS FIRST], false, 0
+   :  +- Exchange hashpartitioning(make#1, 5), ENSURE_REQUIREMENTS, [id=#124]
+   :     +- *(1) Filter isnotnull(make#1)
+   :        +- *(1) ColumnarToRow
+   :           +- FileScan parquet [registration#0,make#1,model#2,engine_size#3] Batched: true, DataFilters: [isnotnull(make#1)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/t1], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
+   +- *(4) Sort [make#8 ASC NULLS FIRST], false, 0
+      +- Exchange hashpartitioning(make#8, 5), ENSURE_REQUIREMENTS, [id=#133]
+         +- *(3) Filter isnotnull(make#8)
+            +- *(3) ColumnarToRow
+               +- FileScan parquet [make#8,sale_price#11] Batched: true, DataFilters: [isnotnull(make#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/t2], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;make:string,sale_price:double&gt;
 
 
 </pre>
@@ -14336,7 +14388,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 7:&gt;                                                          (0 + 3) / 3]</pre>
+<pre>                                                                                </pre>
 </div>
 </div>
 
@@ -14347,20 +14399,20 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------+-------+--------------------+------------+----------+
-|  make|  model|         engine_size|registration|sale_price|
-+------+-------+--------------------+------------+----------+
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    2742.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4363.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4468.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    3327.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    3375.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    5364.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4880.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    2449.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4977.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    3560.0|
-+------+-------+--------------------+------------+----------+
+<pre>+-------+-----+--------------------+------------+----------+
+|   make|model|         engine_size|registration|sale_price|
++-------+-----+--------------------+------------+----------+
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    2046.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    2688.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    3492.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    4723.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    3256.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    2011.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    5457.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    5151.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    4600.0|
+|HYUNDAI|  I20|1.600000000000000000|     Admxty2|    5373.0|
++-------+-----+--------------------+------------+----------+
 only showing top 10 rows
 
 </pre>
@@ -14385,13 +14437,12 @@ only showing top 10 rows
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="3.2.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%ED%95%9C%EC%AA%BD-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%80-%ED%95%84%ED%84%B0%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9E%87%EC%A0%90%EC%9D%B4-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4">3.2. &#54028;&#54000;&#49496;&#51004;&#47196; &#51200;&#51109; &#49884;&#50640;&#45716; &#54620;&#51901; &#54028;&#54000;&#49496;&#51008; &#54596;&#53552;&#47484; &#53685;&#54620; &#51079;&#51216;&#51060; &#51080;&#49845;&#45768;&#45796;<a class="anchor-link" href="#3.2.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%ED%95%9C%EC%AA%BD-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%80-%ED%95%84%ED%84%B0%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9E%87%EC%A0%90%EC%9D%B4-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4">&#182;</a></h4><p><img src="images/bucket-2.png" alt="bucket2"></p>
-
+<h4 id="3.2.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-Dynamic-Partition-Pruning-%ED%99%9C%EC%9A%A9%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%98%EC%97%AC-%ED%95%84%ED%84%B0%EB%A7%81%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4">3.2. &#54028;&#54000;&#49496;&#51004;&#47196; &#51200;&#51109; &#49884;&#50640;&#45716; <code>Dynamic Partition Pruning</code> &#54876;&#50857;&#51060; &#44032;&#45733;&#54616;&#50668; &#54596;&#53552;&#47553;&#51060; &#44032;&#45733;&#54633;&#45768;&#45796;<a class="anchor-link" href="#3.2.-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9C%BC%EB%A1%9C-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-Dynamic-Partition-Pruning-%ED%99%9C%EC%9A%A9%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%98%EC%97%AC-%ED%95%84%ED%84%B0%EB%A7%81%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4">&#182;</a></h4><!-- ![bucket2](images/bucket-2.png) -->
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">partitionBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/troubleshoot5/model&quot;</span><span class="p">)</span>
@@ -14426,7 +14477,7 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;target/troubleshoot5/model&quot;</span><span class="p">)</span>
@@ -14442,12 +14493,11 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_price</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
-<span class="n">model_price</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;sale_price &gt; 2000.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">model_price</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;make IN (&#39;FORD&#39;, &#39;KIA&#39;, &#39;HYUNDAI&#39;) and sale_price &gt; 2000.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14468,68 +14518,35 @@ only showing top 10 rows
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>== Physical Plan ==
-*(5) Project [make#89, model#87, engine_size#88, registration#86, sale_price#96]
-+- *(5) SortMergeJoin [make#89], [make#97], Inner
-   :- *(2) Sort [make#89 ASC NULLS FIRST], false, 0
-   :  +- Exchange hashpartitioning(make#89, 5), ENSURE_REQUIREMENTS, [id=#228]
+*(5) Project [make#106, model#104, engine_size#105, registration#103, sale_price#113]
++- *(5) SortMergeJoin [make#106], [make#114], Inner
+   :- *(2) Sort [make#106 ASC NULLS FIRST], false, 0
+   :  +- Exchange hashpartitioning(make#106, 5), ENSURE_REQUIREMENTS, [id=#274]
    :     +- *(1) ColumnarToRow
-   :        +- FileScan parquet [registration#86,model#87,engine_size#88,make#89] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/target/troubleshoot5/model], PartitionFilters: [isnotnull(make#89)], PushedFilters: [], ReadSchema: struct&lt;registration:string,model:string,engine_size:decimal(38,18)&gt;
-   +- *(4) Sort [make#97 ASC NULLS FIRST], false, 0
-      +- Exchange hashpartitioning(make#97, 5), ENSURE_REQUIREMENTS, [id=#236]
+   :        +- FileScan parquet [registration#103,model#104,engine_size#105,make#106] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/target/troubleshoot5/model], PartitionFilters: [isnotnull(make#106)], PushedFilters: [], ReadSchema: struct&lt;registration:string,model:string,engine_size:decimal(38,18)&gt;
+   +- *(4) Sort [make#114 ASC NULLS FIRST], false, 0
+      +- Exchange hashpartitioning(make#114, 5), ENSURE_REQUIREMENTS, [id=#282]
          +- *(3) ColumnarToRow
-            +- FileScan parquet [sale_price#96,make#97] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/target/troubleshoot5/price], PartitionFilters: [isnotnull(make#97)], PushedFilters: [], ReadSchema: struct&lt;sale_price:double&gt;
+            +- FileScan parquet [sale_price#113,make#114] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/target/troubleshoot5/price], PartitionFilters: [isnotnull(make#114)], PushedFilters: [], ReadSchema: struct&lt;sale_price:double&gt;
 
 
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 14:===================&gt;                                      (1 + 2) / 3]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------+-------+--------------------+------------+----------+
-|  make|  model|         engine_size|registration|sale_price|
-+------+-------+--------------------+------------+----------+
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    2559.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    3464.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    4174.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    4446.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    3095.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    2049.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    3344.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    4286.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    5349.0|
-|NISSAN|QASHQAI|1.000000000000000000|     WqAd1O0|    4149.0|
-+------+-------+--------------------+------------+----------+
++-------+-----+--------------------+------------+----------+
+|   make|model|         engine_size|registration|sale_price|
++-------+-----+--------------------+------------+----------+
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    2827.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    4363.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    4754.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    4499.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    4597.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    4672.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    3657.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    2899.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    5130.0|
+|HYUNDAI|  I20|1.700000000000000000|     PJn4bLy|    2159.0|
++-------+-----+--------------------+------------+----------+
 only showing top 10 rows
 
 </pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
 </div>
 </div>
 
@@ -14540,20 +14557,35 @@ only showing top 10 rows
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="3.3.-%EB%B2%84%ED%82%B7-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%98%EC%A7%80-%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4.">3.3. &#48260;&#53431; &#51200;&#51109; &#49884;&#50640;&#45716; &#49492;&#54540;&#51060; &#48156;&#49373;&#54616;&#51648; &#50506;&#49845;&#45768;&#45796;.<a class="anchor-link" href="#3.3.-%EB%B2%84%ED%82%B7-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%98%EC%A7%80-%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4.">&#182;</a></h4><p><img src="images/bucket-3.png" alt="bucket3"></p>
-
+<h4 id="3.3.-%EB%B2%84%ED%82%B7-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%98%EC%A7%80-%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4.">3.3. &#48260;&#53431; &#51200;&#51109; &#49884;&#50640;&#45716; &#49492;&#54540;&#51060; &#48156;&#49373;&#54616;&#51648; &#50506;&#49845;&#45768;&#45796;.<a class="anchor-link" href="#3.3.-%EB%B2%84%ED%82%B7-%EC%A0%80%EC%9E%A5-%EC%8B%9C%EC%97%90%EB%8A%94-%EC%85%94%ED%94%8C%EC%9D%B4-%EB%B0%9C%EC%83%9D%ED%95%98%EC%A7%80-%EC%95%8A%EC%8A%B5%EB%8B%88%EB%8B%A4.">&#182;</a></h4><!-- ![bucket3](images/bucket-3.png) -->
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">numBuckets</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;drop table if exists model&quot;</span><span class="p">)</span>
+<span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;drop table if exists price&quot;</span><span class="p">)</span>
+
 <span class="c1"># 이전에 삭제되지 않은 임시 경로가 있다면 삭제합니다.</span>
-<span class="o">!</span>rm -rf /home/jovyan/work/spark-warehouse/model
-<span class="o">!</span>rm -rf /home/jovyan/work/spark-warehouse/price
-<span class="n">s1</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bucketBy</span><span class="p">(</span><span class="n">numBuckets</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+<span class="o">!</span>rm -rf /home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/model
+<span class="o">!</span>rm -rf /home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/price
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bucketBy</span><span class="p">(</span><span class="n">numBuckets</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
 <span class="n">s2</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">bucketBy</span><span class="p">(</span><span class="n">numBuckets</span><span class="p">,</span> <span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sortBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -14585,7 +14617,7 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">t1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;select * from model&quot;</span><span class="p">)</span>
@@ -14601,12 +14633,11 @@ only showing top 10 rows
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">t12</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
-<span class="n">t12</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;sale_price &gt; 2000.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">t12</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;make IN (&#39;FORD&#39;, &#39;KIA&#39;, &#39;HYUNDAI&#39;) and sale_price &gt; 2000.0&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14627,40 +14658,100 @@ only showing top 10 rows
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>== Physical Plan ==
-*(3) Project [make#154, model#155, engine_size#156, registration#153, sale_price#164]
-+- *(3) SortMergeJoin [make#154], [make#161], Inner
-   :- *(1) Sort [make#154 ASC NULLS FIRST], false, 0
-   :  +- *(1) Filter isnotnull(make#154)
+*(3) Project [make#171, model#172, engine_size#173, registration#170, sale_price#181]
++- *(3) SortMergeJoin [make#171], [make#178], Inner
+   :- *(1) Sort [make#171 ASC NULLS FIRST], false, 0
+   :  +- *(1) Filter isnotnull(make#171)
    :     +- *(1) ColumnarToRow
-   :        +- FileScan parquet default.model[registration#153,make#154,model#155,engine_size#156] Batched: true, DataFilters: [isnotnull(make#154)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/model], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;, SelectedBucketsCount: 10 out of 10
-   +- *(2) Sort [make#161 ASC NULLS FIRST], false, 0
-      +- *(2) Filter isnotnull(make#161)
+   :        +- FileScan parquet default.model[registration#170,make#171,model#172,engine_size#173] Batched: true, DataFilters: [isnotnull(make#171)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/model], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;, SelectedBucketsCount: 10 out of 10
+   +- *(2) Sort [make#178 ASC NULLS FIRST], false, 0
+      +- *(2) Filter isnotnull(make#178)
          +- *(2) ColumnarToRow
-            +- FileScan parquet default.price[make#161,sale_price#164] Batched: true, DataFilters: [isnotnull(make#161)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/price], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;make:string,sale_price:double&gt;, SelectedBucketsCount: 10 out of 10
+            +- FileScan parquet default.price[make#178,sale_price#181] Batched: true, DataFilters: [isnotnull(make#178)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/spark-warehouse/price], PartitionFilters: [], PushedFilters: [IsNotNull(make)], ReadSchema: struct&lt;make:string,sale_price:double&gt;, SelectedBucketsCount: 10 out of 10
 
 
-+------+-------+--------------------+------------+----------+
-|  make|  model|         engine_size|registration|sale_price|
-+------+-------+--------------------+------------+----------+
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    2742.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4363.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4468.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    3327.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    3375.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    5364.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4880.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    2449.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    4977.0|
-|NISSAN|QASHQAI|1.500000000000000000|     Rsk5K1K|    3560.0|
-+------+-------+--------------------+------------+----------+
++-------+-----+--------------------+------------+----------+
+|   make|model|         engine_size|registration|sale_price|
++-------+-----+--------------------+------------+----------+
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    4315.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    3506.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    4359.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    4483.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    3979.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    2997.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    2294.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    4067.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    3278.0|
+|HYUNDAI|  I20|1.400000000000000000|     iCOyWtD|    3679.0|
++-------+-----+--------------------+------------+----------+
 only showing top 10 rows
 
 </pre>
 </div>
 </div>
 
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
 </div>
 
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>1
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>

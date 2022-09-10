@@ -14068,10 +14068,10 @@ a.anchor-link {
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="o">*</span>
@@ -14106,6 +14106,30 @@ a.anchor-link {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>22/09/09 06:19:47 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to &#34;WARN&#34;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14122,10 +14146,10 @@ a.anchor-link {
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 소켓 커넥션을 통해 수신된 스트림 데이터를 통해 데이터 프레임을 생성하는 예제입니다</span>
@@ -14144,6 +14168,27 @@ a.anchor-link {
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>22/09/09 06:24:47 WARN TextSocketSourceProvider: The socket source should not be used for production applications! It does not support recovery.
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14159,7 +14204,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">socketCounter</span> <span class="o">=</span> <span class="p">(</span>
@@ -14214,7 +14259,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래와 같이 괄호()를 통해 묶는 경우 줄바꿈을 하더라도 backslash(\)를 통해 구분하지 않아도 되어 코드 가독성이 높아집니다</span>
@@ -14272,7 +14317,7 @@ a.anchor-link {
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 성공적으로 수행한 마지막 상태(state)를 저장하기 위한 지속성(persistent)있는 저장소(예: hdfs)의 위치를 지정하며, 실패한 작업의 재개 혹은 복구 시에 활용되어 exactly-once 보장.</span>
@@ -14336,17 +14381,21 @@ a.anchor-link {
 | -l (Listen mode) | 연결을 할 수 있게 계속 요청을 듣고 있게 해주는 옵션 |
 | -v (Verbose) | 상세 정보를 보여주는 옵션 |
 | -p (port) | Listening 포트 |
+| -k | 다중 접속에 바인딩이 가능하도록 열어두는 옵션 |
+| -n | 이름/포트 확인하지 않는 옵션 |
 <br></li>
 </ul>
 </li>
 <li><p>아래와 같이 별도의 터미널을 통해 넷캣(nc) 명령어를 실행합니다</p>
-<div class="highlight"><pre><span></span><span class="c1"># (base) root@notebook: nc -lvp 9999 -n</span>
+<ul>
+<li>스파크 스트리밍 세션이 종료될 때에 <div class="highlight"><pre><span></span><span class="c1"># (base) root@notebook: nc -lvp 9999</span>
 Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 Connection received on localhost <span class="m">37600</span>
 hello world
 data engineering intermediate course
 </pre></div>
-<p><br></p>
+<br></li>
+</ul>
 </li>
 <li><p>표준 출력으로 스파크 스트리밍 실행 결과를 확인 합니다</p>
 <div class="highlight"><pre><span></span>$ docker compose logs -f notebook
@@ -14389,10 +14438,10 @@ notebook  <span class="p">|</span> +------+-----+
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">socketQuery</span> <span class="o">=</span> <span class="n">socketTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -14403,10 +14452,83 @@ notebook  <span class="p">|</span> +------+-----+
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>22/09/09 06:30:52 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 1000 milliseconds, but spent 3108 milliseconds
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>-------------------------------------------
+Batch: 0
+-------------------------------------------
++----+-----+
+|word|count|
++----+-----+
++----+-----+
+
+-------------------------------------------
+Batch: 1
+-------------------------------------------
++-----+-----+
+| word|count|
++-----+-----+
+|world|    1|
+|hello|    1|
++-----+-----+
+
+-------------------------------------------
+Batch: 2
+-------------------------------------------
++-------+-----+
+|   word|count|
++-------+-----+
+|  world|    1|
+|  hello|    2|
+|pyspark|    1|
++-------+-----+
+
+-------------------------------------------
+Batch: 3
+-------------------------------------------
++-------+-----+
+|   word|count|
++-------+-----+
+|  world|    2|
+|   test|    1|
+|  hello|    3|
+|pyspark|    2|
++-------+-----+
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">socketQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
@@ -14492,8 +14614,8 @@ wordCountTrigger = (
 )
 
 # step5: 해당 
-wordCountQuery = wordCountTrigger.start()
-wordCountQuery.awaitTermination(60) # 노트북 특성상, 대기하면 다음 실행을 할 수 없으므로 1분간만 수행하고 종료합니다
+wordCountQuery = wordCountTrigger.start() # start 직후 애플리케이션이 기동되어 출력이 시작됩니다
+wordCountQuery.awaitTermination(60) # 노트북 특성상, 실행 내용을 모두 확인하고, stop 해야하므로 1분간만 수행하고 종료합니다
 wordCountQuery.stop() # 이후에 발생하는 처리는 수행되지 않으며 소켓 서버도 같이 종료됩니다
 ```
 

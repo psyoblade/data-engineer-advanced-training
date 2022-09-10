@@ -14049,13 +14049,13 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="5%EC%9D%BC%EC%B0%A8-3%EA%B5%90%EC%8B%9C---Spark-Cache,-Persist-and-Unpersist">5&#51068;&#52264; 3&#44368;&#49884; - Spark Cache, Persist and Unpersist<a class="anchor-link" href="#5%EC%9D%BC%EC%B0%A8-3%EA%B5%90%EC%8B%9C---Spark-Cache,-Persist-and-Unpersist">&#182;</a></h1><blockquote><p>데이터 캐싱 즉 메모리에 저장하여 성능을 향상 시키는 방식에 대해 이해하고 적용합니다. 기본적으로  스파크는 필요한 데이터 소스의 경우 리니지를 통해 다시 계산하는 것을 원칙으로 하므로 자주 사용되는 중간 데이터의 경우 메모리에 저장해둔다면 유용할 수 있습니다. 일반 ETL 작업 보다는 그래프 연산이나 기계학습 등에 반복적인 처리과정에 효과적입니다.</p>
+<h1 id="3%EC%9D%BC%EC%B0%A8-3%EA%B5%90%EC%8B%9C---Spark-Cache,-Persist-and-Unpersist">3&#51068;&#52264; 3&#44368;&#49884; - Spark Cache, Persist and Unpersist<a class="anchor-link" href="#3%EC%9D%BC%EC%B0%A8-3%EA%B5%90%EC%8B%9C---Spark-Cache,-Persist-and-Unpersist">&#182;</a></h1><blockquote><p>데이터 캐싱 즉 메모리에 저장하여 성능을 향상 시키는 방식에 대해 이해하고 적용합니다. 기본적으로  스파크는 필요한 데이터 소스의 경우 리니지를 통해 다시 계산하는 것을 원칙으로 하므로 자주 사용되는 중간 데이터의 경우 메모리에 저장해둔다면 유용할 수 있습니다. 일반 ETL 작업 보다는 그래프 연산이나 기계학습 등에 반복적인 처리과정에 효과적입니다.</p>
 </blockquote>
-<h3 id="%EB%AA%A9%EC%B0%A8">&#47785;&#52264;<a class="anchor-link" href="#%EB%AA%A9%EC%B0%A8">&#182;</a></h3><ul>
-<li><a href="#1.-SparkSQL-을-통한-캐싱">1. SparkSQL 을 통한 캐싱</a></li>
-<li><a href="#2.-Structured-API-통한-캐싱">2. Structured API 통한 캐싱</a></li>
-<li><a href="#3.-Cache-vs.-Persist-비교">3. Cache vs. Persist 비교</a></li>
-<li><a href="#4.-캐시-전략">4. 캐시 전략</a></li>
+<h2 id="%EA%B0%9C%EC%9A%94">&#44060;&#50836;<a class="anchor-link" href="#%EA%B0%9C%EC%9A%94">&#182;</a></h2><blockquote><p>스파크에는 메모리를 기반으로 데이터를 처리하는 것을 기본 전략으로 체택하고 있어 메모리만 충분하다면 자주 사용하는 테이블(데이터 프레임)을 캐싱해 둘 수 있는데 이를 통해 자주 조인되거나 잘 변경되지 않는 데이터를 캐싱하는 기법을 학습합니다</p>
+</blockquote>
+<ul>
+<li>다양한 캐싱 기법</li>
+<li>캐싱 전략과 활용</li>
 </ul>
 
 </div>
@@ -14110,11 +14110,10 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 09:02:32 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/09/04 08:27:35 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-21/08/21 09:02:33 WARN Utils: Service &#39;SparkUI&#39; could not bind on port 4040. Attempting port 4041.
 </pre>
 </div>
 </div>
@@ -14134,7 +14133,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://36066668d2b9:4041">Spark UI</a></p>
+            <p><a href="http://c7f7ce8f1708:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14159,6 +14158,9 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<h2 id="I.-%EB%8B%A4%EC%96%91%ED%95%9C-%EC%BA%90%EC%8B%B1-%EA%B8%B0%EB%B2%95">I. &#45796;&#50577;&#54620; &#52880;&#49905; &#44592;&#48277;<a class="anchor-link" href="#I.-%EB%8B%A4%EC%96%91%ED%95%9C-%EC%BA%90%EC%8B%B1-%EA%B8%B0%EB%B2%95">&#182;</a></h2><blockquote><p><code>Spark SQL</code> 혹은 <code>Structured API</code> 수준에서 캐싱 명령어는 각각 다르며 조금씩 다르게 동작합니다</p>
+</blockquote>
 <h3 id="1.-SparkSQL-%ED%86%B5%ED%95%9C-%EC%BA%90%EC%8B%B1">1. SparkSQL &#53685;&#54620; &#52880;&#49905;<a class="anchor-link" href="#1.-SparkSQL-%ED%86%B5%ED%95%9C-%EC%BA%90%EC%8B%B1">&#182;</a></h3><div class="highlight"><pre><span></span><span class="c1"># RDD 자체를 캐싱하는 cache 혹은 persist 연산과는 다르게 즉시 테이블을 캐싱합니다.</span>
 <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;CACHE TABLE [tableName]&quot;</span><span class="p">)</span>
 <span class="c1"># 물론 LAZY 키워드를 이용하면 지연된 캐싱도 가능합니다</span>
@@ -14365,6 +14367,9 @@ only showing top 1 row
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<h2 id="II.-%EC%BA%90%EC%8B%B1-%EC%A0%84%EB%9E%B5%EA%B3%BC-%ED%99%9C%EC%9A%A9">II. &#52880;&#49905; &#51204;&#47029;&#44284; &#54876;&#50857;<a class="anchor-link" href="#II.-%EC%BA%90%EC%8B%B1-%EC%A0%84%EB%9E%B5%EA%B3%BC-%ED%99%9C%EC%9A%A9">&#182;</a></h2><blockquote><p>캐싱을 사용할 때에는 <code>Cache</code> 와 <code>Persist</code>의 차이점을 잘 이해하고 사용해야 합니다.</p>
+</blockquote>
 <h3 id="3.-Cache-vs.-Persist-%EB%B9%84%EA%B5%90">3. Cache vs. Persist &#48708;&#44368;<a class="anchor-link" href="#3.-Cache-vs.-Persist-%EB%B9%84%EA%B5%90">&#182;</a></h3><h4 id="3.1-Cache">3.1 Cache<a class="anchor-link" href="#3.1-Cache">&#182;</a></h4><ul>
 <li>RDD cache() 메소드는 기본이 MEMORY_ONLY 캐싱이며 </li>
 <li>DataFrame, DataSet cache() 메소드는 기본이 MEMORY_AND_DISK 캐싱입니다</li>
@@ -14374,7 +14379,7 @@ only showing top 1 row
 <li>persist() 메소드는 STORAGE 레벨을 직접 지정할 수 있습니다</li>
 <li>DataFrame 혹은 DataSet 의 cache() 함수는 persist(StorageLevel.MEMORY_AND_DISK)와 동일합니다</li>
 </ul>
-<h4 id="3.3-Unpersis">3.3 Unpersis<a class="anchor-link" href="#3.3-Unpersis">&#182;</a></h4><ul>
+<h4 id="3.3-Unpersist">3.3 Unpersist<a class="anchor-link" href="#3.3-Unpersist">&#182;</a></h4><ul>
 <li>캐시된 데이터를 제거하며 모든 블록이 제거될 때 까지 블록되는 옵션을 가집니다 unpersist(default=true)<div class="highlight"><pre><span></span><span class="n">cachedData</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
 <span class="n">cachedData</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">cachedData</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>  <span class="c1"># 당연하겠지만 df 또한 unpersist 됩니다</span>
@@ -14538,16 +14543,291 @@ InMemoryTableScan [registration#36, make#37, model#38, engine_size#39, make#44, 
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="4.-%EC%BA%90%EC%8B%9C-%EC%A0%84%EB%9E%B5">4. &#52880;&#49884; &#51204;&#47029;<a class="anchor-link" href="#4.-%EC%BA%90%EC%8B%9C-%EC%A0%84%EB%9E%B5">&#182;</a></h3><ul>
-<li>SparkSQL 은 테이블 단위 캐시와, Lazy 하지 않은 캐시인 점을 이용하면 좀 더 직관적인 관리 및 운영이 가능합니다</li>
-<li>Dataframe, Dataset 은 Lazy Evaluation 인 점을 감안하면, 보다 정교한 개발 및 모듈 개발이 가능합니다 (최적화 관점)</li>
-<li>메모리에 올라와 있지만 캐시가 어떤 이유로든 삭제된 경우 transformation 연산을 통해 다시 계산됩니다</li>
-<li>스파크는 모든 persist(), cache() 메소드가 호출될 때마다 전체 메모리를 모니터링합니다</li>
-<li><p>해당 노드에 사용되지 않거나 혹은 LRU 알고리즘에 따라 캐시 데이터를 삭제합니다.</p>
-</li>
-<li><p>Storage Level 수준에 따른 리소스 사용 매트릭스</p>
-</li>
-</ul>
+<p><br></p>
+<h3 id="4.-Cached-%EC%97%AC%EB%B6%80%EC%97%90-%EB%94%B0%EB%A5%B8-%EC%84%B1%EB%8A%A5-%EC%B0%A8%EC%9D%B4-%EC%8B%A4%EC%8A%B5">4. Cached &#50668;&#48512;&#50640; &#46384;&#47480; &#49457;&#45733; &#52264;&#51060; &#49892;&#49845;<a class="anchor-link" href="#4.-Cached-%EC%97%AC%EB%B6%80%EC%97%90-%EB%94%B0%EB%A5%B8-%EC%84%B1%EB%8A%A5-%EC%B0%A8%EC%9D%B4-%EC%8B%A4%EC%8A%B5">&#182;</a></h3>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/s1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/s2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">s1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">model</span><span class="p">]</span>
+<span class="n">sale_price</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sale_price</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<table border='1'>
+<tr><th>registration</th><th>make</th><th>model</th><th>engine_size</th><th>make</th><th>model</th><th>engine_size</th><th>sale_price</th></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>1610.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>3283.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>5371.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>4341.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>2679.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>4836.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>1482.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>1144.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>1162.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>2325.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>4271.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>665.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>2973.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>758.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>4230.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>1924.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>3456.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>1647.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>3074.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>4855.0</td></tr>
+</table>
+only showing top 20 rows
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="c1"># cache 하지 않은 상태에서 Join 할 때 </span>
+<span class="n">sale_price</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>[Stage 16:&gt;                                                         (0 + 1) / 1]</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+------------+------------------+
+|registration|price             |
++------------+------------------+
+|TxRX6kA     |3238.9210526315787|
+|PX4Aq0t     |3238.9210526315787|
+|ALS3XKU     |3238.9210526315787|
+|JBlTWUg     |3238.9210526315787|
+|b03GIjW     |3238.9210526315787|
+|atj0cou     |3163.0254237288136|
+|eFTv6hF     |3163.0254237288136|
+|Rz1GRum     |3163.0254237288136|
+|UPDkPxK     |3163.0254237288136|
+|zmpYII0     |3163.0254237288136|
++------------+------------------+
+only showing top 10 rows
+
+CPU times: user 9.63 ms, sys: 2.19 ms, total: 11.8 ms
+Wall time: 1.79 s
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">s3</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/s1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">s4</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/s2&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">s3</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">s4</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">s3</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">s4</span><span class="o">.</span><span class="n">model</span><span class="p">]</span>
+<span class="n">cached_price</span> <span class="o">=</span> <span class="n">s3</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s4</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s4</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s3</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">cached_price</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<table border='1'>
+<tr><th>registration</th><th>make</th><th>model</th><th>engine_size</th><th>make</th><th>model</th><th>engine_size</th><th>sale_price</th></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>1610.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>3283.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>5371.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>4341.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>2679.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>4836.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>1482.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>1144.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>1162.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>2325.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>4271.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>665.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>2973.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>758.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.200000000000000000</td><td>4230.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>1924.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>3456.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>1647.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.000000000000000000</td><td>3074.0</td></tr>
+<tr><td>mK5LtWT</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>FIAT</td><td>500</td><td>1.100000000000000000</td><td>4855.0</td></tr>
+</table>
+only showing top 20 rows
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
+
+<span class="c1"># cache 한 상태에서 Join 할 때 </span>
+<span class="n">cached_price</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;price&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+------------+------------------+
+|registration|price             |
++------------+------------------+
+|TxRX6kA     |3238.9210526315787|
+|PX4Aq0t     |3238.9210526315787|
+|ALS3XKU     |3238.9210526315787|
+|JBlTWUg     |3238.9210526315787|
+|b03GIjW     |3238.9210526315787|
+|atj0cou     |3163.0254237288136|
+|eFTv6hF     |3163.0254237288136|
+|Rz1GRum     |3163.0254237288136|
+|UPDkPxK     |3163.0254237288136|
+|zmpYII0     |3163.0254237288136|
++------------+------------------+
+only showing top 10 rows
+
+CPU times: user 2.38 ms, sys: 3.74 ms, total: 6.11 ms
+Wall time: 496 ms
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><br></p>
+<h3 id="5.-%EC%BA%90%EC%8B%9C-%EC%A0%84%EB%9E%B5">5. &#52880;&#49884; &#51204;&#47029;<a class="anchor-link" href="#5.-%EC%BA%90%EC%8B%9C-%EC%A0%84%EB%9E%B5">&#182;</a></h3><h5 id="SparkSQL-%EC%9D%80-%ED%85%8C%EC%9D%B4%EB%B8%94-%EB%8B%A8%EC%9C%84-%EC%BA%90%EC%8B%9C%EC%99%80,-Lazy-%ED%95%98%EC%A7%80-%EC%95%8A%EC%9D%80-%EC%BA%90%EC%8B%9C%EC%9D%B8-%EC%A0%90%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EB%A9%B4-%EC%A2%80-%EB%8D%94-%EC%A7%81%EA%B4%80%EC%A0%81%EC%9D%B8-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%EC%9A%B4%EC%98%81%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4">SparkSQL &#51008; &#53580;&#51060;&#48660; &#45800;&#50948; &#52880;&#49884;&#50752;, Lazy &#54616;&#51648; &#50506;&#51008; &#52880;&#49884;&#51064; &#51216;&#51012; &#51060;&#50857;&#54616;&#47732; &#51328; &#45908; &#51649;&#44288;&#51201;&#51064; &#44288;&#47532; &#48143; &#50868;&#50689;&#51060; &#44032;&#45733;&#54633;&#45768;&#45796;<a class="anchor-link" href="#SparkSQL-%EC%9D%80-%ED%85%8C%EC%9D%B4%EB%B8%94-%EB%8B%A8%EC%9C%84-%EC%BA%90%EC%8B%9C%EC%99%80,-Lazy-%ED%95%98%EC%A7%80-%EC%95%8A%EC%9D%80-%EC%BA%90%EC%8B%9C%EC%9D%B8-%EC%A0%90%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EB%A9%B4-%EC%A2%80-%EB%8D%94-%EC%A7%81%EA%B4%80%EC%A0%81%EC%9D%B8-%EA%B4%80%EB%A6%AC-%EB%B0%8F-%EC%9A%B4%EC%98%81%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4">&#182;</a></h5><h5 id="Dataframe,-Dataset-%EC%9D%80-Lazy-Evaluation-%EC%9D%B8-%EC%A0%90%EC%9D%84-%EA%B0%90%EC%95%88%ED%95%98%EB%A9%B4,-%EB%B3%B4%EB%8B%A4-%EC%A0%95%EA%B5%90%ED%95%9C-%EA%B0%9C%EB%B0%9C-%EB%B0%8F-%EB%AA%A8%EB%93%88-%EA%B0%9C%EB%B0%9C%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4-(%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B4%80%EC%A0%90)">Dataframe, Dataset &#51008; Lazy Evaluation &#51064; &#51216;&#51012; &#44048;&#50504;&#54616;&#47732;, &#48372;&#45796; &#51221;&#44368;&#54620; &#44060;&#48156; &#48143; &#47784;&#46280; &#44060;&#48156;&#51060; &#44032;&#45733;&#54633;&#45768;&#45796; (&#52572;&#51201;&#54868; &#44288;&#51216;)<a class="anchor-link" href="#Dataframe,-Dataset-%EC%9D%80-Lazy-Evaluation-%EC%9D%B8-%EC%A0%90%EC%9D%84-%EA%B0%90%EC%95%88%ED%95%98%EB%A9%B4,-%EB%B3%B4%EB%8B%A4-%EC%A0%95%EA%B5%90%ED%95%9C-%EA%B0%9C%EB%B0%9C-%EB%B0%8F-%EB%AA%A8%EB%93%88-%EA%B0%9C%EB%B0%9C%EC%9D%B4-%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4-(%EC%B5%9C%EC%A0%81%ED%99%94-%EA%B4%80%EC%A0%90)">&#182;</a></h5><h5 id="%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90-%EC%98%AC%EB%9D%BC%EC%99%80-%EC%9E%88%EC%A7%80%EB%A7%8C-%EC%BA%90%EC%8B%9C%EA%B0%80-%EC%96%B4%EB%96%A4-%EC%9D%B4%EC%9C%A0%EB%A1%9C%EB%93%A0-%EC%82%AD%EC%A0%9C%EB%90%9C-%EA%B2%BD%EC%9A%B0-transformation-%EC%97%B0%EC%82%B0%EC%9D%84-%ED%86%B5%ED%95%B4-%EB%8B%A4%EC%8B%9C-%EA%B3%84%EC%82%B0%EB%90%A9%EB%8B%88%EB%8B%A4">&#47700;&#47784;&#47532;&#50640; &#50732;&#46972;&#50752; &#51080;&#51648;&#47564; &#52880;&#49884;&#44032; &#50612;&#46500; &#51060;&#50976;&#47196;&#46304; &#49325;&#51228;&#46108; &#44221;&#50864; transformation &#50672;&#49328;&#51012; &#53685;&#54644; &#45796;&#49884; &#44228;&#49328;&#46121;&#45768;&#45796;<a class="anchor-link" href="#%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90-%EC%98%AC%EB%9D%BC%EC%99%80-%EC%9E%88%EC%A7%80%EB%A7%8C-%EC%BA%90%EC%8B%9C%EA%B0%80-%EC%96%B4%EB%96%A4-%EC%9D%B4%EC%9C%A0%EB%A1%9C%EB%93%A0-%EC%82%AD%EC%A0%9C%EB%90%9C-%EA%B2%BD%EC%9A%B0-transformation-%EC%97%B0%EC%82%B0%EC%9D%84-%ED%86%B5%ED%95%B4-%EB%8B%A4%EC%8B%9C-%EA%B3%84%EC%82%B0%EB%90%A9%EB%8B%88%EB%8B%A4">&#182;</a></h5><h5 id="%EC%8A%A4%ED%8C%8C%ED%81%AC%EB%8A%94-%EB%AA%A8%EB%93%A0-persist(),-cache()-%EB%A9%94%EC%86%8C%EB%93%9C%EA%B0%80-%ED%98%B8%EC%B6%9C%EB%90%A0-%EB%95%8C%EB%A7%88%EB%8B%A4-%EC%A0%84%EC%B2%B4-%EB%A9%94%EB%AA%A8%EB%A6%AC%EB%A5%BC-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%A9%EB%8B%88%EB%8B%A4">&#49828;&#54028;&#53356;&#45716; &#47784;&#46304; persist(), cache() &#47700;&#49548;&#46300;&#44032; &#54840;&#52636;&#46112; &#46412;&#47560;&#45796; &#51204;&#52404; &#47700;&#47784;&#47532;&#47484; &#47784;&#45768;&#53552;&#47553;&#54633;&#45768;&#45796;<a class="anchor-link" href="#%EC%8A%A4%ED%8C%8C%ED%81%AC%EB%8A%94-%EB%AA%A8%EB%93%A0-persist(),-cache()-%EB%A9%94%EC%86%8C%EB%93%9C%EA%B0%80-%ED%98%B8%EC%B6%9C%EB%90%A0-%EB%95%8C%EB%A7%88%EB%8B%A4-%EC%A0%84%EC%B2%B4-%EB%A9%94%EB%AA%A8%EB%A6%AC%EB%A5%BC-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%ED%95%A9%EB%8B%88%EB%8B%A4">&#182;</a></h5><h5 id="%ED%95%B4%EB%8B%B9-%EB%85%B8%EB%93%9C%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EC%A7%80-%EC%95%8A%EA%B1%B0%EB%82%98-%ED%98%B9%EC%9D%80-LRU-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%97%90-%EB%94%B0%EB%9D%BC-%EC%BA%90%EC%8B%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%82%AD%EC%A0%9C%ED%95%A9%EB%8B%88%EB%8B%A4.">&#54644;&#45817; &#45432;&#46300;&#50640; &#49324;&#50857;&#46104;&#51648; &#50506;&#44144;&#45208; &#54841;&#51008; LRU &#50508;&#44256;&#47532;&#51608;&#50640; &#46384;&#46972; &#52880;&#49884; &#45936;&#51060;&#53552;&#47484; &#49325;&#51228;&#54633;&#45768;&#45796;.<a class="anchor-link" href="#%ED%95%B4%EB%8B%B9-%EB%85%B8%EB%93%9C%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EC%A7%80-%EC%95%8A%EA%B1%B0%EB%82%98-%ED%98%B9%EC%9D%80-LRU-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%97%90-%EB%94%B0%EB%9D%BC-%EC%BA%90%EC%8B%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%82%AD%EC%A0%9C%ED%95%A9%EB%8B%88%EB%8B%A4.">&#182;</a></h5><p><br></p>
+<h3 id="6.-Storage-Level">6. Storage Level<a class="anchor-link" href="#6.-Storage-Level">&#182;</a></h3><blockquote><p>수준에 따른 리소스 사용 매트릭스</p>
+</blockquote>
 <div class="highlight"><pre><span></span>Storage Level    Space used  CPU <span class="nb">time</span>  In memory  On-disk  Serialized   Recompute some partitions
 ----------------------------------------------------------------------------------------------------
 MEMORY_ONLY          High        Low       Y          N        N         Y    
@@ -14568,6 +14848,20 @@ DISK_ONLY            Low         High      N          Y        Y         N
 </ul>
 
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div>
 </body>
 
