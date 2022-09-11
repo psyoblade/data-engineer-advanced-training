@@ -139,13 +139,18 @@ curl -X POST -d 'json={"message":"hello"}' localhost:9881/debug
         time_key time
         keys time,movie,title,title_eng,year,grade
         types time:integer,movie:string,title:string,title_eng:string,year:integer,grade:string
-        keep_time_key true
+        keep_time_key false
     </parse>
 </source>
 
-<match {태그}>
-    type stdout
-</match>
+<filter info>
+    @type record_transformer
+    enable_ruby
+    <record>
+        timestamp ${Time.at(time).strftime('%Y-%m-%dT%H:%M:%S%z')}
+    </record>
+</filter>
+
 <match info>
     @type kafka2
 
