@@ -14111,7 +14111,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/09/07 01:39:20 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/09/09 05:41:51 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -14134,7 +14134,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://c6c145fcf635:4040">Spark UI</a></p>
+            <p><a href="http://d1067dc1417f:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14169,7 +14169,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 소스 스키마</span>
 <span class="n">activityPath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/activity-data&quot;</span>
-<span class="n">activityData</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">activityPath</span><span class="p">)</span>
+<span class="n">activityData</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">activityPath</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">activityData</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">activityData</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
 </pre></div>
@@ -14205,8 +14205,8 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
 <table border='1'>
 <tr><th>Arrival_Time</th><th>Creation_Time</th><th>Device</th><th>Index</th><th>Model</th><th>User</th><th>gt</th><th>x</th><th>y</th><th>z</th></tr>
-<tr><td>1424686735090</td><td>1424686733090638193</td><td>nexus4_1</td><td>18</td><td>nexus4</td><td>g</td><td>stand</td><td>3.356934E-4</td><td>-5.645752E-4</td><td>-0.018814087</td></tr>
-<tr><td>1424686735292</td><td>1424688581345918092</td><td>nexus4_2</td><td>66</td><td>nexus4</td><td>g</td><td>stand</td><td>-0.005722046</td><td>0.029083252</td><td>0.005569458</td></tr>
+<tr><td>1424686734964</td><td>1424688581018556031</td><td>nexus4_2</td><td>1</td><td>nexus4</td><td>g</td><td>stand</td><td>-0.001449585</td><td>0.035491943</td><td>0.027999878</td></tr>
+<tr><td>1424686735180</td><td>1424688581235108765</td><td>nexus4_2</td><td>44</td><td>nexus4</td><td>g</td><td>stand</td><td>-0.006790161</td><td>-0.05102539</td><td>0.020523071</td></tr>
 </table>
 
 </div>
@@ -14270,7 +14270,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </tr>
 <tr>
 <td>Rate Source</td>
-<td>트리밍 디버깅을 위한 포맷이며, 콘솔로 바로 출력합니다</td>
+<td>스트리밍 디버깅을 위한 포맷이며, 콘솔로 바로 출력합니다</td>
 <td>Debug Only</td>
 </tr>
 </tbody>
@@ -14381,7 +14381,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </tr>
 <tr>
 <td>Memory Sink</td>
-<td>스트리밍 디버깅을 위한 포매싱며, 임의의 테이블로 출력합니다</td>
+<td>스트리밍 디버깅을 위한 포맷이며, 임의의 테이블로 출력합니다</td>
 <td>Debug Only, .queryName("tableName") 옵션을 통해 테이블 이름을 지정합니다</td>
 </tr>
 </tbody>
@@ -14474,7 +14474,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 트리거</span>
@@ -14505,10 +14505,46 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ls <span class="nv">$checkpointLocation</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>ls: cannot access &#39;/home/jovyan/work/lgde-spark-stream/tmp/activity_count&#39;: No such file or directory
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 기동</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># !rm -rf $checkpointLocation</span>
+<span class="c1"># 기동</span>
 <span class="n">activityQuery</span> <span class="o">=</span> <span class="n">activityTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="n">activityQuery</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="c1"># 노트북 특성상, 대기하면 다음 실행을 할 수 없으므로 30초만 수행하고 종료합니다</span>
 <span class="n">activityQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c1"># 특정 타스크가 처리 중에 timeout 되는 경우, 해당 스레드가 종료되어 예외가 발생할 수 있습니다</span>
@@ -14530,13 +14566,34 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>-------------------------------------------
+Batch: 0
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|12309|
+|     stand|11385|
+|stairsdown| 9365|
+|      walk|13256|
+|  stairsup|10452|
+|      null|10448|
+|      bike|10797|
++----------+-----+
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 14:43:58 WARN OffsetSeqMetadata: Conf &#39;spark.sql.streaming.stateStore.compression.codec&#39; was not found in the offset log, using default value &#39;lz4&#39;
-21/08/21 14:43:59 WARN HDFSBackedStateStoreProvider: The state for version 31 doesn&#39;t exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
-21/08/21 14:43:59 WARN HDFSBackedStateStoreProvider: The state for version 31 doesn&#39;t exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
-21/08/21 14:43:59 WARN HDFSBackedStateStoreProvider: The state for version 31 doesn&#39;t exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
-21/08/21 14:43:59 WARN HDFSBackedStateStoreProvider: The state for version 31 doesn&#39;t exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
-21/08/21 14:43:59 WARN HDFSBackedStateStoreProvider: The state for version 31 doesn&#39;t exist in loadedMaps. Reading snapshot file and delta files if needed...Note that this is normal for the first batch of starting query.
+<pre>22/09/09 06:02:58 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 1000 milliseconds, but spent 1409 milliseconds
 </pre>
 </div>
 </div>
@@ -14549,482 +14606,80 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>-------------------------------------------
-Batch: 31
+Batch: 1
 -------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|393885|
-|     stand|364315|
-|stairsdown|299609|
-|      walk|424161|
-|  stairsup|334659|
-|      null|334282|
-|      bike|345483|
-+----------+------+
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 14:44:00 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 1000 milliseconds, but spent 1718 milliseconds
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>-------------------------------------------
-Batch: 32
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|406192|
-|     stand|375701|
-|stairsdown|308970|
-|      walk|437416|
-|  stairsup|345116|
-|      null|344730|
-|      bike|356281|
-+----------+------+
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|24617|
+|     stand|22770|
+|stairsdown|18732|
+|      walk|26512|
+|  stairsup|20902|
+|      null|20897|
+|      bike|21594|
++----------+-----+
 
 -------------------------------------------
-Batch: 33
+Batch: 2
 -------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|418500|
-|     stand|387087|
-|stairsdown|318333|
-|      walk|450672|
-|  stairsup|355571|
-|      null|355177|
-|      bike|367077|
-+----------+------+
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|36926|
+|     stand|34154|
+|stairsdown|28097|
+|      walk|39768|
+|  stairsup|31354|
+|      null|31346|
+|      bike|32390|
++----------+-----+
 
 -------------------------------------------
-Batch: 34
+Batch: 3
 -------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|430808|
-|     stand|398473|
-|stairsdown|327693|
-|      walk|463928|
-|  stairsup|366029|
-|      null|365623|
-|      bike|377874|
-+----------+------+
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|49235|
+|     stand|45539|
+|stairsdown|37463|
+|      walk|53024|
+|  stairsup|41805|
+|      null|41794|
+|      bike|43187|
++----------+-----+
 
 -------------------------------------------
-Batch: 35
+Batch: 4
 -------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|443116|
-|     stand|409857|
-|stairsdown|337052|
-|      walk|477184|
-|  stairsup|376490|
-|      null|376069|
-|      bike|388671|
-+----------+------+
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|61545|
+|     stand|56924|
+|stairsdown|46828|
+|      walk|66280|
+|  stairsup|52257|
+|      null|52241|
+|      bike|53984|
++----------+-----+
 
 -------------------------------------------
-Batch: 36
+Batch: 5
 -------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|455424|
-|     stand|421241|
-|stairsdown|346412|
-|      walk|490440|
-|  stairsup|386951|
-|      null|386515|
-|      bike|399468|
-+----------+------+
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|73855|
+|     stand|68309|
+|stairsdown|56192|
+|      walk|79536|
+|  stairsup|62710|
+|      null|62688|
+|      bike|64781|
++----------+-----+
 
--------------------------------------------
-Batch: 37
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|467732|
-|     stand|432625|
-|stairsdown|355773|
-|      walk|503696|
-|  stairsup|397412|
-|      null|396960|
-|      bike|410266|
-+----------+------+
-
--------------------------------------------
-Batch: 38
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|480040|
-|     stand|444009|
-|stairsdown|365134|
-|      walk|516952|
-|  stairsup|407875|
-|      null|407405|
-|      bike|421063|
-+----------+------+
-
--------------------------------------------
-Batch: 39
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|492348|
-|     stand|455392|
-|stairsdown|374497|
-|      walk|530207|
-|  stairsup|418336|
-|      null|417852|
-|      bike|431860|
-+----------+------+
-
--------------------------------------------
-Batch: 40
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|504656|
-|     stand|466775|
-|stairsdown|383858|
-|      walk|543462|
-|  stairsup|428799|
-|      null|428299|
-|      bike|442657|
-+----------+------+
-
--------------------------------------------
-Batch: 41
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|516964|
-|     stand|478158|
-|stairsdown|393220|
-|      walk|556717|
-|  stairsup|439261|
-|      null|438746|
-|      bike|453454|
-+----------+------+
-
--------------------------------------------
-Batch: 42
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|529271|
-|     stand|489542|
-|stairsdown|402586|
-|      walk|569972|
-|  stairsup|449719|
-|      null|449194|
-|      bike|464250|
-+----------+------+
-
--------------------------------------------
-Batch: 43
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|541579|
-|     stand|500926|
-|stairsdown|411953|
-|      walk|583227|
-|  stairsup|460176|
-|      null|459641|
-|      bike|475046|
-+----------+------+
-
--------------------------------------------
-Batch: 44
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|553887|
-|     stand|512310|
-|stairsdown|421321|
-|      walk|596482|
-|  stairsup|470632|
-|      null|470088|
-|      bike|485842|
-+----------+------+
-
--------------------------------------------
-Batch: 45
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|566195|
-|     stand|523695|
-|stairsdown|430690|
-|      walk|609737|
-|  stairsup|481088|
-|      null|480534|
-|      bike|496637|
-+----------+------+
-
--------------------------------------------
-Batch: 46
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|578503|
-|     stand|535080|
-|stairsdown|440057|
-|      walk|622991|
-|  stairsup|491547|
-|      null|490979|
-|      bike|507432|
-+----------+------+
-
--------------------------------------------
-Batch: 47
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|590814|
-|     stand|546465|
-|stairsdown|449425|
-|      walk|636245|
-|  stairsup|502004|
-|      null|501422|
-|      bike|518227|
-+----------+------+
-
--------------------------------------------
-Batch: 48
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|603125|
-|     stand|557851|
-|stairsdown|458790|
-|      walk|649498|
-|  stairsup|512462|
-|      null|511868|
-|      bike|529021|
-+----------+------+
-
--------------------------------------------
-Batch: 49
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|615436|
-|     stand|569237|
-|stairsdown|468153|
-|      walk|662751|
-|  stairsup|522921|
-|      null|522314|
-|      bike|539816|
-+----------+------+
-
--------------------------------------------
-Batch: 50
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|627747|
-|     stand|580623|
-|stairsdown|477518|
-|      walk|676004|
-|  stairsup|533378|
-|      null|532760|
-|      bike|550611|
-+----------+------+
-
--------------------------------------------
-Batch: 51
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|640058|
-|     stand|592009|
-|stairsdown|486881|
-|      walk|689257|
-|  stairsup|543835|
-|      null|543207|
-|      bike|561406|
-+----------+------+
-
--------------------------------------------
-Batch: 52
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|652369|
-|     stand|603394|
-|stairsdown|496243|
-|      walk|702511|
-|  stairsup|554293|
-|      null|553653|
-|      bike|572202|
-+----------+------+
-
--------------------------------------------
-Batch: 53
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|664680|
-|     stand|614779|
-|stairsdown|505604|
-|      walk|715765|
-|  stairsup|564752|
-|      null|564099|
-|      bike|582998|
-+----------+------+
-
--------------------------------------------
-Batch: 54
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|676991|
-|     stand|626164|
-|stairsdown|514965|
-|      walk|729020|
-|  stairsup|575209|
-|      null|574544|
-|      bike|593795|
-+----------+------+
-
--------------------------------------------
-Batch: 55
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|689302|
-|     stand|637549|
-|stairsdown|524326|
-|      walk|742275|
-|  stairsup|585666|
-|      null|584989|
-|      bike|604592|
-+----------+------+
-
--------------------------------------------
-Batch: 56
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|701611|
-|     stand|648933|
-|stairsdown|533688|
-|      walk|755530|
-|  stairsup|596122|
-|      null|595437|
-|      bike|615389|
-+----------+------+
-
--------------------------------------------
-Batch: 57
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|713920|
-|     stand|660317|
-|stairsdown|543051|
-|      walk|768785|
-|  stairsup|606577|
-|      null|605886|
-|      bike|626185|
-+----------+------+
-
--------------------------------------------
-Batch: 58
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|726229|
-|     stand|671701|
-|stairsdown|552415|
-|      walk|782040|
-|  stairsup|617030|
-|      null|616336|
-|      bike|636981|
-+----------+------+
-
--------------------------------------------
-Batch: 59
--------------------------------------------
-+----------+------+
-|        gt| count|
-+----------+------+
-|       sit|738536|
-|     stand|683088|
-|stairsdown|561777|
-|      walk|795296|
-|  stairsup|627486|
-|      null|626783|
-|      bike|647778|
-+----------+------+
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/21 14:44:28 ERROR WriteToDataSourceV2Exec: Data source write support org.apache.spark.sql.execution.streaming.sources.MicroBatchWrite@7d26042 is aborting.
-21/08/21 14:44:28 ERROR WriteToDataSourceV2Exec: Data source write support org.apache.spark.sql.execution.streaming.sources.MicroBatchWrite@7d26042 aborted.
-21/08/21 14:44:28 ERROR DiskBlockObjectWriter: Exception occurred while reverting partial writes to file /tmp/blockmgr-b3f2fd2c-b881-4de8-99da-2c05a5d44bd9/06/temp_shuffle_2969115e-8ccb-400e-ba9a-44358ab45f45, null
-21/08/21 14:44:28 ERROR DiskBlockObjectWriter: Exception occurred while reverting partial writes to file /tmp/blockmgr-b3f2fd2c-b881-4de8-99da-2c05a5d44bd9/37/temp_shuffle_b3287c95-21e2-45b1-abc9-52a1f250a61b, null
-21/08/21 14:44:28 ERROR DiskBlockObjectWriter: Exception occurred while reverting partial writes to file /tmp/blockmgr-b3f2fd2c-b881-4de8-99da-2c05a5d44bd9/30/temp_shuffle_0b3528b4-b9c8-4f3e-b0a4-fa19973f8b64, null
-21/08/21 14:44:28 ERROR DiskBlockObjectWriter: Exception occurred while reverting partial writes to file /tmp/blockmgr-b3f2fd2c-b881-4de8-99da-2c05a5d44bd9/27/temp_shuffle_a499dcc8-a1b6-42bf-b23c-d1be25f54c33, null
-21/08/21 14:44:28 ERROR DiskBlockObjectWriter: Exception occurred while reverting partial writes to file /tmp/blockmgr-b3f2fd2c-b881-4de8-99da-2c05a5d44bd9/03/temp_shuffle_11ff1e90-4c96-4734-84d7-70344f6274c6, null
-21/08/21 14:44:28 WARN TaskSetManager: Lost task 0.0 in stage 64.0 (TID 350) (0cadd86ac43f executor driver): TaskKilled (Stage cancelled)
 </pre>
 </div>
 </div>
@@ -15093,7 +14748,7 @@ activityQuery.stop()
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[37]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)</span>
@@ -15174,18 +14829,56 @@ customQuery.stop()
 
 </details>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)</span>
+
+<span class="n">schema1</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
+        <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">schema2</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">StructType</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">schema1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">schema2</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>StructType(List(StructField(col1,StringType,true),StructField(col2,LongType,true)))
+StructType(List(StructField(col1,StringType,true),StructField(col2,StringType,true),StructField(col3,StringType,true)))
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div>
@@ -15237,7 +14930,7 @@ notebook     | +----------+-------+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[38]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)</span>
@@ -15253,7 +14946,7 @@ notebook     | +----------+-------+
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3><font color=blue>4. [중급]</font> 애플리케이션이 종료된 이후에 파일이 추가된 경우, 애플리케이션을 재기동하면 어떻게 동작하나요?</h3>
 <ul>
-<li>이전 예제에서 이미 애플리케이션이 종료었기 때문에, data 경로에 임의의 json 파일을 appended-2.json 으로| 수동으로 복사해 주고, 애플리케이션을 재기동하여 카운트에 변화가 있는지 확인합니다<ul>
+<li>이전 예제에서 이미 애플리케이션이 종료었기 때문에, data 경로에 임의의 json 파일을 appended-2.json 으로 수동으로 복사해 주고, 애플리케이션을 재기동하여 카운트에 변화가 있는지 확인합니다<ul>
 <li>타임아웃 : 10초 이상 (기동 이후에 확인할 정도의 시간)</li>
 <li>데이터 경로 : /home/jovyan/work/activity-data</li>
 <li>JSON 파일("part-00000-tid-730451297822678341-1dda7027-2071-4d73-a0e2-7fb6a91e1d1f-0-c000.json")을 임의의 파일(appended-2.json")로 변경하여 복사합니다</li>
@@ -15294,7 +14987,7 @@ notebook     | +----------+-------+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)</span>

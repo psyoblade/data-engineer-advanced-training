@@ -1,5 +1,5 @@
 #!/bin/bash
-lectures="core delta stream troubleshoot"
+lectures="core stream troubleshoot"
 for lecture in $lectures; do
     notebook="lgde-spark-$lecture"
     notepath="notebooks/$notebook"

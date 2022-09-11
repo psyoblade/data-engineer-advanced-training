@@ -68,7 +68,7 @@ services:
     container_name: cassandra
     image: psyoblade/data-engineer-cassandra:1.0
     ports:
-      - "7000:7000"
+      - "7001:7000"
 
 networks:
   default:

@@ -14056,18 +14056,19 @@ a.anchor-link {
 </ul>
 <h2 id="%EB%AA%A9%EC%B0%A8">&#47785;&#52264;<a class="anchor-link" href="#%EB%AA%A9%EC%B0%A8">&#182;</a></h2><ul>
 <li><a href="#1.-스트리밍-조인">1. 스트리밍 조인</a><ul>
-<li><a href="#1.1.-스트림과-정적-테이블-조인">1.1 스트림과 정적 테이블 조인</a></li>
-<li><a href="#1.2.-스트림과-스트림-테이블-조인">1.2 스트림과 스트림 테이블 조인</a></li>
-<li><a href="#1.3-워터마킹을-이용한-아우터-조인">1.3 워터마킹을 이용한 아우터 조인</a></li>
+<li>1.1 스트림-정적 테이블 조인</li>
+<li>1.2 스트림-스트림 테이블 조인</li>
+<li>1.3 스트림-스트림 워터마킹 이너 조인</li>
+<li>1.4 스트림-스트림 워터마킹 아우터 조인</li>
 </ul>
 </li>
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="o">*</span>
@@ -14105,67 +14106,10 @@ a.anchor-link {
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/20 12:04:25 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
-Setting default log level to &#34;WARN&#34;.
-To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
-
-
-
-<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
-
-            <div>
-                <p><b>SparkSession - in-memory</b></p>
-                
-        <div>
-            <p><b>SparkContext</b></p>
-
-            <p><a href="http://f87a8a278a00:4040">Spark UI</a></p>
-
-            <dl>
-              <dt>Version</dt>
-                <dd><code>v3.1.2</code></dd>
-              <dt>Master</dt>
-                <dd><code>local[*]</code></dd>
-              <dt>AppName</dt>
-                <dd><code>pyspark-shell</code></dd>
-            </dl>
-        </div>
-        
-            </div>
-        
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 스트림 테이블을 주기적으로 조회하는 함수 (name: 이름, sql: Spark SQL, iterations: 반복횟수, sleep_secs: 인터벌)</span>
@@ -14217,27 +14161,33 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </ul>
 </li>
 <li>정적 데이터의 경우 반복적으로 읽게 되므로 캐싱하여 성능을 높일 수 있습니다</li>
-<li>정적 데이터가 변경되는 경우 소스의 종류에 따라 반영되지 않을 수 있습니다<ul>
+<li><strong>정적 데이터가 변경되는 경우 소스의 종류에 따라 반영되지 않을 수 있습니다</strong><ul>
 <li>파일 소스에 데이터가 추가(append)되는 경우 스트리밍 쿼리가 재시작 되기 전까지는 반영되기 어렵습니다</li>
+<li>정적 파일을 변경하더라도, 이전의 결과가 나오거나 제대로 처리되지 않는 경우가 발생할 수 있습니다.</li>
 </ul>
 </li>
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">queryName</span> <span class="o">=</span> <span class="s2">&quot;staticJoin&quot;</span>
-<span class="n">userPath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/user-static&quot;</span>
-<span class="n">userStatic</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">userPath</span><span class="p">)</span>
-<span class="n">userStatic</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">checkpointLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/tmp/</span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">!</span>rm -rf <span class="nv">$checkpointLocation</span>
 
-<span class="n">logsPath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/tumbling-stream&quot;</span>
-<span class="c1"># logsStream = spark.read.json(logsPath)</span>
-<span class="c1"># logsStream.printSchema()</span>
+<span class="n">userPath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/userStatic&quot;</span>
+<span class="n">userStatic</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">userPath</span><span class="p">)</span> <span class="c1"># .where(expr(&quot;age &gt; 10&quot;)) 이러한 필터 조건이 들어가면 정적 테이블 조인이 안되는 현상 발생</span>
+<span class="n">userStatic</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">userStatic</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">logsPath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/tumblingWindow&quot;</span>
+<span class="n">logsStream</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">logsPath</span><span class="p">)</span>
+<span class="n">logsStream</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">logsStream</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="n">logsSchema</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">StructType</span><span class="p">()</span>
     <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;emp_id&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span>
@@ -14246,15 +14196,38 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
     <span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span>
 <span class="p">)</span>
 <span class="n">logsStream</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">readStream</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">logsSchema</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">logsPath</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">staticSelector</span> <span class="o">=</span> <span class="n">logsStream</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">userStatic</span><span class="p">,</span> <span class="n">logsStream</span><span class="o">.</span><span class="n">emp_id</span> <span class="o">==</span> <span class="n">userStatic</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="s2">&quot;leftOuter&quot;</span><span class="p">)</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">joinExpression</span> <span class="o">=</span> <span class="p">(</span><span class="n">logsStream</span><span class="o">.</span><span class="n">emp_id</span> <span class="o">==</span> <span class="n">userStatic</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span>
+<span class="n">staticSelector</span> <span class="o">=</span> <span class="n">logsStream</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">userStatic</span><span class="p">,</span> <span class="n">joinExpression</span><span class="p">,</span> <span class="s2">&quot;leftOuter&quot;</span><span class="p">)</span>
 <span class="n">staticWriter</span> <span class="o">=</span> <span class="n">staticSelector</span><span class="o">.</span><span class="n">writeStream</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;append&quot;</span><span class="p">)</span>
-
-<span class="n">checkpointLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/tmp/</span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="o">!</span>rm -rf <span class="nv">$checkpointLocation</span>
 <span class="n">staticTrigger</span> <span class="o">=</span> <span class="n">staticWriter</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">&quot;5 second&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="n">checkpointLocation</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">staticQuery</span> <span class="o">=</span> <span class="n">staticTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">staticQuery</span> <span class="o">=</span> <span class="n">staticTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">staticQuery</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">staticQuery</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">staticQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
@@ -14264,53 +14237,11 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>root
- |-- gender: string (nullable = true)
- |-- reg_dt: string (nullable = true)
- |-- user_id: long (nullable = true)
- |-- user_name: string (nullable = true)
-
--------------------------------------------
-Batch: 0
--------------------------------------------
-+------+----------------+----------------------+----------+------+----------------------+-------+----------+
-|emp_id|        emp_name|                  time| timestamp|gender|                reg_dt|user_id| user_name|
-+------+----------------+----------------------+----------+------+----------------------+-------+----------+
-|     1|        엘지전자|2016. 3. 20. 오후 1...|1458444054|  남성|2014. 1. 10. 오후 1...|      1|    김엘지|
-|     1|        엘지전자|2016. 3. 20. 오후 1...|1458444055|  남성|2014. 1. 10. 오후 1...|      1|    김엘지|
-|     1|        엘지전자|2016. 3. 20. 오후 1...|1458444056|  남성|2014. 1. 10. 오후 1...|      1|    김엘지|
-|     1|        엘지전자|2016. 3. 20. 오후 3...|1458454057|  남성|2014. 1. 10. 오후 1...|      1|    김엘지|
-|     2|        엘지화학|2016. 3. 20. 오후 1...|1458445054|  여성|2015. 3. 2. 오후 12...|      2|    박전자|
-|     3|엘지에너지솔루션|2016. 3. 20. 오전 1...|1458442054|  남성|2018. 7. 30. 오전 0...|      3|  이데이터|
-|     4|            엘지|2016. 3. 20. 오후 1...|1458446054|  여성|2013. 3. 18. 오후 1...|      4|홍엔지니어|
-|     4|            엘지|2016. 3. 20. 오후 1...|1458446055|  여성|2013. 3. 18. 오후 1...|      4|홍엔지니어|
-+------+----------------+----------------------+----------+------+----------------------+-------+----------+
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
-<h3 id="1.2-%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%A1%B0%EC%9D%B8">1.2 &#49828;&#53944;&#47548;&#44284; <code>&#49828;&#53944;&#47548; &#53580;&#51060;&#48660; &#51312;&#51064;</code><a class="anchor-link" href="#1.2-%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%A1%B0%EC%9D%B8">&#182;</a></h3><blockquote><p>스트림과 스트림 데이터집합의 조인의 경우 양쪽 스트림 모두 지연될 수 있기 때문에 완전하지 않은 데이터 소스에 대한 조인이 일어날 수 있으므로 주의해서 다루어야 합니다. 이번에는 click 뿐만 아니라 impression 까지도 스트림 데이터 소스로 조인하는 예제를 학습합니다</p>
+<h3 id="1.2-%EC%8A%A4%ED%8A%B8%EB%A6%BC-vs-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9D%B4%EB%84%88%EC%A1%B0%EC%9D%B8">1.2 <code>&#49828;&#53944;&#47548; vs &#49828;&#53944;&#47548; &#53580;&#51060;&#48660; &#51060;&#45320;&#51312;&#51064;</code><a class="anchor-link" href="#1.2-%EC%8A%A4%ED%8A%B8%EB%A6%BC-vs-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9D%B4%EB%84%88%EC%A1%B0%EC%9D%B8">&#182;</a></h3><blockquote><p>스트림과 스트림 데이터집합의 조인의 경우 양쪽 스트림 모두 지연될 수 있기 때문에 완전하지 않은 데이터 소스에 대한 조인이 일어날 수 있으므로 주의해서 다루어야 합니다. 이번에는 click 뿐만 아니라 impression 까지도 스트림 데이터 소스로 조인하는 예제를 학습합니다</p>
 </blockquote>
 <p><img src="images/figure.8-11.png" alt="figure.8-11"></p>
 <p><br></p>
@@ -14324,13 +14255,15 @@ Batch: 0
 </pre></div>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">impressions</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/impressions&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">queryName</span> <span class="o">=</span> <span class="s2">&quot;streamStreamJoin&quot;</span>
+
+<span class="n">impressions</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/impressions&quot;</span><span class="p">)</span>
 <span class="n">impressions</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
 <span class="n">impressions</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -14344,61 +14277,13 @@ Batch: 0
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>root
- |-- adId: long (nullable = true)
- |-- impressionTime: long (nullable = true)
- |-- time: string (nullable = true)
-
-+----+--------------+-------------------+
-|adId|impressionTime|               time|
-+----+--------------+-------------------+
-|   1|    1628737260|2021-08-12 12:01:00|
-|   2|    1628737440|2021-08-12 12:04:00|
-|   3|    1628737620|2021-08-12 12:07:00|
-|   4|    1628737740|2021-08-12 12:09:00|
-+----+--------------+-------------------+
-
-root
- |-- adId: long (nullable = true)
- |-- clickTime: long (nullable = true)
- |-- time: string (nullable = true)
-
-+----+----------+-------------------+
-|adId| clickTime|               time|
-+----+----------+-------------------+
-|   1|1628737320|2021-08-12 12:02:00|
-|   2|1628737980|2021-08-12 12:13:00|
-|   4|1628737560|2021-08-12 12:06:00|
-+----+----------+-------------------+
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">queryName</span> <span class="o">=</span> <span class="s2">&quot;streamStreamJoin&quot;</span>
-<span class="n">impressionSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;impressionTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">impressionSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;impressionTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
 <span class="n">clickSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;clickTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
 
 <span class="c1"># 지연된 로그가 없으므로, 예제 단순화를 위해 watermark 사용하지 않음</span>
@@ -14421,48 +14306,24 @@ root
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
 </div>
-</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>1, 2, 4 번 로그만 inner join 에 의해 출력됩니다</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="c1"># impressions.json</span>
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:1, <span class="s2">&quot;impressionTime&quot;</span>:1628737260, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:01:00&quot;</span> <span class="o">}</span>,
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:2, <span class="s2">&quot;impressionTime&quot;</span>:1628737440, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:04:00&quot;</span> <span class="o">}</span>,
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:3, <span class="s2">&quot;impressionTime&quot;</span>:1628737620, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:07:00&quot;</span> <span class="o">}</span>,
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:4, <span class="s2">&quot;impressionTime&quot;</span>:1628737740, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:09:00&quot;</span> <span class="o">}</span>
 
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>-------------------------------------------
-Batch: 0
--------------------------------------------
-+----+-------------------+-------------------+----+-------------------+-------------------+
-|adId|     impressionTime|               time|adId|          clickTime|               time|
-+----+-------------------+-------------------+----+-------------------+-------------------+
-|   4|2021-08-12 12:09:00|2021-08-12 12:09:00|   4|2021-08-12 12:06:00|2021-08-12 12:06:00|
-|   2|2021-08-12 12:04:00|2021-08-12 12:04:00|   2|2021-08-12 12:13:00|2021-08-12 12:13:00|
-|   1|2021-08-12 12:01:00|2021-08-12 12:01:00|   1|2021-08-12 12:02:00|2021-08-12 12:02:00|
-+----+-------------------+-------------------+----+-------------------+-------------------+
-
-</pre>
-</div>
-</div>
+<span class="c1"># clicks.json</span>
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:1, <span class="s2">&quot;clickTime&quot;</span>:1628737320, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:02:00&quot;</span> <span class="o">}</span>,
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:4, <span class="s2">&quot;clickTime&quot;</span>:1628737560, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:06:00&quot;</span> <span class="o">}</span>,
+<span class="o">{</span> <span class="s2">&quot;adId&quot;</span>:2, <span class="s2">&quot;clickTime&quot;</span>:1628737980, <span class="s2">&quot;time&quot;</span>:<span class="s2">&quot;2021-08-12 12:13:00&quot;</span> <span class="o">}</span>
+</pre></div>
 
 </div>
-
-</div>
-
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14526,7 +14387,7 @@ Batch: 0
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="images/figure.8-13.png" alt="figure.8-13"></p>
 <p><br></p>
-<h4 id="1.2.4-%EA%B7%B8%EB%A6%BC%EC%9D%84-%ED%86%B5%ED%95%B4-2%EA%B0%80%EC%A7%80-%EC%8A%A4%ED%8A%B8%EB%A6%BC%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B0%80%EC%A0%95%EC%9D%84-%EB%B6%84%EC%84%9D%ED%95%A9%EB%8B%88%EB%8B%A4">1.2.4 &#44536;&#47548;&#51012; &#53685;&#54644; 2&#44032;&#51648; &#49828;&#53944;&#47548;&#50640; &#45824;&#54620; &#44032;&#51221;&#51012; &#48516;&#49437;&#54633;&#45768;&#45796;<a class="anchor-link" href="#1.2.4-%EA%B7%B8%EB%A6%BC%EC%9D%84-%ED%86%B5%ED%95%B4-2%EA%B0%80%EC%A7%80-%EC%8A%A4%ED%8A%B8%EB%A6%BC%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B0%80%EC%A0%95%EC%9D%84-%EB%B6%84%EC%84%9D%ED%95%A9%EB%8B%88%EB%8B%A4">&#182;</a></h4><ul>
+<h3 id="1.3-%EC%8A%A4%ED%8A%B8%EB%A6%BC-vs-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%82%B9-%EC%A1%B0%EC%9D%B8">1.3 <code>&#49828;&#53944;&#47548; vs &#49828;&#53944;&#47548; &#53580;&#51060;&#48660; &#50892;&#53552;&#47560;&#53433; &#51312;&#51064;</code><a class="anchor-link" href="#1.3-%EC%8A%A4%ED%8A%B8%EB%A6%BC-vs-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%ED%85%8C%EC%9D%B4%EB%B8%94-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%82%B9-%EC%A1%B0%EC%9D%B8">&#182;</a></h3><ul>
 <li><ol>
 <li>노출 데이터를 기준 : 노출은 2시간 지연이고, 클릭은 3시간 지연이므로, 노출 이후 1시간 클릭 가정을 고려하면 최대 4시간 노출 버퍼가 유지되어야 합니다</li>
 </ol>
@@ -14555,88 +14416,40 @@ Batch: 0
 <span class="p">)</span>
 </pre></div>
 <p><br></p>
-<h4 id="1.2.5-Inner-Join-%EC%97%B0%EC%82%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B8%B0%EC%96%B5%ED%95%B4-%EB%91%90%EC%96%B4%EC%95%BC%ED%95%98%EB%8A%94-%ED%82%A4%ED%8F%AC%EC%9D%B8%ED%8A%B8">1.2.5 Inner Join &#50672;&#49328;&#50640; &#45824;&#54620; &#44592;&#50613;&#54644; &#46160;&#50612;&#50556;&#54616;&#45716; &#53412;&#54252;&#51064;&#53944;<a class="anchor-link" href="#1.2.5-Inner-Join-%EC%97%B0%EC%82%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B8%B0%EC%96%B5%ED%95%B4-%EB%91%90%EC%96%B4%EC%95%BC%ED%95%98%EB%8A%94-%ED%82%A4%ED%8F%AC%EC%9D%B8%ED%8A%B8">&#182;</a></h4><ul>
+<h4 id="1.3.1-Inner-Join-%EC%97%B0%EC%82%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B8%B0%EC%96%B5%ED%95%B4-%EB%91%90%EC%96%B4%EC%95%BC%ED%95%98%EB%8A%94-%ED%82%A4%ED%8F%AC%EC%9D%B8%ED%8A%B8">1.3.1 Inner Join &#50672;&#49328;&#50640; &#45824;&#54620; &#44592;&#50613;&#54644; &#46160;&#50612;&#50556;&#54616;&#45716; &#53412;&#54252;&#51064;&#53944;<a class="anchor-link" href="#1.3.1-Inner-Join-%EC%97%B0%EC%82%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EA%B8%B0%EC%96%B5%ED%95%B4-%EB%91%90%EC%96%B4%EC%95%BC%ED%95%98%EB%8A%94-%ED%82%A4%ED%8F%AC%EC%9D%B8%ED%8A%B8">&#182;</a></h4><ul>
 <li>Inner Join 의 경우, 워터마킹과, 이벤트 타임 제약 두 가지 모두 선택 사항이므로, 'Unbounded State' 에 대한 위험성을 내포하고 있습니다. 즉, 두 가지 옵션을 지정해 주었을 때에만 더 이상 조인되지 않을 수 있는 '상태'가 정리 대상으로 관리된다는 의미입니다</li>
 <li>워터마킹 집계 연산에서 다루었던 것과 동일하게, 워터마킹에 의해 지정된 시간 범위내에 지연된 로그가 누락되지 않음을 보장하지만, 지연 로그가 처리되지 않는 것은 보장하지는 않습니다.</li>
 </ul>
 
 </div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br></p>
-<h3><font color=blue>1. [중급]</font> 위 실습의 노출(impressions)과 클릭(clicks) 데이터를 스트리밍 데이터로 읽고 콘솔 출력을 해보세요</h3>
-<ul>
-<li>노출 소스 정보<ul>
-<li>쿼리 : impressions</li>
-<li>위치 : f"{work_dir}/data/impressions"</li>
-<li>스키마 : adId long, impressionTime timestamp, time string</li>
-<li>워터마크 : 2시간</li>
-<li>체크포인트 : f"{work_dir}/tmp/impressions"</li>
-</ul>
-</li>
-<li>클릭 소스 정보<ul>
-<li>쿼리 : clicks</li>
-<li>위치 : f"{work_dir}/data/clicks"</li>
-<li>스키마 : adId long, clickTime timestamp, time string</li>
-<li>워터마크 : 3시간</li>
-<li>체크포인트 : f"{work_dir}/tmp/clicks"</li>
-</ul>
-</li>
-<li>기타<ul>
-<li>체크포인트는 사용전에 반드시 삭제합니다</li>
-<li>타임아웃 : 5초 내외 (하나의 파일을 읽고 조인하는 시간)</li>
-<li>포맷 : console</li>
-<li>출력 : append</li>
-<li>테스트 후 애플리케이션을 반드시 종료해 주세요</li>
-</ul>
-</li>
-</ul>
-<details><summary>[정답] 출력 결과 확인 </summary>
-
-> 아래와 유사하게 방식으로 작성 되었다면 정답입니다
-
-```python
-# 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)
-impressionSchema = StructType().add(StructField("adId", LongType())).add(StructField("impressionTime", TimestampType())).add(StructField("time", StringType()))
-clickSchema = StructType().add(StructField("adId", LongType())).add(StructField("clickTime", TimestampType())).add(StructField("time", StringType()))
-
-impressions = spark.readStream.format("json").schema(impressionSchema).load(f"{work_dir}/data/impressions")
-impressionsWithWatermark = impressions.selectExpr("adId AS impressionAdid", "impressionTime").withWatermark("impressionTime", "2 hours")
-
-queryName = "impressions"
-checkpointLocation = f"{work_dir}/tmp/{queryName}"
-!rm -rf $checkpointLocation
-impressionsQuery = (
-    impressionsWithWatermark.writeStream.queryName(queryName).format("console").outputMode("append")
-    .trigger(processingTime="1 second").option("checkpointLocation", checkpointLocation).start()
-)
-impressionsQuery.awaitTermination(5)
-impressionsQuery.stop()
-
-clicks = spark.readStream.format("json").schema(clickSchema).load(f"{work_dir}/data/clicks")
-clicksWithWatermark = clicks.selectExpr("adId AS clickAdid", "clickTime").withWatermark("clickTime", "3 hours")
-
-queryName = "clicks"
-checkpointLocation = f"{work_dir}/tmp/{queryName}"
-!rm -rf $checkpointLocation
-clicksQuery = (
-    clicksWithWatermark.writeStream.queryName(queryName).format("console").outputMode("append")
-    .trigger(processingTime="1 second").option("checkpointLocation", checkpointLocation).start()
-)
-clicksQuery.awaitTermination(5)
-clicksQuery.stop()
-```
-
-</details>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[40]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">queryName</span> <span class="o">=</span> <span class="s2">&quot;streamStreamInnerJoinWithWatermark&quot;</span>
+<span class="n">impressionSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;impressionTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+<span class="n">clickSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;clickTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+
+<span class="n">impressions</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span>
+    <span class="o">.</span><span class="n">readStream</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;maxFilesPerTrigger&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;latestFirst&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">impressionSchema</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/impressionsWithWatermark&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">impressionsWithWatermark</span> <span class="o">=</span> <span class="n">impressions</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">&quot;adId AS impressionAdid&quot;</span><span class="p">,</span> <span class="s2">&quot;impressionTime&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">&quot;impressionTime&quot;</span><span class="p">,</span> <span class="s2">&quot;2 hours&quot;</span><span class="p">)</span>
+
+<span class="n">clicks</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span>
+    <span class="o">.</span><span class="n">readStream</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">clickSchema</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/clicksWithWatermark&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">clicksWithWatermark</span> <span class="o">=</span> <span class="n">clicks</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">&quot;adId AS clickAdid&quot;</span><span class="p">,</span> <span class="s2">&quot;clickTime&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">&quot;clickTime&quot;</span><span class="p">,</span> <span class="s2">&quot;3 hours&quot;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14644,120 +14457,31 @@ clicksQuery.stop()
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>-------------------------------------------
-Batch: 0
--------------------------------------------
-+--------------+-------------------+
-|impressionAdid|     impressionTime|
-+--------------+-------------------+
-|             1|2021-08-12 12:01:00|
-|             2|2021-08-12 12:04:00|
-|             3|2021-08-12 12:07:00|
-|             4|2021-08-12 12:09:00|
-+--------------+-------------------+
-
--------------------------------------------
-Batch: 0
--------------------------------------------
-+---------+-------------------+
-|clickAdid|          clickTime|
-+---------+-------------------+
-|        1|2021-08-12 12:02:00|
-|        2|2021-08-12 12:13:00|
-|        4|2021-08-12 12:06:00|
-+---------+-------------------+
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br></p>
-<h3><font color=red>2. [고급]</font> 위 실습의 노출(impressions)과 클릭(clicks) 데이터에 대한 스트리밍 조인을 수행하세요</h3>
-<ul>
-<li>노출 소스 정보<ul>
-<li>쿼리 : impressions</li>
-<li>위치 : f"{work_dir}/data/impressions"</li>
-<li>스키마 : adId long, impressionTime timestamp, time string</li>
-<li>워터마크 : 2시간</li>
-</ul>
-</li>
-<li>클릭 소스 정보<ul>
-<li>쿼리 : clicks</li>
-<li>위치 : f"{work_dir}/data/clicks"</li>
-<li>스키마 : adId long, clickTime timestamp, time string</li>
-<li>워터마크 : 3시간</li>
-</ul>
-</li>
-<li>조인 조건<ul>
-<li>쿼리 : streamStreamJoin</li>
-<li>조건 : 노출(impression)의 adid 와 클릭(click)의 adid 가 일치하면서, 노출 이후 1시간 이내에 클릭이 발생하는 조건</li>
-</ul>
-</li>
-<li>기타<ul>
-<li>체크포인트는 사용전에 반드시 삭제합니다</li>
-<li>타임아웃 : 5초 내외 (하나의 파일을 읽고 조인하는 시간)</li>
-<li>포맷 : console</li>
-<li>출력 : append</li>
-<li>테스트 후 애플리케이션을 반드시 종료해 주세요</li>
-</ul>
-</li>
-</ul>
-<details><summary>[정답] 출력 결과 확인 </summary>
-
-> 아래와 유사하게 방식으로 작성 되었다면 정답입니다
-
-```python
-# 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)
-queryName = "streamStreamJoin"
-impressionSchema = StructType().add(StructField("adId", LongType())).add(StructField("impressionTime", TimestampType())).add(StructField("time", StringType()))
-clickSchema = StructType().add(StructField("adId", LongType())).add(StructField("clickTime", TimestampType())).add(StructField("time", StringType()))
-
-impressions = spark.readStream.format("json").schema(impressionSchema).load(f"{work_dir}/data/impressions")
-impressionsWithWatermark = impressions.selectExpr("adId AS impressionAdid", "impressionTime").withWatermark("impressionTime", "2 hours")
-
-clicks = spark.readStream.format("json").schema(clickSchema).load(f"{work_dir}/data/clicks")
-clicksWithWatermark = clicks.selectExpr("adId AS clickAdid", "clickTime").withWatermark("clickTime", "3 hours")
-
-# clickTime 이 impressionTime 사이에 있는 조건
-joinCondition = expr("impressionAdid = clickAdid AND clickTime BETWEEN impressionTime AND impressionTime + INTERVAL 1 HOUR")
-streamStreamSelector = impressionsWithWatermark.join(clicksWithWatermark, joinCondition)
-streamStreamWriter = streamStreamSelector.writeStream.format("console").queryName(queryName).outputMode("append")
-
-checkpointLocation = f"{work_dir}/tmp/{queryName}"
-!rm -rf $checkpointLocation
-streamStreamJoinQuery = streamStreamWriter.option("checkpointLocation", checkpointLocation).start()
-streamStreamJoinQuery.awaitTermination(10)
-streamStreamJoinQuery.stop()
-```
-
-</details>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[33]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 아래에 실습 코드를 작성하고 실행하세요 (Shift+Enter)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># clickTime 이 impressionTime 사이에 있는 조건</span>
+<span class="n">joinCondition</span> <span class="o">=</span> <span class="n">expr</span><span class="p">(</span><span class="s2">&quot;impressionAdid = clickAdid AND clickTime BETWEEN impressionTime AND impressionTime + INTERVAL 1 HOUR&quot;</span><span class="p">)</span>
+<span class="n">streamStreamSelector</span> <span class="o">=</span> <span class="n">impressionsWithWatermark</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">clicksWithWatermark</span><span class="p">,</span> <span class="n">joinCondition</span><span class="p">)</span>
+<span class="n">streamStreamWriter</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">streamStreamSelector</span>
+    <span class="o">.</span><span class="n">writeStream</span>
+    <span class="o">.</span><span class="n">queryName</span><span class="p">(</span><span class="n">queryName</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;append&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">checkpointLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/tmp/</span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">!</span>rm -rf <span class="nv">$checkpointLocation</span>
+
+<span class="n">streamStreamJoinTrigger</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">streamStreamWriter</span>
+    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">&quot;10 seconds&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="n">checkpointLocation</span><span class="p">)</span>
+<span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14765,60 +14489,28 @@ streamStreamJoinQuery.stop()
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 마지막에 지연된 로그가 정상적으로 출력되기 위해서 impression 과 watermark 시간 조정이 필요합니다</span>
+<span class="n">streamStreamJoinQuery</span> <span class="o">=</span> <span class="n">streamStreamJoinTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">streamStreamJoinQuery</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">streamStreamJoinQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
 
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
+     </div>
 </div>
 </div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>-------------------------------------------
-Batch: 0
--------------------------------------------
-+--------------+-------------------+---------+-------------------+
-|impressionAdid|     impressionTime|clickAdid|          clickTime|
-+--------------+-------------------+---------+-------------------+
-|             2|2021-08-12 12:04:00|        2|2021-08-12 12:13:00|
-|             1|2021-08-12 12:01:00|        1|2021-08-12 12:02:00|
-+--------------+-------------------+---------+-------------------+
-
--------------------------------------------
-Batch: 1
--------------------------------------------
-+--------------+--------------+---------+---------+
-|impressionAdid|impressionTime|clickAdid|clickTime|
-+--------------+--------------+---------+---------+
-+--------------+--------------+---------+---------+
-
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><br></p>
-<h3 id="1.3-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%82%B9%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%95%84%EC%9A%B0%ED%84%B0-%EC%A1%B0%EC%9D%B8">1.3 <em>&#50892;&#53552;&#47560;&#53433;</em>&#51012; &#51060;&#50857;&#54620; <code>&#50500;&#50864;&#53552; &#51312;&#51064;</code><a class="anchor-link" href="#1.3-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%82%B9%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%95%84%EC%9A%B0%ED%84%B0-%EC%A1%B0%EC%9D%B8">&#182;</a></h3><blockquote><p>위의 Inner Join 예제의 경우 노출은 되더라도 클릭되지 않은 경우는 전혀 리포팅 되지 않게 됩니다. 그래서 노출은 되지만 클릭되지 않은 경우를 고려하기 위해서 Outer Join 을 사용하게 됩니다</p>
+<h3 id="1.4-%EC%8A%A4%ED%8A%B8%EB%A6%BC-vs.-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%82%B9-%EC%95%84%EC%9A%B0%ED%84%B0-%EC%A1%B0%EC%9D%B8">1.4 <code>&#49828;&#53944;&#47548; vs. &#49828;&#53944;&#47548; &#50892;&#53552;&#47560;&#53433; &#50500;&#50864;&#53552; &#51312;&#51064;</code><a class="anchor-link" href="#1.4-%EC%8A%A4%ED%8A%B8%EB%A6%BC-vs.-%EC%8A%A4%ED%8A%B8%EB%A6%BC-%EC%9B%8C%ED%84%B0%EB%A7%88%ED%82%B9-%EC%95%84%EC%9A%B0%ED%84%B0-%EC%A1%B0%EC%9D%B8">&#182;</a></h3><blockquote><p>위의 Inner Join 예제의 경우 노출은 되더라도 클릭되지 않은 경우는 전혀 리포팅 되지 않게 됩니다. 그래서 노출은 되지만 클릭되지 않은 경우를 고려하기 위해서 Outer Join 을 사용하게 됩니다</p>
 </blockquote>
 <div class="highlight"><pre><span></span><span class="p">(</span>
     <span class="n">impressionsWithWatermark</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
@@ -14840,6 +14532,89 @@ Batch: 1
 </ul>
 
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">queryName</span> <span class="o">=</span> <span class="s2">&quot;streamStreamOuterJoinWithWatermark&quot;</span>
+<span class="n">impressionSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;impressionTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+<span class="n">clickSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;adId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;clickTime&quot;</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">()))</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">()))</span>
+
+<span class="n">impressions</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span>
+    <span class="o">.</span><span class="n">readStream</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;maxFilesPerTrigger&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;latestFirst&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">impressionSchema</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/impressionsWithWatermark&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">impressionsWithWatermark</span> <span class="o">=</span> <span class="n">impressions</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">&quot;adId AS impressionAdid&quot;</span><span class="p">,</span> <span class="s2">&quot;impressionTime&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">&quot;impressionTime&quot;</span><span class="p">,</span> <span class="s2">&quot;2 hours&quot;</span><span class="p">)</span>
+
+<span class="n">clicks</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">spark</span>
+    <span class="o">.</span><span class="n">readStream</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">schema</span><span class="p">(</span><span class="n">clickSchema</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/data/clicksWithWatermark&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">clicksWithWatermark</span> <span class="o">=</span> <span class="n">clicks</span><span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">&quot;adId AS clickAdid&quot;</span><span class="p">,</span> <span class="s2">&quot;clickTime&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">withWatermark</span><span class="p">(</span><span class="s2">&quot;clickTime&quot;</span><span class="p">,</span> <span class="s2">&quot;3 hours&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># clickTime 이 impressionTime 사이에 있는 조건</span>
+<span class="n">joinCondition</span> <span class="o">=</span> <span class="n">expr</span><span class="p">(</span><span class="s2">&quot;impressionAdid = clickAdid AND clickTime BETWEEN impressionTime AND impressionTime + INTERVAL 1 HOUR&quot;</span><span class="p">)</span>
+<span class="n">streamStreamSelector</span> <span class="o">=</span> <span class="n">impressionsWithWatermark</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">clicksWithWatermark</span><span class="p">,</span> <span class="n">joinCondition</span><span class="p">,</span> <span class="s2">&quot;leftOuter&quot;</span><span class="p">)</span>
+<span class="n">streamStreamWriter</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">streamStreamSelector</span>
+    <span class="o">.</span><span class="n">writeStream</span>
+    <span class="o">.</span><span class="n">queryName</span><span class="p">(</span><span class="n">queryName</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;console&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">outputMode</span><span class="p">(</span><span class="s2">&quot;append&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">checkpointLocation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_dir</span><span class="si">}</span><span class="s2">/tmp/</span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">!</span>rm -rf <span class="nv">$checkpointLocation</span>
+
+<span class="n">streamStreamJoinTrigger</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">streamStreamWriter</span>
+    <span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">processingTime</span><span class="o">=</span><span class="s2">&quot;10 seconds&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;checkpointLocation&quot;</span><span class="p">,</span> <span class="n">checkpointLocation</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">streamStreamJoinQuery</span> <span class="o">=</span> <span class="n">streamStreamJoinTrigger</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="n">streamStreamJoinQuery</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">streamStreamJoinQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">

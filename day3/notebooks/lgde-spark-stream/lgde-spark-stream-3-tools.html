@@ -14124,7 +14124,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/28 15:34:12 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/09/09 11:02:21 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -14147,7 +14147,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://383e5fd7e261:4040">Spark UI</a></p>
+            <p><a href="http://d1067dc1417f:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14182,7 +14182,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <ul>
 <li>2교시에서 수행한 소켓 스트리밍 서버를 통한 예제 애플리케이션을 활용합니다<ul>
 <li>아래의 명령으로 소켓 서버를 기동하고 스트리밍 애플리케이션을 기동합니다<div class="highlight"><pre><span></span><span class="c1"># terminal</span>
-nc -lvp <span class="m">9999</span> -n
+nc -lvp <span class="m">9999</span>
 </pre></div>
 </li>
 </ul>
@@ -14253,7 +14253,61 @@ nc -lvp <span class="m">9999</span> -n
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>21/08/28 15:34:21 WARN TextSocketSourceProvider: The socket source should not be used for production applications! It does not support recovery.
+<pre>22/09/09 11:03:22 WARN TextSocketSourceProvider: The socket source should not be used for production applications! It does not support recovery.
+22/09/09 11:03:27 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 1000 milliseconds, but spent 2752 milliseconds
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>-------------------------------------------
+Batch: 0
+-------------------------------------------
++----+-----+
+|Word|count|
++----+-----+
++----+-----+
+
+-------------------------------------------
+Batch: 1
+-------------------------------------------
++------+-----+
+|  Word|count|
++------+-----+
+| world|    1|
+|�hello|    1|
++------+-----+
+
+-------------------------------------------
+Batch: 2
+-------------------------------------------
++------+-----+
+|  Word|count|
++------+-----+
+| world|    2|
+|  test|    1|
+|�hello|    1|
++------+-----+
+
+-------------------------------------------
+Batch: 3
+-------------------------------------------
++-------+-----+
+|   Word|count|
++-------+-----+
+|  world|    2|
+|   test|    2|
+|  hello|    1|
+|pyspark|    1|
+| �hello|    1|
++-------+-----+
+
 </pre>
 </div>
 </div>
@@ -14320,7 +14374,7 @@ notebook     <span class="p">|</span> +-----+-----+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">JSON</span><span class="p">(</span><span class="n">wordCountQuery</span><span class="o">.</span><span class="n">lastProgress</span><span class="p">)</span>
@@ -14339,7 +14393,7 @@ notebook     <span class="p">|</span> +-----+-----+
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -14357,7 +14411,7 @@ notebook     <span class="p">|</span> +-----+-----+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wordCountQuery</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
@@ -14388,7 +14442,7 @@ notebook     <span class="p">|</span> +-----+-----+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">displayStatus</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">iterations</span><span class="p">,</span> <span class="n">sleep_secs</span><span class="p">):</span>
@@ -14420,7 +14474,7 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[101]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm -rf <span class="nv">$wordCountCheckpointDir</span>
@@ -14448,7 +14502,7 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>&#39;[status of query] Iteration: 60, Status: Waiting for next trigger&#39;</pre>
+<pre>&#39;[status of query] Iteration: 40, Status: Waiting for next trigger&#39;</pre>
 </div>
 
 </div>
@@ -14462,28 +14516,29 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>{&#39;id&#39;: &#39;9ea980c7-15f8-404d-92b8-5351dac7140b&#39;,
- &#39;runId&#39;: &#39;2f76de05-aba0-4d5a-a97a-7343f3502dd5&#39;,
+<pre>{&#39;id&#39;: &#39;d0b60305-4542-4ca2-833f-f5c87e74441b&#39;,
+ &#39;runId&#39;: &#39;76e67630-cc17-4b8d-851a-560c4a1dbe4b&#39;,
  &#39;name&#39;: &#39;wordCount&#39;,
- &#39;timestamp&#39;: &#39;2021-08-15T16:27:16.001Z&#39;,
- &#39;batchId&#39;: 5,
+ &#39;timestamp&#39;: &#39;2022-09-09T11:17:26.000Z&#39;,
+ &#39;batchId&#39;: 7,
  &#39;numInputRows&#39;: 0,
  &#39;inputRowsPerSecond&#39;: 0.0,
  &#39;processedRowsPerSecond&#39;: 0.0,
  &#39;durationMs&#39;: {&#39;latestOffset&#39;: 0, &#39;triggerExecution&#39;: 0},
- &#39;stateOperators&#39;: [{&#39;numRowsTotal&#39;: 4,
+ &#39;stateOperators&#39;: [{&#39;numRowsTotal&#39;: 9,
    &#39;numRowsUpdated&#39;: 0,
-   &#39;memoryUsedBytes&#39;: 3008,
-   &#39;customMetrics&#39;: {&#39;loadedMapCacheHitCount&#39;: 15,
-    &#39;loadedMapCacheMissCount&#39;: 5,
-    &#39;stateOnCurrentVersionSizeBytes&#39;: 1176}}],
+   &#39;memoryUsedBytes&#39;: 4368,
+   &#39;numRowsDroppedByWatermark&#39;: 0,
+   &#39;customMetrics&#39;: {&#39;loadedMapCacheHitCount&#39;: 60,
+    &#39;loadedMapCacheMissCount&#39;: 0,
+    &#39;stateOnCurrentVersionSizeBytes&#39;: 2200}}],
  &#39;sources&#39;: [{&#39;description&#39;: &#39;TextSocketV2[host: localhost, port: 9999]&#39;,
-   &#39;startOffset&#39;: 0,
-   &#39;endOffset&#39;: 0,
+   &#39;startOffset&#39;: 5,
+   &#39;endOffset&#39;: 5,
    &#39;numInputRows&#39;: 0,
    &#39;inputRowsPerSecond&#39;: 0.0,
    &#39;processedRowsPerSecond&#39;: 0.0}],
- &#39;sink&#39;: {&#39;description&#39;: &#39;org.apache.spark.sql.execution.streaming.ConsoleTable$@35cbdff9&#39;,
+ &#39;sink&#39;: {&#39;description&#39;: &#39;org.apache.spark.sql.execution.streaming.ConsoleTable$@5c14ee96&#39;,
   &#39;numOutputRows&#39;: 0}}</pre>
 </div>
 
@@ -14505,7 +14560,7 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">customSchema</span> <span class="o">=</span> <span class="p">(</span>
@@ -14555,10 +14610,10 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>rm -rf <span class="nv">$checkpointLocation</span>
@@ -14572,10 +14627,143 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 </div>
 </div>
 
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>-------------------------------------------
+Batch: 0
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|12309|
+|     stand|11385|
+|stairsdown| 9365|
+|      walk|13256|
+|      null|10448|
+|  stairsup|10452|
+|      bike|10797|
++----------+-----+
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>22/09/09 11:18:34 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 1000 milliseconds, but spent 1025 milliseconds
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>-------------------------------------------
+Batch: 1
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|24617|
+|     stand|22770|
+|stairsdown|18732|
+|      walk|26512|
+|      null|20897|
+|  stairsup|20902|
+|      bike|21594|
++----------+-----+
+
+-------------------------------------------
+Batch: 2
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|36926|
+|     stand|34154|
+|stairsdown|28097|
+|      walk|39768|
+|      null|31346|
+|  stairsup|31354|
+|      bike|32390|
++----------+-----+
+
+-------------------------------------------
+Batch: 3
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|49235|
+|     stand|45539|
+|stairsdown|37463|
+|      walk|53024|
+|      null|41794|
+|  stairsup|41805|
+|      bike|43187|
++----------+-----+
+
+-------------------------------------------
+Batch: 4
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|61545|
+|     stand|56924|
+|stairsdown|46828|
+|      walk|66280|
+|      null|52241|
+|  stairsup|52257|
+|      bike|53984|
++----------+-----+
+
+-------------------------------------------
+Batch: 5
+-------------------------------------------
++----------+-----+
+|        gt|count|
++----------+-----+
+|       sit|73855|
+|     stand|68309|
+|stairsdown|56192|
+|      walk|79536|
+|      null|62688|
+|  stairsup|62710|
+|      bike|64781|
++----------+-----+
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[109]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">streams</span><span class="o">.</span><span class="n">active</span>
@@ -14594,14 +14782,13 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[109]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[&lt;pyspark.sql.streaming.StreamingQuery at 0x7f434fce0be0&gt;,
- &lt;pyspark.sql.streaming.StreamingQuery at 0x7f434fbda730&gt;]</pre>
+<pre>[]</pre>
 </div>
 
 </div>
@@ -14613,7 +14800,7 @@ Listening on <span class="m">0</span>.0.0.0 <span class="m">9999</span>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p><code>http://vm&lt;number&gt;.aiffel.co.kr:4040/jobs</code> 페이지에 접속하여, 현재 실행 중인 <code>custom_count</code> 정보를 확인합니다 (여러개의 SparkContext 가 존재하는 경우 포트가 4041, 4042 로 늘어날 수 있습니다)</p>
+<blockquote><p><code>http://my-cloud.host.com:4040/jobs</code> 페이지에 접속하여, 현재 실행 중인 <code>custom_count</code> 정보를 확인합니다 (여러개의 SparkContext 가 존재하는 경우 포트가 4041, 4042 로 늘어날 수 있습니다)</p>
 </blockquote>
 <h4 id="%EC%9B%B9-UI-%ED%86%B5%ED%95%9C-%EB%94%94%EB%B2%84%EA%B9%85">&#50937; UI &#53685;&#54620; &#46356;&#48260;&#44613;<a class="anchor-link" href="#%EC%9B%B9-UI-%ED%86%B5%ED%95%9C-%EB%94%94%EB%B2%84%EA%B9%85">&#182;</a></h4><ul>
 <li><a href="http://localhost:4040/jobs">http://localhost:4040/jobs</a>
@@ -14729,7 +14916,7 @@ socketQuery.stop()
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 파일을 읽어서 스키마를 확인하고</span>
@@ -14818,12 +15005,12 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 애플리케이션은 종료되어도 해당 가상 테이블은 여전히 존재하므로, 확인이 가능합니다</span>
 <span class="n">memory_flight</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;select * from </span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">memory_flight</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">memory_flight</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;count &gt; 10000&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">))</span>
 </pre></div>
 
      </div>
@@ -14839,7 +15026,7 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[45]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 
 
 
@@ -14851,7 +15038,23 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 <tr><td>United States</td><td>United States</td><td>1418309</td></tr>
 <tr><td>United States</td><td>United States</td><td>1070857</td></tr>
 <tr><td>United States</td><td>United States</td><td>700855</td></tr>
+<tr><td>United States</td><td>United States</td><td>352742</td></tr>
+<tr><td>United States</td><td>Canada</td><td>49695</td></tr>
+<tr><td>Canada</td><td>United States</td><td>49052</td></tr>
+<tr><td>United States</td><td>Canada</td><td>41518</td></tr>
+<tr><td>Canada</td><td>United States</td><td>41078</td></tr>
+<tr><td>United States</td><td>Mexico</td><td>38225</td></tr>
+<tr><td>Mexico</td><td>United States</td><td>38075</td></tr>
+<tr><td>United States</td><td>Canada</td><td>33535</td></tr>
+<tr><td>Canada</td><td>United States</td><td>33218</td></tr>
+<tr><td>United States</td><td>Mexico</td><td>31735</td></tr>
+<tr><td>Mexico</td><td>United States</td><td>31648</td></tr>
+<tr><td>United States</td><td>Canada</td><td>25438</td></tr>
+<tr><td>United States</td><td>Mexico</td><td>25381</td></tr>
+<tr><td>Mexico</td><td>United States</td><td>25276</td></tr>
+<tr><td>Canada</td><td>United States</td><td>25184</td></tr>
 </table>
+only showing top 20 rows
 
 </div>
 
@@ -14885,7 +15088,7 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 스트림 테이블을 주기적으로 조회하는 함수 (name: 이름, sql: Spark SQL, iterations: 반복횟수, sleep_secs: 인터벌)</span>
@@ -14908,7 +15111,7 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">displayStream</span><span class="p">(</span><span class="s2">&quot;count_of_flight&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;select * from </span><span class="si">{</span><span class="n">queryName</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -14933,7 +15136,7 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>&#39;[count_of_flight] Iteration: 10, Query: select * from memory_flight&#39;</pre>
+<pre>&#39;[count_of_flight] Iteration: 5, Query: select * from memory_flight&#39;</pre>
 </div>
 
 </div>
@@ -14945,30 +15148,30 @@ StructType(List(StructField(DEST_COUNTRY_NAME,StringType,true),StructField(ORIGI
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------------------+----------------------+-----+
-|DEST_COUNTRY_NAME       |ORIGIN_COUNTRY_NAME   |count|
-+------------------------+----------------------+-----+
-|United States           |India                 |69   |
-|Costa Rica              |United States         |477  |
-|Turks and Caicos Islands|United States         |136  |
-|United States           |Afghanistan           |2    |
-|United States           |Netherlands           |570  |
-|Iceland                 |United States         |118  |
-|Marshall Islands        |United States         |77   |
-|Luxembourg              |United States         |91   |
-|El Salvador             |United States         |519  |
-|Samoa                   |United States         |28   |
-|Sint Maarten            |United States         |61   |
-|Hong Kong               |United States         |252  |
-|Suriname                |United States         |12   |
-|United States           |Bosnia and Herzegovina|1    |
-|United States           |Portugal              |104  |
-|United States           |Guatemala             |333  |
-|United States           |Venezuela             |341  |
-|United States           |Chile                 |176  |
-|United States           |Hong Kong             |293  |
-|Sweden                  |United States         |65   |
-+------------------------+----------------------+-----+
+<pre>+------------------------+-------------------+-----+
+|DEST_COUNTRY_NAME       |ORIGIN_COUNTRY_NAME|count|
++------------------------+-------------------+-----+
+|United States           |Croatia            |1    |
+|United States           |India              |76   |
+|Costa Rica              |United States      |494  |
+|Turks and Caicos Islands|United States      |163  |
+|United States           |Afghanistan        |3    |
+|Iceland                 |United States      |113  |
+|United States           |Netherlands        |622  |
+|Marshall Islands        |United States      |81   |
+|Luxembourg              |United States      |120  |
+|El Salvador             |United States      |495  |
+|Samoa                   |United States      |25   |
+|Sint Maarten            |United States      |240  |
+|Hong Kong               |United States      |282  |
+|Suriname                |United States      |11   |
+|United States           |Portugal           |109  |
+|United States           |Guatemala          |340  |
+|United States           |Venezuela          |352  |
+|Guinea                  |United States      |5    |
+|United States           |Chile              |182  |
+|United States           |Hong Kong          |317  |
++------------------------+-------------------+-----+
 only showing top 20 rows
 
 </pre>

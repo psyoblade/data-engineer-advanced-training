@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>lgde-spark-troubleshoot-2-skewness</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>lgde-spark-core-remind</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14049,18 +14049,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="3%EC%9D%BC%EC%B0%A8-2%EA%B5%90%EC%8B%9C---Spark-Skewness-Problem">3&#51068;&#52264; 2&#44368;&#49884; - Spark Skewness Problem<a class="anchor-link" href="#3%EC%9D%BC%EC%B0%A8-2%EA%B5%90%EC%8B%9C---Spark-Skewness-Problem">&#182;</a></h1><blockquote><p>특정 킷 값이 너무 많아 일부 Reduce 작업이 지연되어 전체 작업 시간에 영향을 주는 경우를 해결합니다</p>
-</blockquote>
-<h2 id="%EA%B0%9C%EC%9A%94">&#44060;&#50836;<a class="anchor-link" href="#%EA%B0%9C%EC%9A%94">&#182;</a></h2><blockquote><p>대용량 데이터 처리 시에 성능저하의 가장 큰 원인 중 하나인, 왜곡된 값에 대한 처리를 다룹니다. 이러한 왜곡된 데이터 처리가 까다로운 이유는 애초에 왜곡된 데이터라면 개발시에 발견되어 조치되거나, 최적화될 수 있으나, 특정 기간에 발생하는 이벤트 혹은 예상하기 어려운 가비지 데이터 수신 등의 다양한 경우에 발생할 수 있기 때문에 즉각적인 판단과 조치가 필요한 경우가 의외로 자주 발생하기 때문에 잘 익혀둘 필요가 있습니다.</p>
-</blockquote>
-<h2 id="%EB%AA%A9%EC%B0%A8">&#47785;&#52264;<a class="anchor-link" href="#%EB%AA%A9%EC%B0%A8">&#182;</a></h2><ul>
-<li>왜곡된 데이터 이해하기</li>
-<li>왜곡 데이터 처리 전략<ul>
-<li><a href="https://itnext.io/handling-data-skew-in-apache-spark-9f56343e58e8">https://itnext.io/handling-data-skew-in-apache-spark-9f56343e58e8</a></li>
-</ul>
-</li>
-</ul>
-
+<h3 id="%ED%80%B4%EC%A6%88%EB%A5%BC-%ED%92%80%EA%B8%B0-%EC%9C%84%ED%95%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%84%B8%EC%85%98%EC%9D%84-%EC%83%9D%EC%84%B1%ED%95%A9%EB%8B%88%EB%8B%A4">&#53300;&#51592;&#47484; &#54400;&#44592; &#50948;&#54620; &#49828;&#54028;&#53356; &#49464;&#49496;&#51012; &#49373;&#49457;&#54633;&#45768;&#45796;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88%EB%A5%BC-%ED%92%80%EA%B8%B0-%EC%9C%84%ED%95%9C-%EC%8A%A4%ED%8C%8C%ED%81%AC-%EC%84%B8%EC%85%98%EC%9D%84-%EC%83%9D%EC%84%B1%ED%95%A9%EB%8B%88%EB%8B%A4">&#182;</a></h3>
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
@@ -14113,7 +14102,7 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>22/09/04 05:05:43 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/07/24 12:44:05 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
 Setting default log level to &#34;WARN&#34;.
 To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
@@ -14136,7 +14125,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
         <div>
             <p><b>SparkContext</b></p>
 
-            <p><a href="http://5f99db12ea6b:4040">Spark UI</a></p>
+            <p><a href="http://232bceae482b:4040">Spark UI</a></p>
 
             <dl>
               <dt>Version</dt>
@@ -14161,104 +14150,22 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br></p>
-<h2 id="I.-%EC%99%9C%EA%B3%A1%EB%90%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0">I. &#50780;&#44257;&#46108; &#45936;&#51060;&#53552; &#51060;&#54644;&#54616;&#44592;<a class="anchor-link" href="#I.-%EC%99%9C%EA%B3%A1%EB%90%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0">&#182;</a></h2><h3 id="1.-Skewness-%EB%AC%B8%EC%A0%9C%EC%9D%98-%EC%A0%91%EA%B7%BC">1. Skewness &#47928;&#51228;&#51032; &#51217;&#44540;<a class="anchor-link" href="#1.-Skewness-%EB%AC%B8%EC%A0%9C%EC%9D%98-%EC%A0%91%EA%B7%BC">&#182;</a></h3><h4 id="1.1.-Skew-%EB%A5%BC-%EB%B0%9C%EC%83%9D%EC%8B%9C%ED%82%A4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%B0%98%EB%93%9C%EC%8B%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC%EB%A7%8C-%ED%95%98%EB%8A%94%EA%B0%80?">1.1. Skew &#47484; &#48156;&#49373;&#49884;&#53412;&#45716; &#45936;&#51060;&#53552;&#47484; &#48152;&#46300;&#49884; &#49324;&#50857;&#54644;&#50556;&#47564; &#54616;&#45716;&#44032;?<a class="anchor-link" href="#1.1.-Skew-%EB%A5%BC-%EB%B0%9C%EC%83%9D%EC%8B%9C%ED%82%A4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%B0%98%EB%93%9C%EC%8B%9C-%EC%82%AC%EC%9A%A9%ED%95%B4%EC%95%BC%EB%A7%8C-%ED%95%98%EB%8A%94%EA%B0%80?">&#182;</a></h4><blockquote><p>대부분의 Skew 발생 대상 컬럼은 outer join 혹은 데이터 누락에 의한 Null 혹은 0 인 경우가 많은데 해당 데이터가 필요 없다면 na 함수 혹은 filter 등을 통해서 제외 후 처리하는 것이 가장 좋습니다</p>
-</blockquote>
-<h4 id="1.2.-Skew-%EB%A5%BC-%EB%B0%9C%EC%83%9D-%EC%8B%9C%ED%82%A4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%B3%84%EB%8F%84%EC%9D%98-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8%EC%9D%84-%EA%B5%AC%EC%84%B1%ED%95%A0-%ED%95%84%EC%9A%94%EA%B0%80-%EC%9E%88%EB%8A%94%EA%B0%80?">1.2. Skew &#47484; &#48156;&#49373; &#49884;&#53412;&#45716; &#45936;&#51060;&#53552;&#47484; &#48324;&#46020;&#51032; &#54028;&#51060;&#54532;&#46972;&#51064;&#51012; &#44396;&#49457;&#54624; &#54596;&#50836;&#44032; &#51080;&#45716;&#44032;?<a class="anchor-link" href="#1.2.-Skew-%EB%A5%BC-%EB%B0%9C%EC%83%9D-%EC%8B%9C%ED%82%A4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%B3%84%EB%8F%84%EC%9D%98-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8%EC%9D%84-%EA%B5%AC%EC%84%B1%ED%95%A0-%ED%95%84%EC%9A%94%EA%B0%80-%EC%9E%88%EB%8A%94%EA%B0%80?">&#182;</a></h4><blockquote><p>Skew 발생 대상 컬럼에 대해 처리나 별도의 연산이 필요하다면, Skew 대상 데이터를 별도의 데이터프레임으로 구성하고 Union 을 통해 최종 결과를 생성하는 것이 병렬성 및 향후 유지보수 관점에도 유용할 수 있습니다</p>
-</blockquote>
-<h4 id="1.3.-%EC%A1%B0%EC%9D%B8-%EB%8C%80%EC%83%81-%ED%85%8C%EC%9D%B4%EB%B8%94-%EA%B0%80%EC%9A%B4%EB%8D%B0-Broadcast-%ED%95%B4%EB%8F%84-%EC%A2%8B%EC%9D%84-%EB%A7%8C%ED%81%BC-%EC%B6%A9%EB%B6%84%ED%9E%88-%EC%9E%91%EC%9D%80-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%9D%B4-%EC%A1%B4%EC%9E%AC%ED%95%98%EB%8A%94%EA%B0%80?">1.3. &#51312;&#51064; &#45824;&#49345; &#53580;&#51060;&#48660; &#44032;&#50868;&#45936; Broadcast &#54644;&#46020; &#51339;&#51012; &#47564;&#53372; &#52649;&#48516;&#55176; &#51089;&#51008; &#53580;&#51060;&#48660;&#51060; &#51316;&#51116;&#54616;&#45716;&#44032;?<a class="anchor-link" href="#1.3.-%EC%A1%B0%EC%9D%B8-%EB%8C%80%EC%83%81-%ED%85%8C%EC%9D%B4%EB%B8%94-%EA%B0%80%EC%9A%B4%EB%8D%B0-Broadcast-%ED%95%B4%EB%8F%84-%EC%A2%8B%EC%9D%84-%EB%A7%8C%ED%81%BC-%EC%B6%A9%EB%B6%84%ED%9E%88-%EC%9E%91%EC%9D%80-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%9D%B4-%EC%A1%B4%EC%9E%AC%ED%95%98%EB%8A%94%EA%B0%80?">&#182;</a></h4><blockquote><p>브로드캐스팅 대상 테이블을 큰 테이블로 전송하는 방식이므로 파티셔닝의 수를 변경할 수 없는 제약이 있어 큰 테이블이 사전에 잘 파티셔닝 혹은 evenly distributed 되어 있어야 더욱 좋은 효과를 발휘합니다
-브로드캐스팅 할 수 있는 크기가 최대 8gb 로 제한되어 있어 그 이상 전송할 수 없으며, 기본 값은 10mb 입니다.
-브로드캐스팅은 당연하게도 해당 브로드캐스팅 테이블은 드라이브 컨테이너 뿐만 아니라 드라이버의 메모리에 모두 올라올 수 있을 만큼 충분한 메모리가 필요합니다. 예를 들어 1gb 짜리 테이블이고 100개의 컨테이너가 뜬다고 가정하면 최소 총 100gb 이상의 추가적인 메모리 오버헤드가 발생합니다. 자칫 잘못하면 아래와 같은 메시지와 함께 어플리케이션이 종료됩니다.</p>
-<div class="highlight"><pre><span></span><span class="n">java</span><span class="p">.</span><span class="na">lang</span><span class="p">.</span><span class="na">OutOfMemoryError</span><span class="p">:</span> <span class="n">Not</span> <span class="n">enough</span> <span class="n">memory</span> <span class="n">to</span> <span class="n">build</span> <span class="n">and</span> <span class="n">broadcast</span> <span class="n">the</span> <span class="n">table</span> <span class="n">to</span> <span class="n">all</span> <span class="n">worker</span> <span class="n">nodes</span><span class="p">.</span>
-</pre></div>
-<p>브로드캐스팅은 해당 데이터 전체가 네트워크를 모두 점유하고 해당 컨테이너가 해당 테이블 전체를 복사해야 하므로 상당히 무거운 작업입니다. 그러한 부담을 감수할 만큼 충분히 가치가 있는 경우에만 적용할 수 있습니다. 
-특히 브로드캐스팅 대상 테이블이 점점 커지는 경우라면 언젠가는 임계치를 초과하여 문제가 발생할 수 있으므로 데이터의 특성을 잘 고려해야만 합니다.</p>
-</blockquote>
-<h4 id="1.4-Skew-%EB%8C%80%EC%83%81-%EC%BB%AC%EB%9F%BC%EC%9D%84-%ED%8A%B9%EC%A0%95%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9C%BC%EB%A9%B0-%EB%B8%8C%EB%A1%9C%EB%93%9C%EC%BA%90%EC%8A%A4%ED%8C%85%EC%9D%B4-%EC%96%B4%EB%A0%B5%EB%8B%A4%EB%A9%B4?">1.4 Skew &#45824;&#49345; &#52972;&#47100;&#51012; &#53945;&#51221;&#54624; &#49688; &#51080;&#51004;&#47728; &#48652;&#47196;&#46300;&#52880;&#49828;&#54021;&#51060; &#50612;&#47157;&#45796;&#47732;?<a class="anchor-link" href="#1.4-Skew-%EB%8C%80%EC%83%81-%EC%BB%AC%EB%9F%BC%EC%9D%84-%ED%8A%B9%EC%A0%95%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9C%BC%EB%A9%B0-%EB%B8%8C%EB%A1%9C%EB%93%9C%EC%BA%90%EC%8A%A4%ED%8C%85%EC%9D%B4-%EC%96%B4%EB%A0%B5%EB%8B%A4%EB%A9%B4?">&#182;</a></h4><blockquote><p>치우친 데이터 컬럼에 대해 추가 랜덤 키(salt key)를 부여하고 조인 되는 대상 테이블에는 해당 salt key 최대 크기 만큼 뻥튀기 (explode) 하여 키 파티셔닝을 통한 병렬성을 늘릴 수 있도록 합니다 .</p>
-<ul>
-<li>saltedJoin<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">saltedJoin</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">buildDf</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">joinExpression</span><span class="p">:</span> <span class="n">Column</span><span class="p">,</span> <span class="n">joinType</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">salt</span><span class="p">:</span> <span class="n">Int</span><span class="p">):</span> <span class="n">DataFrame</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="kn">import</span> <span class="nn">org.apache.spark.sql.functions._</span>
-  <span class="n">val</span> <span class="n">tmpDf</span> <span class="o">=</span> <span class="n">buildDf</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="err">“</span><span class="n">slt_range</span><span class="err">”</span><span class="p">,</span> <span class="n">array</span><span class="p">(</span><span class="n">Range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">salt</span><span class="p">)</span><span class="o">.</span><span class="n">toList</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">lit</span><span class="p">):</span> <span class="n">_</span><span class="o">*</span><span class="p">))</span>
-  <span class="n">val</span> <span class="n">tableDf</span> <span class="o">=</span> <span class="n">tmpDf</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="err">“</span><span class="n">slt_ratio_s</span><span class="err">”</span><span class="p">,</span> <span class="n">explode</span><span class="p">(</span><span class="n">tmpDf</span><span class="p">(</span><span class="err">“</span><span class="n">slt_range</span><span class="err">”</span><span class="p">)))</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="err">“</span><span class="n">slt_range</span><span class="err">”</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">streamDf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="err">“</span><span class="n">slt_ratio</span><span class="err">”</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span> <span class="o">%</span> <span class="n">salt</span><span class="p">)</span>
-  <span class="n">val</span> <span class="n">saltedExpr</span> <span class="o">=</span> <span class="n">streamDf</span><span class="p">(</span><span class="err">“</span><span class="n">slt_ratio</span><span class="err">”</span><span class="p">)</span> <span class="o">===</span> <span class="n">tableDf</span><span class="p">(</span><span class="err">“</span><span class="n">slt_ratio_s</span><span class="err">”</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">joinExpression</span>
-  <span class="n">streamDf</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tableDf</span><span class="p">,</span> <span class="n">saltedExpr</span><span class="p">,</span> <span class="n">joinType</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="err">“</span><span class="n">slt_ratio_s</span><span class="err">”</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="err">“</span><span class="n">slt_ratio</span><span class="err">”</span><span class="p">)</span>
-<span class="p">}</span>
-</pre></div>
-즉, 메인 테이블에 A 라는 키가 존재하고 조인 되는 테이블에도 A 가 있다면 메인 테이블에는 임의의 1~N 까지의 킷 값을 부여하고 조인되는 테이블의 레코드 수를 N배로 explode 하게 하여 동일한 값을 N배 레코드로 확장하여 조인할 수 있도록 하고, 마지막에 해당 salting key 컬럼을 제거합니다 <div class="highlight"><pre><span></span><span class="n">val</span> <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="err">“</span><span class="n">s3</span><span class="p">:</span><span class="o">//...</span><span class="err">”</span><span class="p">)</span>
-<span class="n">val</span> <span class="n">geoDataDf</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="err">“</span><span class="n">s3</span><span class="p">:</span><span class="o">//...</span><span class="err">”</span><span class="p">)</span>
-<span class="n">val</span> <span class="n">userAgentDf</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="err">“</span><span class="n">s3</span><span class="p">:</span><span class="o">//...</span><span class="err">”</span><span class="p">)</span>
-<span class="n">val</span> <span class="n">ownerMetadataDf</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="err">“</span><span class="n">s3</span><span class="p">:</span><span class="o">//...</span><span class="err">”</span><span class="p">)</span>
-<span class="n">df</span>
-<span class="o">.</span><span class="n">saltedJoin</span><span class="p">(</span><span class="n">geoDataDf</span><span class="p">,</span> <span class="n">exprGeo</span><span class="p">,</span> <span class="err">“</span><span class="n">left</span><span class="err">”</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="o">.</span><span class="n">saltedJoin</span><span class="p">(</span><span class="n">userAgentDf</span><span class="p">,</span> <span class="n">exprUserAgent</span><span class="p">,</span> <span class="err">“</span><span class="n">left</span><span class="err">”</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="o">.</span><span class="n">saltedJoin</span><span class="p">(</span><span class="n">ownerMetadataDf</span><span class="p">,</span> <span class="n">exprOwnerMetadata</span><span class="p">,</span> <span class="err">“</span><span class="n">left</span><span class="err">”</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="o">.</span><span class="n">write</span>
-<span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="err">“</span><span class="n">s3</span><span class="p">:</span><span class="o">//...</span><span class="err">”</span><span class="p">)</span>
-</pre></div>
-</li>
+<h3 id="%ED%80%B4%EC%A6%88-1.-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%9D%BD%EC%96%B4%EC%84%9C-user-%EB%9D%BC%EB%8A%94-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C-printSchema-%EB%B0%8F-display-%ED%95%A8%EC%88%98%EB%A5%BC-%EC%8D%A8%EC%84%9C-%EC%8A%A4%ED%82%A4%EB%A7%88%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 1. &#51060;&#50857;&#51088; &#45936;&#51060;&#53552;&#47484; &#51069;&#50612;&#49436; user &#46972;&#45716; &#48320;&#49688;&#50640; &#45812;&#50500;&#49436; printSchema &#48143; display &#54632;&#49688;&#47484; &#50024;&#49436; &#49828;&#53412;&#47560;&#50752; &#45936;&#51060;&#53552;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-1.-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%9D%BD%EC%96%B4%EC%84%9C-user-%EB%9D%BC%EB%8A%94-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C-printSchema-%EB%B0%8F-display-%ED%95%A8%EC%88%98%EB%A5%BC-%EC%8D%A8%EC%84%9C-%EC%8A%A4%ED%82%A4%EB%A7%88%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>이용자 파일 위치 : <code>data/tbl_user.csv</code> </li>
+<li>파일 포맷 : csv</li>
+<li>읽기 옵션 : inferSchema=true, header=true</li>
 </ul>
-</blockquote>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">small</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">medium</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="n">large</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="2.-Skewness-%ED%8E%B8%EC%A4%91%EC%9D%98-%EC%9D%B8%EC%A7%80%EC%9D%98-%EC%96%B4%EB%A0%A4%EC%9B%80">2. Skewness &#54200;&#51473;&#51032; &#51064;&#51648;&#51032; &#50612;&#47140;&#50880;<a class="anchor-link" href="#2.-Skewness-%ED%8E%B8%EC%A4%91%EC%9D%98-%EC%9D%B8%EC%A7%80%EC%9D%98-%EC%96%B4%EB%A0%A4%EC%9B%80">&#182;</a></h3><blockquote><p>조인 연산에 있어서 파티션 단위 데이터 스큐를 해결하기 어려운 이유는 임의의 컬럼에 대해 조인 연산을 할 때에 해당 키를 기준으로 말아올렸을 때의 파티셔닝이 잘 분산되어 있다는 보장도 어렵고 사전에 예측도 어렵기 때문이다. 예를 들어 조인 조건이 A.name == B.name and A.model == B.model 일 경우 name 과 model 에 의해 생성되는 일치하는 파티셔닝 그룹이 어떤 그룹에 많은 데이터가 모일 지 예측하기 어렵고, 시간이 지남에 따라 혹은 특정 시기에 변화할 수도 있기 때문이다.</p>
-</blockquote>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><br></p>
-<h2 id="II.-%EC%99%9C%EA%B3%A1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B2%98%EB%A6%AC-%EC%A0%84%EB%9E%B5">II. &#50780;&#44257; &#45936;&#51060;&#53552; &#52376;&#47532; &#51204;&#47029;<a class="anchor-link" href="#II.-%EC%99%9C%EA%B3%A1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%B2%98%EB%A6%AC-%EC%A0%84%EB%9E%B5">&#182;</a></h2><blockquote><p>왜곡된 데이터의 경우 가장 중요한 부분은 어떤 데이터 혹은 어떤 경우에 발생하는 지를 인지하는 것이 가장 중요하며, 우리 조직에서 가지고 있는 정책 혹은 의사결정에 필요한 프로세스를 잘 구축하는 것이 필요합니다.</p>
-</blockquote>
-<h3 id="3.-Skewness-%ED%95%B4%EA%B2%B0-%EC%A0%84%EB%9E%B5">3. Skewness &#54644;&#44208; &#51204;&#47029;<a class="anchor-link" href="#3.-Skewness-%ED%95%B4%EA%B2%B0-%EC%A0%84%EB%9E%B5">&#182;</a></h3><h4 id="3.1-%EC%B5%9C%EB%8C%80%ED%95%9C-%EC%A1%B0%EC%9D%B8-%EB%8C%80%EC%83%81-%EB%B2%94%EC%9C%84%EB%A5%BC-%EC%A4%84%EC%9E%85%EB%8B%88%EB%8B%A4">3.1 &#52572;&#45824;&#54620; &#51312;&#51064; &#45824;&#49345; &#48276;&#50948;&#47484; &#51460;&#51077;&#45768;&#45796;<a class="anchor-link" href="#3.1-%EC%B5%9C%EB%8C%80%ED%95%9C-%EC%A1%B0%EC%9D%B8-%EB%8C%80%EC%83%81-%EB%B2%94%EC%9C%84%EB%A5%BC-%EC%A4%84%EC%9E%85%EB%8B%88%EB%8B%A4">&#182;</a></h4><blockquote><p>전체 대상으로 조인을 하는 것 보다 최대한 필요한 컬럼만 지정하고, 구체적인 필터를 통해 조인 전에 데이터를 줄입니다</p>
-</blockquote>
-<h4 id="3.2-%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90-%EC%98%AC%EB%A6%B4-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%83%81%EB%8C%80%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%9E%91%EC%9D%80-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%9D%B8%EC%A7%80-%ED%99%95%EC%9D%B8">3.2 &#47700;&#47784;&#47532;&#50640; &#50732;&#47540; &#49688; &#51080;&#45716; &#49345;&#45824;&#51201;&#51004;&#47196; &#51089;&#51008; &#53580;&#51060;&#48660;&#51064;&#51648; &#54869;&#51064;<a class="anchor-link" href="#3.2-%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90-%EC%98%AC%EB%A6%B4-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%83%81%EB%8C%80%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%9E%91%EC%9D%80-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%9D%B8%EC%A7%80-%ED%99%95%EC%9D%B8">&#182;</a></h4><blockquote><p>조인대상 테이블 중에 충분히 작은 10~100mb 미만의 경우 broadcast 힌트를 통해 메모리에 올려 조인합니다</p>
-</blockquote>
-<h4 id="3.3-%EC%A1%B0%EC%9D%B8-%ED%82%A4%EC%97%90-%EC%B6%94%EA%B0%80%ED%95%A0-%EB%A7%8C%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%9E%88%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8">3.3 &#51312;&#51064; &#53412;&#50640; &#52628;&#44032;&#54624; &#47564;&#54620; &#45936;&#51060;&#53552;&#44032; &#51080;&#45716;&#51648; &#54869;&#51064;<a class="anchor-link" href="#3.3-%EC%A1%B0%EC%9D%B8-%ED%82%A4%EC%97%90-%EC%B6%94%EA%B0%80%ED%95%A0-%EB%A7%8C%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EA%B0%80-%EC%9E%88%EB%8A%94%EC%A7%80-%ED%99%95%EC%9D%B8">&#182;</a></h4><blockquote><p>우리가 원하는 것은 가장 큰 파티션인 Ford Fiesta 을 작은 파티션들로 쪼개어 병렬처리가 가능하게 하기 위함
-0.1 리터 차이가 나는 필터를 적용하면 직관적이지만, 파티션이 "model", "make" 에 의해 결정나기 때문에 스큐현상을 피할 수 없습니다
-이를 회피하기 위해 exact matching 이 가능하도록 이미 알고 있는 값의 범위를 right-join 테이블에 (-1, 0, +1) 의 3가지 경우를 explode 를 통해 생성해내어 조인을 수행합니다
-이 경우는 engine_size 가 0.1 단위로만 차이가 난다는 가정을 해야만 하지만, 비지니스 로직이 명확하다면 가장 좋은 성능을 냅니다</p>
-</blockquote>
-<h4 id="3.4-%EC%A1%B0%EC%9D%B8-%EB%8C%80%EC%83%81-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%97%90-%EB%9E%9C%EB%8D%A4%ED%95%9C-%EC%88%98%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EC%97%AC-%EB%B3%91%EB%A0%AC%EC%84%B1%EC%9D%84-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">3.4 &#51312;&#51064; &#45824;&#49345; &#53580;&#51060;&#48660;&#50640; &#47004;&#45924;&#54620; &#49688;&#47484; &#52628;&#44032;&#54616;&#50668; &#48337;&#47148;&#49457;&#51012; &#52628;&#44032;&#54616;&#45716; &#48169;&#48277;<a class="anchor-link" href="#3.4-%EC%A1%B0%EC%9D%B8-%EB%8C%80%EC%83%81-%ED%85%8C%EC%9D%B4%EB%B8%94%EC%97%90-%EB%9E%9C%EB%8D%A4%ED%95%9C-%EC%88%98%EB%A5%BC-%EC%B6%94%EA%B0%80%ED%95%98%EC%97%AC-%EB%B3%91%EB%A0%AC%EC%84%B1%EC%9D%84-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">&#182;</a></h4><blockquote><p>상대적으로 작은 테이블에 병렬수 만큼의 시퀀스를 추가해서 뻥튀기 합니다
-상대적으로 큰 테이블에는 파티션 별로 일정하게 증가하는 시퀀스를 추가하여 조인할 수 있도록 구성합니다</p>
-</blockquote>
-<h4 id="3.5-%EB%B3%91%EB%A0%AC-%EC%88%98%EC%A4%80%EC%9D%84-%EB%86%92%EC%9D%B4%EA%B1%B0%EB%82%98,-%EC%8A%A4%ED%81%90%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EC%BB%AC%EB%9F%BC%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C%EB%A7%8C-%EB%B3%91%EB%A0%AC%EC%84%B1%EC%9D%84-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">3.5 &#48337;&#47148; &#49688;&#51456;&#51012; &#45458;&#51060;&#44144;&#45208;, &#49828;&#53328;&#44032; &#48156;&#49373;&#54616;&#45716; &#52972;&#47100;&#50640; &#45824;&#54644;&#49436;&#47564; &#48337;&#47148;&#49457;&#51012; &#52628;&#44032;&#54616;&#45716; &#48169;&#48277;<a class="anchor-link" href="#3.5-%EB%B3%91%EB%A0%AC-%EC%88%98%EC%A4%80%EC%9D%84-%EB%86%92%EC%9D%B4%EA%B1%B0%EB%82%98,-%EC%8A%A4%ED%81%90%EA%B0%80-%EB%B0%9C%EC%83%9D%ED%95%98%EB%8A%94-%EC%BB%AC%EB%9F%BC%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C%EB%A7%8C-%EB%B3%91%EB%A0%AC%EC%84%B1%EC%9D%84-%EC%B6%94%EA%B0%80%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95">&#182;</a></h4><blockquote><p>충분히 많은 타스크 수를 늘려서 병렬성을 높이는 방법
-정해진 컬럼에 대해서만 병렬성을 늘리고, 다른 컬럼에 대해서는 일정한 숫자를 추가합니다</p>
-</blockquote>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/s1&quot;</span><span class="p">)</span>
-<span class="n">s2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">&quot;source/s2&quot;</span><span class="p">)</span>
-<span class="n">s1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
-<span class="n">c1</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">c2</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">user</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/tbl_user.csv&quot;</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14277,8 +14184,14 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- u_id: integer (nullable = true)
+ |-- u_name: string (nullable = true)
+ |-- u_gender: string (nullable = true)
+ |-- u_signup: integer (nullable = true)
+
+</pre>
 </div>
 </div>
 
@@ -14288,16 +14201,109 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>u_id</th><th>u_name</th><th>u_gender</th><th>u_signup</th></tr>
+<tr><td>1</td><td>정휘센</td><td>남</td><td>19700808</td></tr>
+<tr><td>2</td><td>김싸이언</td><td>남</td><td>19710201</td></tr>
+<tr><td>3</td><td>박트롬</td><td>여</td><td>19951030</td></tr>
+<tr><td>4</td><td>청소기</td><td>남</td><td>19770329</td></tr>
+<tr><td>5</td><td>유코드제로</td><td>여</td><td>20021029</td></tr>
+<tr><td>6</td><td>윤디오스</td><td>남</td><td>20040101</td></tr>
+<tr><td>7</td><td>임모바일</td><td>남</td><td>20040807</td></tr>
+<tr><td>8</td><td>조노트북</td><td>여</td><td>20161201</td></tr>
+<tr><td>9</td><td>최컴퓨터</td><td>남</td><td>20201124</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="%ED%80%B4%EC%A6%88-2.-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84%EC%9D%84-%EC%95%84%EB%9E%98%EC%9D%98-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EB%8F%84%EB%A1%9D-%EB%B3%80%ED%99%98-%ED%9B%84,-tbl_user-%EC%9D%B4%EB%9D%BC%EB%8A%94-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C,-%EC%8A%A4%ED%82%A4%EB%A7%88%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 2. &#51060;&#50857;&#51088; &#45936;&#51060;&#53552;&#54532;&#47112;&#51076;&#51012; &#50500;&#47000;&#51032; &#51312;&#44148;&#50640; &#47582;&#46020;&#47197; &#48320;&#54872; &#54980;, tbl_user &#51060;&#46972;&#45716; &#48320;&#49688;&#50640; &#45812;&#50500;&#49436;, &#49828;&#53412;&#47560;&#50752; &#45936;&#51060;&#53552;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-2.-%EC%9D%B4%EC%9A%A9%EC%9E%90-%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84%EC%9D%84-%EC%95%84%EB%9E%98%EC%9D%98-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EB%8F%84%EB%A1%9D-%EB%B3%80%ED%99%98-%ED%9B%84,-tbl_user-%EC%9D%B4%EB%9D%BC%EB%8A%94-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C,-%EC%8A%A4%ED%82%A4%EB%A7%88%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>컬럼 이름 변경 : u_signup -&gt; u_register</li>
+<li>컬럼 변경 : u_name 컬럼의 첫 글자를 u_family_name 으로, 나머지 글자 전부를 u_given_name 으로 u_name 컬럼은 제거</li>
+<li>최종 출력 컬럼 : u_id, u_gender, u_register, u_family_name, u_given_name</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># structured api 방식으로 구현이 가능합니다</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">tbl_user</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">user</span>
+    <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;u_signup&quot;</span><span class="p">,</span> <span class="s2">&quot;u_register&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;u_family_name&quot;</span><span class="p">,</span> <span class="n">substring</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;u_given_name&quot;</span><span class="p">,</span> <span class="n">col</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">)))</span>
+    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">tbl_user</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tbl_user</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>root
- |-- registration: string (nullable = true)
- |-- make: string (nullable = true)
- |-- model: string (nullable = true)
- |-- engine_size: decimal(38,18) (nullable = true)
+ |-- u_id: integer (nullable = true)
+ |-- u_gender: string (nullable = true)
+ |-- u_register: integer (nullable = true)
+ |-- u_family_name: string (nullable = true)
+ |-- u_given_name: string (nullable = true)
 
-10000 100000
 </pre>
 </div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>u_id</th><th>u_gender</th><th>u_register</th><th>u_family_name</th><th>u_given_name</th></tr>
+<tr><td>1</td><td>남</td><td>19700808</td><td>정</td><td>휘센</td></tr>
+<tr><td>2</td><td>남</td><td>19710201</td><td>김</td><td>싸이언</td></tr>
+<tr><td>3</td><td>여</td><td>19951030</td><td>박</td><td>트롬</td></tr>
+<tr><td>4</td><td>남</td><td>19770329</td><td>청</td><td>소기</td></tr>
+<tr><td>5</td><td>여</td><td>20021029</td><td>유</td><td>코드제로</td></tr>
+<tr><td>6</td><td>남</td><td>20040101</td><td>윤</td><td>디오스</td></tr>
+<tr><td>7</td><td>남</td><td>20040807</td><td>임</td><td>모바일</td></tr>
+<tr><td>8</td><td>여</td><td>20161201</td><td>조</td><td>노트북</td></tr>
+<tr><td>9</td><td>남</td><td>20201124</td><td>최</td><td>컴퓨터</td></tr>
+</table>
+
+</div>
+
 </div>
 
 </div>
@@ -14310,112 +14316,17 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+-------------+-------+--------------------+
-|registration|         make|  model|         engine_size|
-+------------+-------------+-------+--------------------+
-|     CPbYgbw|         FORD| FIESTA|1.300000000000000000|
-|     Q8GO2EU|         FORD| FIESTA|1.000000000000000000|
-|     qTQ7HxY|         FORD| FIESTA|1.200000000000000000|
-|     3FpMCC8|     VAUXHALL|  CORSA|1.500000000000000000|
-|     cirRCzK|       NISSAN|QASHQAI|1.300000000000000000|
-|     mK5LtWT|         FIAT|    500|1.100000000000000000|
-|     Cjxu9je|MERCEDED_BENZ|E CLASS|1.600000000000000000|
-|     j359V7w|       NISSAN|QASHQAI|1.100000000000000000|
-|     oaCQJN0|         FORD| FIESTA|1.300000000000000000|
-|     eGqJCKX|MERCEDED_BENZ|E CLASS|1.500000000000000000|
-+------------+-------------+-------+--------------------+
-only showing top 10 rows
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+-------------+-------+--------------------+----------+
-|         make|  model|         engine_size|sale_price|
-+-------------+-------+--------------------+----------+
-|         FIAT|    500|1.100000000000000000|    1610.0|
-|          KIA|    RIO|1.800000000000000000|    1934.0|
-|       SUZUKI|  SWIFT|1.400000000000000000|     946.0|
-|       SUZUKI|  SWIFT|1.200000000000000000|    4799.0|
-|         FIAT|    500|1.400000000000000000|    5213.0|
-|       SUZUKI|  SWIFT|1.600000000000000000|    2529.0|
-|       NISSAN|QASHQAI|1.100000000000000000|    2120.0|
-|          KIA|    RIO|1.200000000000000000|    2122.0|
-|         FORD| FIESTA|1.300000000000000000|     862.0|
-|MERCEDED_BENZ|E CLASS|1.100000000000000000|    2456.0|
-+-------------+-------+--------------------+----------+
-only showing top 10 rows
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">s1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">model</span><span class="p">]</span>
-<span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="c1"># .filter(abs(s2(&quot;engine_size&quot;) - s1(&quot;engine_size&quot;)) &lt;= &quot;0.1&quot;)</span>
-<span class="c1"># .groupBy(&quot;registration&quot;).agg(avg(&quot;sale_price&quot;).as(&quot;average_price&quot;))</span>
+<span class="n">tbl_user</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">user</span>
+    <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">&quot;u_signup&quot;</span><span class="p">,</span> <span class="s2">&quot;u_register&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;u_family_name&quot;</span><span class="p">,</span> <span class="n">expr</span><span class="p">(</span><span class="s2">&quot;substr(u_name, 0, 1)&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;u_given_name&quot;</span><span class="p">,</span> <span class="n">expr</span><span class="p">(</span><span class="s2">&quot;substr(u_name, 2)&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;u_name&quot;</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">tbl_user</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tbl_user</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14435,47 +14346,16 @@ only showing top 10 rows
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-*(3) HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-+- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#144]
-   +- *(2) HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-      +- *(2) Project [registration#6, sale_price#17]
-         +- *(2) BroadcastHashJoin [make#7, model#8], [make#14, model#15], Inner, BuildLeft, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1), false
-            :- BroadcastExchange HashedRelationBroadcastMode(List(input[1, string, false], input[2, string, false]),false), [id=#135]
-            :  +- *(1) Filter (isnotnull(make#7) AND isnotnull(model#8))
-            :     +- *(1) ColumnarToRow
-            :        +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-            +- *(2) Filter (isnotnull(make#14) AND isnotnull(model#15))
-               +- *(2) ColumnarToRow
-                  +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [isnotnull(make#14), isnotnull(model#15)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
-
+<pre>root
+ |-- u_id: integer (nullable = true)
+ |-- u_gender: string (nullable = true)
+ |-- u_register: integer (nullable = true)
+ |-- u_family_name: string (nullable = true)
+ |-- u_given_name: string (nullable = true)
 
 </pre>
 </div>
 </div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s1</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
 
@@ -14483,61 +14363,23 @@ only showing top 10 rows
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+--------+------+-----+
-|    make| model|count|
-+--------+------+-----+
-|    FORD|FIESTA| 5720|
-|    FIAT|   500|  574|
-|VAUXHALL| CORSA|  556|
-+--------+------+-----+
-only showing top 3 rows
 
-</pre>
-</div>
-</div>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>u_id</th><th>u_gender</th><th>u_register</th><th>u_family_name</th><th>u_given_name</th></tr>
+<tr><td>1</td><td>남</td><td>19700808</td><td>정</td><td>휘센</td></tr>
+<tr><td>2</td><td>남</td><td>19710201</td><td>김</td><td>싸이언</td></tr>
+<tr><td>3</td><td>여</td><td>19951030</td><td>박</td><td>트롬</td></tr>
+<tr><td>4</td><td>남</td><td>19770329</td><td>청</td><td>소기</td></tr>
+<tr><td>5</td><td>여</td><td>20021029</td><td>유</td><td>코드제로</td></tr>
+<tr><td>6</td><td>남</td><td>20040101</td><td>윤</td><td>디오스</td></tr>
+<tr><td>7</td><td>남</td><td>20040807</td><td>임</td><td>모바일</td></tr>
+<tr><td>8</td><td>여</td><td>20161201</td><td>조</td><td>노트북</td></tr>
+<tr><td>9</td><td>남</td><td>20201124</td><td>최</td><td>컴퓨터</td></tr>
+</table>
 
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s2</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;make&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+-------+------+-----+
-|   make| model|count|
-+-------+------+-----+
-|   FORD|FIESTA|55584|
-|   FIAT|   500| 5695|
-|HYUNDAI|   I20| 5646|
-+-------+------+-----+
-only showing top 3 rows
-
-</pre>
-</div>
 </div>
 
 </div>
@@ -14547,8 +14389,422 @@ only showing top 3 rows
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="4.-Skewness-%EC%A0%84%EB%9E%B5-%EC%8B%A4%EC%8A%B5">4. Skewness &#51204;&#47029; &#49892;&#49845;<a class="anchor-link" href="#4.-Skewness-%EC%A0%84%EB%9E%B5-%EC%8B%A4%EC%8A%B5">&#182;</a></h3><h4 id="4.1.-%EB%B8%8C%EB%A1%9C%EB%93%9C%EC%BA%90%EC%8A%A4%ED%8C%85%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%A1%B0%EC%9D%B8%EC%97%B0%EC%82%B0">4.1. &#48652;&#47196;&#46300;&#52880;&#49828;&#54021;&#51012; &#53685;&#54620; &#51312;&#51064;&#50672;&#49328;<a class="anchor-link" href="#4.1.-%EB%B8%8C%EB%A1%9C%EB%93%9C%EC%BA%90%EC%8A%A4%ED%8C%85%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%A1%B0%EC%9D%B8%EC%97%B0%EC%82%B0">&#182;</a></h4><blockquote><p>데이터의 크기가 충분히 작아서 브로드캐스팅 되지만, 명시적으로 크기를 지정합니다, <a href="http://localhost:4040/stages/">http://localhost:4040/stages/</a> 페이지에서 전체적으로 소요되는 시간을 확인합니다.</p>
-</blockquote>
+<h3 id="%ED%80%B4%EC%A6%88-3.-%EB%A7%A4%EC%B6%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%9D%BD%EC%96%B4%EC%84%9C-tbl_purchase-%EC%9D%B4%EB%9D%BC%EB%8A%94-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EA%B3%A0-tbl_user-%EA%B3%BC-%EC%A1%B0%EC%9D%B8%ED%95%98%EC%97%AC-fact_daily-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 3. &#47588;&#52636; &#45936;&#51060;&#53552;&#47484; &#51069;&#50612;&#49436; tbl_purchase &#51060;&#46972;&#45716; &#48320;&#49688;&#50640; &#45812;&#44256; tbl_user &#44284; &#51312;&#51064;&#54616;&#50668; fact_daily &#48320;&#49688;&#50640; &#45812;&#50500;&#49436; &#45936;&#51060;&#53552;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-3.-%EB%A7%A4%EC%B6%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%9D%BD%EC%96%B4%EC%84%9C-tbl_purchase-%EC%9D%B4%EB%9D%BC%EB%8A%94-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EA%B3%A0-tbl_user-%EA%B3%BC-%EC%A1%B0%EC%9D%B8%ED%95%98%EC%97%AC-fact_daily-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>조인 조건 : tbl_user.u_id == tbl_purchase.p_uid</li>
+<li>조인 방식 : tbl_user 테이블을 기준으로 left outer join</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tbl_purchase</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;inferSchema&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/tbl_purchase.csv&quot;</span><span class="p">)</span>
+<span class="n">tbl_purchase</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">tbl_purchase</span><span class="p">)</span>
+
+<span class="n">fact_daily</span> <span class="o">=</span> <span class="n">tbl_user</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tbl_purchase</span><span class="p">,</span> <span class="n">tbl_user</span><span class="o">.</span><span class="n">u_id</span> <span class="o">==</span> <span class="n">tbl_purchase</span><span class="o">.</span><span class="n">p_uid</span><span class="p">,</span> <span class="s2">&quot;left_outer&quot;</span><span class="p">)</span>
+<span class="n">fact_daily</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">fact_daily</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- p_time: integer (nullable = true)
+ |-- p_uid: integer (nullable = true)
+ |-- p_id: integer (nullable = true)
+ |-- p_name: string (nullable = true)
+ |-- p_amount: integer (nullable = true)
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>p_time</th><th>p_uid</th><th>p_id</th><th>p_name</th><th>p_amount</th></tr>
+<tr><td>1603651550</td><td>0</td><td>1000</td><td>GoldStar TV</td><td>100000</td></tr>
+<tr><td>1603651550</td><td>1</td><td>2000</td><td>LG DIOS</td><td>2000000</td></tr>
+<tr><td>1603694755</td><td>1</td><td>2001</td><td>LG Gram</td><td>1800000</td></tr>
+<tr><td>1603673500</td><td>2</td><td>2002</td><td>LG Cyon</td><td>1400000</td></tr>
+<tr><td>1603652155</td><td>3</td><td>2003</td><td>LG TV</td><td>1000000</td></tr>
+<tr><td>1603674500</td><td>4</td><td>2004</td><td>LG Computer</td><td>4500000</td></tr>
+<tr><td>1603665955</td><td>5</td><td>2001</td><td>LG Gram</td><td>3500000</td></tr>
+<tr><td>1603666155</td><td>5</td><td>2003</td><td>LG TV</td><td>2500000</td></tr>
+</table>
+
+</div>
+
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- u_id: integer (nullable = true)
+ |-- u_gender: string (nullable = true)
+ |-- u_register: integer (nullable = true)
+ |-- u_family_name: string (nullable = true)
+ |-- u_given_name: string (nullable = true)
+ |-- p_time: integer (nullable = true)
+ |-- p_uid: integer (nullable = true)
+ |-- p_id: integer (nullable = true)
+ |-- p_name: string (nullable = true)
+ |-- p_amount: integer (nullable = true)
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>u_id</th><th>u_gender</th><th>u_register</th><th>u_family_name</th><th>u_given_name</th><th>p_time</th><th>p_uid</th><th>p_id</th><th>p_name</th><th>p_amount</th></tr>
+<tr><td>1</td><td>남</td><td>19700808</td><td>정</td><td>휘센</td><td>1603694755</td><td>1</td><td>2001</td><td>LG Gram</td><td>1800000</td></tr>
+<tr><td>1</td><td>남</td><td>19700808</td><td>정</td><td>휘센</td><td>1603651550</td><td>1</td><td>2000</td><td>LG DIOS</td><td>2000000</td></tr>
+<tr><td>2</td><td>남</td><td>19710201</td><td>김</td><td>싸이언</td><td>1603673500</td><td>2</td><td>2002</td><td>LG Cyon</td><td>1400000</td></tr>
+<tr><td>3</td><td>여</td><td>19951030</td><td>박</td><td>트롬</td><td>1603652155</td><td>3</td><td>2003</td><td>LG TV</td><td>1000000</td></tr>
+<tr><td>4</td><td>남</td><td>19770329</td><td>청</td><td>소기</td><td>1603674500</td><td>4</td><td>2004</td><td>LG Computer</td><td>4500000</td></tr>
+<tr><td>5</td><td>여</td><td>20021029</td><td>유</td><td>코드제로</td><td>1603666155</td><td>5</td><td>2003</td><td>LG TV</td><td>2500000</td></tr>
+<tr><td>5</td><td>여</td><td>20021029</td><td>유</td><td>코드제로</td><td>1603665955</td><td>5</td><td>2001</td><td>LG Gram</td><td>3500000</td></tr>
+<tr><td>6</td><td>남</td><td>20040101</td><td>윤</td><td>디오스</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td></tr>
+<tr><td>7</td><td>남</td><td>20040807</td><td>임</td><td>모바일</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td></tr>
+<tr><td>8</td><td>여</td><td>20161201</td><td>조</td><td>노트북</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td></tr>
+<tr><td>9</td><td>남</td><td>20201124</td><td>최</td><td>컴퓨터</td><td>null</td><td>null</td><td>null</td><td>null</td><td>null</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="%ED%80%B4%EC%A6%88-4.-fact_daily-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-na-%ED%95%A8%EC%88%98%EB%A5%BC-%EC%8D%A8%EC%84%9C-%EB%A7%A4%EC%B6%9C-%EC%A0%95%EB%B3%B4%EA%B0%80-%EB%84%90%EC%9D%B8-%EA%B2%BD%EC%9A%B0%EB%8A%94-%EC%95%84%EB%9E%98%EC%9D%98-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EA%B2%8C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B3%A0-fact_daily_na-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 4. fact_daily &#45936;&#51060;&#53552;&#47484; na &#54632;&#49688;&#47484; &#50024;&#49436; &#47588;&#52636; &#51221;&#48372;&#44032; &#45328;&#51064; &#44221;&#50864;&#45716; &#50500;&#47000;&#51032; &#51312;&#44148;&#50640; &#47582;&#44172; &#48320;&#44221;&#54616;&#44256; fact_daily_na &#48320;&#49688;&#50640; &#45812;&#50500;&#49436; &#45936;&#51060;&#53552;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-4.-fact_daily-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-na-%ED%95%A8%EC%88%98%EB%A5%BC-%EC%8D%A8%EC%84%9C-%EB%A7%A4%EC%B6%9C-%EC%A0%95%EB%B3%B4%EA%B0%80-%EB%84%90%EC%9D%B8-%EA%B2%BD%EC%9A%B0%EB%8A%94-%EC%95%84%EB%9E%98%EC%9D%98-%EC%A1%B0%EA%B1%B4%EC%97%90-%EB%A7%9E%EA%B2%8C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B3%A0-fact_daily_na-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84%EC%84%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>p_time : 0</li>
+<li>p_uid : 0</li>
+<li>p_name : "미확인"</li>
+<li>p_amount : 0</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">na_fill</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;p_time&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;p_uid&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;p_name&quot;</span><span class="p">:</span><span class="s2">&quot;미확인&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;p_amount&quot;</span><span class="p">:</span><span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="n">fact_daily_na</span> <span class="o">=</span> <span class="n">fact_daily</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">na_fill</span><span class="p">)</span>
+<span class="n">fact_daily_na</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">fact_daily_na</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- u_id: integer (nullable = true)
+ |-- u_gender: string (nullable = true)
+ |-- u_register: integer (nullable = true)
+ |-- u_family_name: string (nullable = true)
+ |-- u_given_name: string (nullable = true)
+ |-- p_time: integer (nullable = false)
+ |-- p_uid: integer (nullable = false)
+ |-- p_id: integer (nullable = true)
+ |-- p_name: string (nullable = false)
+ |-- p_amount: integer (nullable = false)
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>u_id</th><th>u_gender</th><th>u_register</th><th>u_family_name</th><th>u_given_name</th><th>p_time</th><th>p_uid</th><th>p_id</th><th>p_name</th><th>p_amount</th></tr>
+<tr><td>1</td><td>남</td><td>19700808</td><td>정</td><td>휘센</td><td>1603694755</td><td>1</td><td>2001</td><td>LG Gram</td><td>1800000</td></tr>
+<tr><td>1</td><td>남</td><td>19700808</td><td>정</td><td>휘센</td><td>1603651550</td><td>1</td><td>2000</td><td>LG DIOS</td><td>2000000</td></tr>
+<tr><td>2</td><td>남</td><td>19710201</td><td>김</td><td>싸이언</td><td>1603673500</td><td>2</td><td>2002</td><td>LG Cyon</td><td>1400000</td></tr>
+<tr><td>3</td><td>여</td><td>19951030</td><td>박</td><td>트롬</td><td>1603652155</td><td>3</td><td>2003</td><td>LG TV</td><td>1000000</td></tr>
+<tr><td>4</td><td>남</td><td>19770329</td><td>청</td><td>소기</td><td>1603674500</td><td>4</td><td>2004</td><td>LG Computer</td><td>4500000</td></tr>
+<tr><td>5</td><td>여</td><td>20021029</td><td>유</td><td>코드제로</td><td>1603666155</td><td>5</td><td>2003</td><td>LG TV</td><td>2500000</td></tr>
+<tr><td>5</td><td>여</td><td>20021029</td><td>유</td><td>코드제로</td><td>1603665955</td><td>5</td><td>2001</td><td>LG Gram</td><td>3500000</td></tr>
+<tr><td>6</td><td>남</td><td>20040101</td><td>윤</td><td>디오스</td><td>0</td><td>0</td><td>null</td><td>미확인</td><td>0</td></tr>
+<tr><td>7</td><td>남</td><td>20040807</td><td>임</td><td>모바일</td><td>0</td><td>0</td><td>null</td><td>미확인</td><td>0</td></tr>
+<tr><td>8</td><td>여</td><td>20161201</td><td>조</td><td>노트북</td><td>0</td><td>0</td><td>null</td><td>미확인</td><td>0</td></tr>
+<tr><td>9</td><td>남</td><td>20201124</td><td>최</td><td>컴퓨터</td><td>0</td><td>0</td><td>null</td><td>미확인</td><td>0</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="%ED%80%B4%EC%A6%88-5.-fact_daily_na-%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%84%B1%EB%B3%84-%EB%A7%A4%EC%B6%9C-%EA%B8%88%EC%95%A1%EC%9D%98-%ED%95%A9%EA%B3%84%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 5. fact_daily_na &#45936;&#51060;&#53552;&#54532;&#47112;&#51076;&#51012; &#51060;&#50857;&#54616;&#50668; &#49457;&#48324; &#47588;&#52636; &#44552;&#50529;&#51032; &#54633;&#44228;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-5.-fact_daily_na-%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%94%84%EB%A0%88%EC%9E%84%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%84%B1%EB%B3%84-%EB%A7%A4%EC%B6%9C-%EA%B8%88%EC%95%A1%EC%9D%98-%ED%95%A9%EA%B3%84%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>결과 스키마 : u_gender, count</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">count_by_gender</span> <span class="o">=</span> <span class="n">fact_daily_na</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;u_gender&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;p_amount&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;sum&quot;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">count_by_gender</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>u_gender</th><th>sum</th></tr>
+<tr><td>여</td><td>7000000</td></tr>
+<tr><td>남</td><td>9700000</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="%ED%80%B4%EC%A6%88-6.-fact_daily_na-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-json-%ED%8F%AC%EB%A7%B7%EC%9C%BC%EB%A1%9C-%EC%A0%80%EC%9E%A5-%ED%9B%84,-%EB%8B%A4%EC%8B%9C-%EC%9D%BD%EC%96%B4%EC%84%9C-fact_daily_json-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84-%EC%8A%A4%ED%82%A4%EB%A7%88%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 6. fact_daily_na &#45936;&#51060;&#53552;&#47484; json &#54252;&#47607;&#51004;&#47196; &#51200;&#51109; &#54980;, &#45796;&#49884; &#51069;&#50612;&#49436; fact_daily_json &#48320;&#49688;&#50640; &#45812;&#50500; &#49828;&#53412;&#47560;&#50752; &#45936;&#51060;&#53552;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-6.-fact_daily_na-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-json-%ED%8F%AC%EB%A7%B7%EC%9C%BC%EB%A1%9C-%EC%A0%80%EC%9E%A5-%ED%9B%84,-%EB%8B%A4%EC%8B%9C-%EC%9D%BD%EC%96%B4%EC%84%9C-fact_daily_json-%EB%B3%80%EC%88%98%EC%97%90-%EB%8B%B4%EC%95%84-%EC%8A%A4%ED%82%A4%EB%A7%88%EC%99%80-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>저장 경로 : <code>data/fact_daily_na/dt=20220727</code> </li>
+<li>저장 포맷 : json</li>
+<li>저장 옵션 : 덮어쓰기(overwrite)</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">json_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">work_data</span><span class="si">}</span><span class="s2">/fact_daily/dt=20220727&quot;</span>
+<span class="n">fact_daily_na</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">&quot;overwrite&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
+<span class="n">fact_daily_json</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
+<span class="n">fact_daily_json</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="n">display</span><span class="p">(</span><span class="n">fact_daily_json</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>root
+ |-- p_amount: long (nullable = true)
+ |-- p_id: long (nullable = true)
+ |-- p_name: string (nullable = true)
+ |-- p_time: long (nullable = true)
+ |-- p_uid: long (nullable = true)
+ |-- u_family_name: string (nullable = true)
+ |-- u_gender: string (nullable = true)
+ |-- u_given_name: string (nullable = true)
+ |-- u_id: long (nullable = true)
+ |-- u_register: long (nullable = true)
+
+</pre>
+</div>
+</div>
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>p_amount</th><th>p_id</th><th>p_name</th><th>p_time</th><th>p_uid</th><th>u_family_name</th><th>u_gender</th><th>u_given_name</th><th>u_id</th><th>u_register</th></tr>
+<tr><td>1800000</td><td>2001</td><td>LG Gram</td><td>1603694755</td><td>1</td><td>정</td><td>남</td><td>휘센</td><td>1</td><td>19700808</td></tr>
+<tr><td>2000000</td><td>2000</td><td>LG DIOS</td><td>1603651550</td><td>1</td><td>정</td><td>남</td><td>휘센</td><td>1</td><td>19700808</td></tr>
+<tr><td>1400000</td><td>2002</td><td>LG Cyon</td><td>1603673500</td><td>2</td><td>김</td><td>남</td><td>싸이언</td><td>2</td><td>19710201</td></tr>
+<tr><td>1000000</td><td>2003</td><td>LG TV</td><td>1603652155</td><td>3</td><td>박</td><td>여</td><td>트롬</td><td>3</td><td>19951030</td></tr>
+<tr><td>4500000</td><td>2004</td><td>LG Computer</td><td>1603674500</td><td>4</td><td>청</td><td>남</td><td>소기</td><td>4</td><td>19770329</td></tr>
+<tr><td>2500000</td><td>2003</td><td>LG TV</td><td>1603666155</td><td>5</td><td>유</td><td>여</td><td>코드제로</td><td>5</td><td>20021029</td></tr>
+<tr><td>3500000</td><td>2001</td><td>LG Gram</td><td>1603665955</td><td>5</td><td>유</td><td>여</td><td>코드제로</td><td>5</td><td>20021029</td></tr>
+<tr><td>0</td><td>null</td><td>미확인</td><td>0</td><td>0</td><td>윤</td><td>남</td><td>디오스</td><td>6</td><td>20040101</td></tr>
+<tr><td>0</td><td>null</td><td>미확인</td><td>0</td><td>0</td><td>임</td><td>남</td><td>모바일</td><td>7</td><td>20040807</td></tr>
+<tr><td>0</td><td>null</td><td>미확인</td><td>0</td><td>0</td><td>조</td><td>여</td><td>노트북</td><td>8</td><td>20161201</td></tr>
+<tr><td>0</td><td>null</td><td>미확인</td><td>0</td><td>0</td><td>최</td><td>남</td><td>컴퓨터</td><td>9</td><td>20201124</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="%ED%80%B4%EC%A6%88-7.-fact_daily_json-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%83%81%ED%92%88%EB%B3%84-%EB%A7%A4%EC%B6%9C-%EA%B8%88%EC%95%A1%EC%9D%98-%ED%95%A9%EA%B3%84%EB%A5%BC-%EA%B5%AC%ED%95%98%EA%B3%A0-%EC%B5%9C%EB%8C%80-%EB%A7%A4%EC%B6%9C-%EC%83%81%ED%92%88%EC%9D%B4%EB%A6%84%EC%9D%84-%ED%99%95%EC%9D%B8%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 7. fact_daily_json &#45936;&#51060;&#53552;&#47484; &#49345;&#54408;&#48324; &#47588;&#52636; &#44552;&#50529;&#51032; &#54633;&#44228;&#47484; &#44396;&#54616;&#44256; &#52572;&#45824; &#47588;&#52636; &#49345;&#54408;&#51060;&#47492;&#51012; &#54869;&#51064;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-7.-fact_daily_json-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%83%81%ED%92%88%EB%B3%84-%EB%A7%A4%EC%B6%9C-%EA%B8%88%EC%95%A1%EC%9D%98-%ED%95%A9%EA%B3%84%EB%A5%BC-%EA%B5%AC%ED%95%98%EA%B3%A0-%EC%B5%9C%EB%8C%80-%EB%A7%A4%EC%B6%9C-%EC%83%81%ED%92%88%EC%9D%B4%EB%A6%84%EC%9D%84-%ED%99%95%EC%9D%B8%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>결과 스키마 : p_name, amount</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">structured_fact</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">fact_daily_json</span>
+    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;p_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">&quot;p_amount&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">&quot;sum&quot;</span><span class="p">))</span>
+    <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="n">desc</span><span class="p">(</span><span class="s2">&quot;sum&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">structured_fact</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>p_name</th><th>sum</th></tr>
+<tr><td>LG Gram</td><td>5300000</td></tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="%ED%80%B4%EC%A6%88-8.-'%ED%80%B4%EC%A6%88-7'%EC%9D%84-SparkSQL-%EB%B0%A9%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94,-%EC%9D%B4%EB%AF%B8-SparkSQL-%EB%B0%A9%EC%8B%9D%EC%9C%BC%EB%A1%9C-%ED%92%80%EC%97%88%EB%8B%A4%EB%A9%B4-Structured-API-%EB%B0%A9%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EC%9E%91%EC%84%B1%ED%95%98%EC%84%B8%EC%9A%94">&#53300;&#51592; 8. '&#53300;&#51592; 7'&#51012; SparkSQL &#48169;&#49885;&#51004;&#47196; &#44208;&#44284;&#47484; &#52636;&#47141;&#54616;&#49464;&#50836;, &#51060;&#48120; SparkSQL &#48169;&#49885;&#51004;&#47196; &#54400;&#50632;&#45796;&#47732; Structured API &#48169;&#49885;&#51004;&#47196; &#51089;&#49457;&#54616;&#49464;&#50836;<a class="anchor-link" href="#%ED%80%B4%EC%A6%88-8.-'%ED%80%B4%EC%A6%88-7'%EC%9D%84-SparkSQL-%EB%B0%A9%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EA%B2%B0%EA%B3%BC%EB%A5%BC-%EC%B6%9C%EB%A0%A5%ED%95%98%EC%84%B8%EC%9A%94,-%EC%9D%B4%EB%AF%B8-SparkSQL-%EB%B0%A9%EC%8B%9D%EC%9C%BC%EB%A1%9C-%ED%92%80%EC%97%88%EB%8B%A4%EB%A9%B4-Structured-API-%EB%B0%A9%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EC%9E%91%EC%84%B1%ED%95%98%EC%84%B8%EC%9A%94">&#182;</a></h3><ul>
+<li>결과 스키마 : p_name, amount</li>
+</ul>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14557,11 +14813,16 @@ only showing top 3 rows
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>  <span class="c1"># 10mb</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span>
-<span class="n">res</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">res</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fact_daily_json</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s2">&quot;fact_daily_json&quot;</span><span class="p">)</span>
+<span class="n">no_1_product_query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select p_name, sum(p_amount) as sum</span>
+<span class="s2">from fact_daily_json</span>
+<span class="s2">group by p_name</span>
+<span class="s2">order by sum desc</span>
+<span class="s2">limit 1</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">no_1_product</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="n">no_1_product_query</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">no_1_product</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14580,793 +14841,21 @@ only showing top 3 rows
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-*(3) HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-+- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#272]
-   +- *(2) HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-      +- *(2) Project [registration#6, sale_price#17]
-         +- *(2) BroadcastHashJoin [make#7, model#8], [make#14, model#15], Inner, BuildLeft, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1), false
-            :- BroadcastExchange HashedRelationBroadcastMode(List(input[1, string, false], input[2, string, false]),false), [id=#263]
-            :  +- *(1) Filter (isnotnull(make#7) AND isnotnull(model#8))
-            :     +- *(1) ColumnarToRow
-            :        +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-            +- *(2) Filter (isnotnull(make#14) AND isnotnull(model#15))
-               +- *(2) ColumnarToRow
-                  +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [isnotnull(make#14), isnotnull(model#15)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
 
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 13:&gt;                                                         (0 + 6) / 6]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+------------------+
-|registration|   avg(sale_price)|
-+------------+------------------+
-|     iXXrlpz|2977.1369648060972|
-|     3LIElNn|2977.1369648060972|
-|     HZJtAcH| 3022.568145376804|
-|     cYzmEAU|2977.1369648060972|
-|     n22OxDp| 2987.987181738367|
-|     PTwNpKh| 2987.987181738367|
-|     O7ydunD| 2985.096955128205|
-|     qo0NBCn| 2987.987181738367|
-|     Fwsi8dg| 2986.729458388375|
-|     wiFO8E9|2978.1062155782847|
-+------------+------------------+
-only showing top 10 rows
-
-CPU times: user 8.12 ms, sys: 4.21 ms, total: 12.3 ms
-Wall time: 28 s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="4.2.-%EC%85%94%ED%94%8C%EB%A7%81%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%A1%B0%EC%9D%B8">4.2. &#49492;&#54540;&#47553;&#51012; &#53685;&#54620; &#51312;&#51064;<a class="anchor-link" href="#4.2.-%EC%85%94%ED%94%8C%EB%A7%81%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%A1%B0%EC%9D%B8">&#182;</a></h4><blockquote><p>브로드캐스팅 되지 않도록 임계치 값을 -1로 지정하여 브로드캐스팅 되지 않도록 설정하고, <a href="http://localhost:4040/stages/">http://localhost:4040/stages/</a> 페이지에서 가장 시간이 오래걸린 작업을 확인합니다.</p>
-</blockquote>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span>
-<span class="n">res</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">res</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-*(6) HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-+- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#431]
-   +- *(5) HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-      +- *(5) Project [registration#6, sale_price#17]
-         +- *(5) SortMergeJoin [make#7, model#8], [make#14, model#15], Inner, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1)
-            :- *(2) Sort [make#7 ASC NULLS FIRST, model#8 ASC NULLS FIRST], false, 0
-            :  +- Exchange hashpartitioning(make#7, model#8, 5), ENSURE_REQUIREMENTS, [id=#413]
-            :     +- *(1) Filter (isnotnull(make#7) AND isnotnull(model#8))
-            :        +- *(1) ColumnarToRow
-            :           +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-            +- *(4) Sort [make#14 ASC NULLS FIRST, model#15 ASC NULLS FIRST], false, 0
-               +- Exchange hashpartitioning(make#14, model#15, 5), ENSURE_REQUIREMENTS, [id=#422]
-                  +- *(3) Filter (isnotnull(make#14) AND isnotnull(model#15))
-                     +- *(3) ColumnarToRow
-                        +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [isnotnull(make#14), isnotnull(model#15)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
-
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 17:==============================================&gt;           (4 + 1) / 5]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+------------------+
-|registration|   avg(sale_price)|
-+------------+------------------+
-|     VAXwDvW|2949.7984683595323|
-|     oOwbLbj| 2940.165147453083|
-|     atj0cou| 2957.128184713376|
-|     UPDkPxK| 2957.128184713376|
-|     10MC6Fc| 2972.469609724888|
-|     JgYTNw4|3000.4284736481864|
-|     STRW2oL|2949.7984683595323|
-|     EQ1DjHV| 2957.128184713376|
-|     J1QgrWA| 2957.128184713376|
-|     qFiJQxM| 2972.469609724888|
-+------------+------------------+
-only showing top 10 rows
-
-CPU times: user 18.3 ms, sys: 12.7 ms, total: 31 ms
-Wall time: 1min 36s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="images/spark-2-tasks.png" alt="spark2">
-<img src="images/spark-2-skewness.png" alt="spark2"></p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="4.3-%EC%86%94%ED%8C%85-%EA%B8%B0%EB%B2%95%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%A1%B0%EC%9D%B8">4.3 &#49556;&#54021; &#44592;&#48277;&#51012; &#53685;&#54620; &#51312;&#51064;<a class="anchor-link" href="#4.3-%EC%86%94%ED%8C%85-%EA%B8%B0%EB%B2%95%EC%9D%84-%ED%86%B5%ED%95%9C-%EC%A1%B0%EC%9D%B8">&#182;</a></h4>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">numbers</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="n">explode</span><span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="n">lit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)])))</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+---+---+
-| id|new|
-+---+---+
-|  1|  0|
-|  1|  1|
-|  1|  2|
-|  1|  3|
-|  1|  4|
-|  2|  0|
-|  2|  1|
-|  2|  2|
-|  2|  3|
-|  2|  4|
-|  3|  0|
-|  3|  1|
-|  3|  2|
-|  3|  3|
-|  3|  4|
-|  4|  0|
-|  4|  1|
-|  4|  2|
-|  4|  3|
-|  4|  4|
-+---+---+
-
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">magic_number</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;skew_key&quot;</span><span class="p">,</span> <span class="n">explode</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="n">lit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">magic_number</span><span class="p">)]))))</span>
-<span class="n">t2</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;skew_key&quot;</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">()</span> <span class="o">%</span> <span class="n">magic_number</span><span class="p">)</span>
-<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">t1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">t2</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">t1</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">t2</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">t1</span><span class="o">.</span><span class="n">skew_key</span> <span class="o">==</span> <span class="n">t2</span><span class="o">.</span><span class="n">skew_key</span><span class="p">]</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span>
-<span class="n">res</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">res</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-*(6) HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-+- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#637]
-   +- *(5) HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-      +- *(5) Project [registration#6, sale_price#17]
-         +- *(5) SortMergeJoin [make#7, model#8, cast(skew_key#252 as bigint)], [make#14, model#15, skew_key#258L], Inner, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1)
-            :- *(2) Sort [make#7 ASC NULLS FIRST, model#8 ASC NULLS FIRST, cast(skew_key#252 as bigint) ASC NULLS FIRST], false, 0
-            :  +- Exchange hashpartitioning(make#7, model#8, cast(skew_key#252 as bigint), 5), ENSURE_REQUIREMENTS, [id=#618]
-            :     +- Generate explode([0,1,2]), [registration#6, make#7, model#8, engine_size#9], false, [skew_key#252]
-            :        +- *(1) Filter (isnotnull(make#7) AND isnotnull(model#8))
-            :           +- *(1) ColumnarToRow
-            :              +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-            +- *(4) Sort [make#14 ASC NULLS FIRST, model#15 ASC NULLS FIRST, skew_key#258L ASC NULLS FIRST], false, 0
-               +- Exchange hashpartitioning(make#14, model#15, skew_key#258L, 5), ENSURE_REQUIREMENTS, [id=#628]
-                  +- *(3) Filter ((isnotnull(make#14) AND isnotnull(model#15)) AND isnotnull(skew_key#258L))
-                     +- *(3) Project [make#14, model#15, engine_size#16, sale_price#17, (monotonically_increasing_id() % 3) AS skew_key#258L]
-                        +- *(3) ColumnarToRow
-                           +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
-
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 24:==============================================&gt;           (4 + 1) / 5]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+------------------+
-|registration|   avg(sale_price)|
-+------------+------------------+
-|     mK5LtWT| 3022.568145376804|
-|     W3sj1FD| 2986.729458388375|
-|     f0ohMxn|2977.1369648060972|
-|     Cn2bGX8| 2985.096955128205|
-|     I7cJySY| 3022.568145376804|
-|     uq0hBYu|2977.1369648060972|
-|     mOe4qzJ|2983.3983024206223|
-|     71LjoLT| 2985.096955128205|
-|     tKWT46N|2977.1369648060972|
-|     fRg72LG| 2986.729458388375|
-+------------+------------------+
-only showing top 10 rows
-
-CPU times: user 15.5 ms, sys: 7.3 ms, total: 22.8 ms
-Wall time: 40.6 s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">magic_number</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;skew_key&quot;</span><span class="p">,</span> <span class="n">explode</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="n">array</span><span class="p">([</span><span class="n">lit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">magic_number</span><span class="p">)]))))</span>
-<span class="n">t2</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;skew_key&quot;</span><span class="p">,</span> <span class="n">monotonically_increasing_id</span><span class="p">()</span> <span class="o">%</span> <span class="n">magic_number</span><span class="p">)</span>
-<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">t1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">t2</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">t1</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">t2</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">t1</span><span class="o">.</span><span class="n">skew_key</span> <span class="o">==</span> <span class="n">t2</span><span class="o">.</span><span class="n">skew_key</span><span class="p">]</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">t1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span>
-<span class="n">res</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">res</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-*(6) HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-+- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#834]
-   +- *(5) HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-      +- *(5) Project [registration#6, sale_price#17]
-         +- *(5) SortMergeJoin [make#7, model#8, cast(skew_key#312 as bigint)], [make#14, model#15, skew_key#318L], Inner, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1)
-            :- *(2) Sort [make#7 ASC NULLS FIRST, model#8 ASC NULLS FIRST, cast(skew_key#312 as bigint) ASC NULLS FIRST], false, 0
-            :  +- Exchange hashpartitioning(make#7, model#8, cast(skew_key#312 as bigint), 5), ENSURE_REQUIREMENTS, [id=#815]
-            :     +- Generate explode([0,1,2,3]), [registration#6, make#7, model#8, engine_size#9], false, [skew_key#312]
-            :        +- *(1) Filter (isnotnull(make#7) AND isnotnull(model#8))
-            :           +- *(1) ColumnarToRow
-            :              +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-            +- *(4) Sort [make#14 ASC NULLS FIRST, model#15 ASC NULLS FIRST, skew_key#318L ASC NULLS FIRST], false, 0
-               +- Exchange hashpartitioning(make#14, model#15, skew_key#318L, 5), ENSURE_REQUIREMENTS, [id=#825]
-                  +- *(3) Filter ((isnotnull(make#14) AND isnotnull(model#15)) AND isnotnull(skew_key#318L))
-                     +- *(3) Project [make#14, model#15, engine_size#16, sale_price#17, (monotonically_increasing_id() % 4) AS skew_key#318L]
-                        +- *(3) ColumnarToRow
-                           +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
-
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 28:==============================================&gt;           (4 + 1) / 5]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+------------------+
-|registration|   avg(sale_price)|
-+------------+------------------+
-|     mK5LtWT| 3022.568145376804|
-|     W3sj1FD| 2986.729458388375|
-|     f0ohMxn|2977.1369648060972|
-|     Cn2bGX8| 2985.096955128205|
-|     I7cJySY| 3022.568145376804|
-|     uq0hBYu|2977.1369648060972|
-|     mOe4qzJ|2983.3983024206223|
-|     71LjoLT| 2985.096955128205|
-|     tKWT46N|2977.1369648060972|
-|     fRg72LG| 2986.729458388375|
-+------------+------------------+
-only showing top 10 rows
-
-CPU times: user 18.3 ms, sys: 6.89 ms, total: 25.2 ms
-Wall time: 32.1 s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.enabled&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.skewJoin.enabled&quot;</span><span class="p">,</span> <span class="s2">&quot;true&quot;</span><span class="p">)</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.skewJoin.skewedPartitionFactor&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.advisoryPartitionSizeInBytes&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="o">*</span><span class="mi">1024</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">s1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">model</span><span class="p">]</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span>
-<span class="n">res</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">res</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-AdaptiveSparkPlan isFinalPlan=false
-+- HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-   +- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#984]
-      +- HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-         +- Project [registration#6, sale_price#17]
-            +- SortMergeJoin [make#7, model#8], [make#14, model#15], Inner, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1)
-               :- Sort [make#7 ASC NULLS FIRST, model#8 ASC NULLS FIRST], false, 0
-               :  +- Exchange hashpartitioning(make#7, model#8, 5), ENSURE_REQUIREMENTS, [id=#976]
-               :     +- Filter (isnotnull(make#7) AND isnotnull(model#8))
-               :        +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-               +- Sort [make#14 ASC NULLS FIRST, model#15 ASC NULLS FIRST], false, 0
-                  +- Exchange hashpartitioning(make#14, model#15, 5), ENSURE_REQUIREMENTS, [id=#977]
-                     +- Filter (isnotnull(make#14) AND isnotnull(model#15))
-                        +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [isnotnull(make#14), isnotnull(model#15)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
-
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 34:======================================================&gt; (47 + 1) / 48]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+------------------+
-|registration|   avg(sale_price)|
-+------------+------------------+
-|     VAXwDvW|2949.7984683595323|
-|     oOwbLbj| 2940.165147453083|
-|     atj0cou| 2957.128184713376|
-|     UPDkPxK| 2957.128184713376|
-|     10MC6Fc| 2972.469609724888|
-|     JgYTNw4|3000.4284736481864|
-|     STRW2oL|2949.7984683595323|
-|     EQ1DjHV| 2957.128184713376|
-|     J1QgrWA| 2957.128184713376|
-|     qFiJQxM| 2972.469609724888|
-+------------+------------------+
-only showing top 10 rows
-
-CPU times: user 38.5 ms, sys: 9.34 ms, total: 47.9 ms
-Wall time: 28.3 s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="images/spark-3-tasks.png" alt="spark3">
-<img src="images/spark-3-skewness.png" alt="spark3"></p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.adaptive.enabled&quot;</span><span class="p">,</span> <span class="s2">&quot;false&quot;</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%time</span>
-<span class="n">spark</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;spark.sql.autoBroadcastJoinThreshold&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">cond</span> <span class="o">=</span> <span class="p">[</span><span class="n">s1</span><span class="o">.</span><span class="n">make</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">make</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">model</span> <span class="o">==</span> <span class="n">s2</span><span class="o">.</span><span class="n">model</span><span class="p">]</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">cond</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">&quot;registration&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">&quot;sale_price&quot;</span><span class="p">))</span>
-<span class="n">res</span><span class="o">.</span><span class="n">explain</span><span class="p">()</span>
-<span class="n">res</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>== Physical Plan ==
-*(6) HashAggregate(keys=[registration#6], functions=[avg(sale_price#17)])
-+- Exchange hashpartitioning(registration#6, 5), ENSURE_REQUIREMENTS, [id=#1310]
-   +- *(5) HashAggregate(keys=[registration#6], functions=[partial_avg(sale_price#17)])
-      +- *(5) Project [registration#6, sale_price#17]
-         +- *(5) SortMergeJoin [make#7, model#8], [make#14, model#15], Inner, (cast(CheckOverflow((promote_precision(cast(engine_size#16 as decimal(38,17))) - promote_precision(cast(engine_size#9 as decimal(38,17)))), DecimalType(38,17), true) as double) &lt;= 0.1)
-            :- *(2) Sort [make#7 ASC NULLS FIRST, model#8 ASC NULLS FIRST], false, 0
-            :  +- Exchange hashpartitioning(make#7, model#8, 5), ENSURE_REQUIREMENTS, [id=#1292]
-            :     +- *(1) Filter (isnotnull(make#7) AND isnotnull(model#8))
-            :        +- *(1) ColumnarToRow
-            :           +- FileScan parquet [registration#6,make#7,model#8,engine_size#9] Batched: true, DataFilters: [isnotnull(make#7), isnotnull(model#8)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s1], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;registration:string,make:string,model:string,engine_size:decimal(38,18)&gt;
-            +- *(4) Sort [make#14 ASC NULLS FIRST, model#15 ASC NULLS FIRST], false, 0
-               +- Exchange hashpartitioning(make#14, model#15, 5), ENSURE_REQUIREMENTS, [id=#1301]
-                  +- *(3) Filter (isnotnull(make#14) AND isnotnull(model#15))
-                     +- *(3) ColumnarToRow
-                        +- FileScan parquet [make#14,model#15,engine_size#16,sale_price#17] Batched: true, DataFilters: [isnotnull(make#14), isnotnull(model#15)], Format: Parquet, Location: InMemoryFileIndex[file:/home/jovyan/work/lgde-spark-troubleshoot/source/s2], PartitionFilters: [], PushedFilters: [IsNotNull(make), IsNotNull(model)], ReadSchema: struct&lt;make:string,model:string,engine_size:decimal(38,18),sale_price:double&gt;
-
-
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 41:==============================================&gt;           (4 + 1) / 5]</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------------+------------------+
-|registration|   avg(sale_price)|
-+------------+------------------+
-|     VAXwDvW|2949.7984683595323|
-|     oOwbLbj| 2940.165147453083|
-|     atj0cou| 2957.128184713376|
-|     UPDkPxK| 2957.128184713376|
-|     10MC6Fc| 2972.469609724888|
-|     JgYTNw4|3000.4284736481864|
-|     STRW2oL|2949.7984683595323|
-|     EQ1DjHV| 2957.128184713376|
-|     J1QgrWA| 2957.128184713376|
-|     qFiJQxM| 2972.469609724888|
-+------------+------------------+
-only showing top 10 rows
-
-CPU times: user 26.5 ms, sys: 5.13 ms, total: 31.7 ms
-Wall time: 1min 36s
-</pre>
-</div>
-</div>
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>                                                                                </pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Spark-Tuning-Result">Spark Tuning Result<a class="anchor-link" href="#Spark-Tuning-Result">&#182;</a></h4><table>
-<thead><tr>
-<th>rank</th>
-<th>elapsed</th>
-<th>setting</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>28 s</td>
-<td>broadcasting</td>
-<td>-</td>
-</tr>
-<tr>
-<td>2</td>
-<td>28.3s</td>
-<td>adaptive query</td>
-<td>AQE enabled</td>
-</tr>
-<tr>
-<td>3</td>
-<td>32.1 s</td>
-<td>custom salting</td>
-<td>partition = 4</td>
-</tr>
-<tr>
-<td>4</td>
-<td>40.6 s</td>
-<td>custom salting</td>
-<td>partition = 3</td>
-</tr>
-<tr>
-<td>5</td>
-<td>1min 36s</td>
-<td>default</td>
-<td>-</td>
-</tr>
-</tbody>
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<table border='1'>
+<tr><th>p_name</th><th>sum</th></tr>
+<tr><td>LG Gram</td><td>5300000</td></tr>
 </table>
 
 </div>
+
+</div>
+
+</div>
+
+</div>
+
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
