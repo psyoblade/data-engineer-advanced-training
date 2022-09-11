@@ -10,6 +10,8 @@ services:
     volumes:
       - ./fluentd/config:/fluentd/config
       - ./fluentd/source:/fluentd/source
+    environment:
+      - TZ=Asia/Seoul
     ports:
       - 9881:9881
   zookeeper:
@@ -47,7 +49,7 @@ services:
       MYSQL_PASSWORD: tiger
       TZ: Asia/Seoul
     ports:
-      - '3306:3306'
+      - "3306:3306"
     networks:
       - default
     healthcheck:
@@ -61,15 +63,15 @@ services:
     container_name: notebook
     user: jovyan
     privileged: true
-    image: psyoblade/data-engineer-notebook:1.7.3
+    image: psyoblade/data-engineer-notebook:1.7.5
     restart: always
     volumes:
       - ./notebooks/work:/home/jovyan/work
     environment:
       - GRANT_SUDO=yes
     ports:
-      - "4040:4040"
-      - "4041:4041"
+      - "4040-4049:4040-4049"
+      - "8080:8080"
       - "8888:8888"
   druid:
     container_name: druid
@@ -79,6 +81,9 @@ services:
     expose:
       - "8082"
     entrypoint: [ "./start-micro-quickstart" ]
+    volumes:
+      - ./druid/data/wordcount-v1-index.json:/apache-druid-0.16.1-incubating/quickstart/tutorial/wordcount-v1-index.json
+      - ./druid/data/wordcount-v1-data.json:/apache-druid-0.16.1-incubating/quickstart/tutorial/wordcount-v1-data.json
   turnilo:
     container_name: turnilo
     image: uchhatre/turnilo
@@ -87,7 +92,7 @@ services:
     ports:
       - "9091:9090"
     environment:
-      CONFIG_FILE: "/etc/config/export/new-config.yml"
+      CONFIG_FILE: "/etc/config/turnilo/config.yml"
     volumes:
       - ./turnilo/config/new-config.yml:/etc/config/turnilo/config.yml
 
