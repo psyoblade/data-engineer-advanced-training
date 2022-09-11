@@ -287,7 +287,6 @@ kafkaSchema = (
     .add(StructField("title_eng", StringType()))
     .add(StructField("year", IntegerType()))
     .add(StructField("grade", StringType()))
-    .add(StructField("time", StringType()))
     .add(StructField("timestamp", StringType()))
 )
 
