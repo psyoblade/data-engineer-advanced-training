@@ -24,6 +24,7 @@ alias d="docker-compose"
 ```
 
 ### 1-2. 이전에 기동된 컨테이너가 있다면 강제 종료합니다
+
 ```bash
 # terminal 
 docker rm -f `docker ps -aq`
@@ -31,6 +32,7 @@ docker rm -f `docker ps -aq`
 ```
 
 ### 1-3. 실습을 위한 이미지를 내려받고 컨테이너를 기동합니다
+
 ```bash
 # 컨테이너 기동
 cd /home/ubuntu/work/data-engineer-advanced-training/day5
@@ -49,7 +51,7 @@ docker-compose exec kafka bash
 
 ### 2-1. 에이전트 정상 동작을 확인하기 위해 http 더미 에이전트를 실행합니다
 
->  홈 경로가 `/home/root` 이며 해당 경로에 `fluentd` 스크립트가 존재하며, 카프카 전송 이전에 플루언트디 기동 테스트를 먼저 수애합니다
+>  홈 경로가 `/home/root` 이며 해당 경로에 `fluentd` 스크립트가 존재하며, 카프카 전송 이전에 플루언트디 기동 테스트를 먼저 수행 합니다
 
 * http 서버를 특정 포트로 띄우고 debug 출력을 하는 예제
 ```xml
