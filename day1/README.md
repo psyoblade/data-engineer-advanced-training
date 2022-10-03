@@ -238,7 +238,7 @@ docker rm -f `docker ps -a | grep -v CONTAINER | awk '{ print $1 }'`
 
 ```text
 docker run --name nginx -dit nginx:latest
-docker ps nginx
+docker ps
 docker top nginx
 docker logs nginx
 docker stop nginx
@@ -374,7 +374,7 @@ cat > Dockerfile
 * 아래의 내용을 복사해서 붙여넣고, 엔터를 친 다음, <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 명령으로 나오면 파일이 생성됩니다
 ```bash
 FROM ubuntu:18.04
-LABEL maintainer="student@lg.com"
+LABEL maintainer="student@modulabs.com"
 
 RUN apt-get update && apt-get install -y rsync tree
 
@@ -386,7 +386,7 @@ CMD ["/bin/bash"]
 
 ```bash
 FROM ubuntu:18.04
-LABEL maintainer="student@lg.com"
+LABEL maintainer="student@modulabs.com"
 
 RUN apt-get update && apt-get install -y rsync tree
 
@@ -1070,7 +1070,7 @@ UNLOCK TABLES;
 # cat > Dockerfile
 ARG BASE_CONTAINER=mysql:5.7
 FROM $BASE_CONTAINER
-LABEL maintainer="student@lg.com"
+LABEL maintainer="student@modulabs.com"
 
 ADD ./init /docker-entrypoint-initdb.d
 

@@ -204,7 +204,7 @@ bin/kafka-console-consumer.sh $boot --topic movies --from-beginning --max-messag
 * 노트북 접속을 위해 주소를 확인하여 브라우저에서 접속합니다
 	* 단, 클라우드 환경인 경우에는 클라우드 노드의 주소를 `127.0.0.1` 대신에 넣어야 합니다
 ```bash
-docker-comopse logs notebook | grep 127
+docker-compose logs notebook | grep 127
 # [JupyterLab](http://127.0.0.1:8888/lab?token=d0ffa88b4ca509687f7a6502e4376f1bbf192bd8462f83c2)
 ```
 
@@ -606,7 +606,7 @@ bin/kafka-console-consumer.sh $boot --from-beginning --topic korean_movies
 # docker-compose exec fluentd bash 
 
 cd /fluentd/source
-rm -r movies/*.csv
+rm -r movies/*.tsv
 ```
 
 > 여기까지 수행 되었다면 처음 실습을 시작하는 환경으로 모든 상태가 리셋 되었다고 말할 수 있습니다.
