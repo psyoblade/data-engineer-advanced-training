@@ -1,47 +1,17 @@
-# 데이터 엔지니어링 고급 실습
+## 데이터 엔지니어링 고급
 
-> 데이터 엔지니어링 고급 과정 실습을 위한 페이지 입니다.
+> 
 
-## [1일차. 컨테이너 기술의 이해](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day1/README.md)
-
-## [2일차. 스트림 데이터 수집](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day2/README.md)
-
-## [3일차. 스파크 배치 성능 튜닝](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day3/README.md)
-
-## [4일차. 스파크 스트리밍 처리](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day4/README.md)
-
-## [5일차. 스트리밍 파이프라인 설계](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day5/README.md)
-
-
-
->  자주 사용하는 `.bashrc` 설정입니다
-
-```bash
-# cat ~/.bashrc
-
-export EDITOR="vim"
-alias d="docker-compose"
-alias dps="docker ps -a"
-alias drm="docker rm -f"
-
-alias gl="git log --all --graph --oneline --decorate"
-alias gs="git status"
-alias gd="git diff"
-alias gb="git branch"
-alias gp="git pull"
-```
-
-> `/etc/hosts` 파일에 등록된 내용이며, `<IP>` 항목과 `vm<number>` 항목을 변경해 두시면 접속 시에 편합니다
-
-```bash
-...
-<IP> vm<number>.koreacentral.cloudapp.azure.com vm<number>
-```
-
-> 도커 컨테이너에 문제가 생겼을 때에 도커 서비스 상태 확인 및 재시작 하는 방법
-
-```bash
-sudo systemctl status docker.service
-sudo systemctl restart docker.service
-```
+* 저자
+  * 기업 내외에서 발생하는 다양한 형태의 데이터를 수집, 변환 및 적재를 위한 다양한 기술을 연구하고 이러한 작업을 좀 더 자동화 할 수 있는 서비스와 플랫폼을 개발하는 업무를 하고 있습니다
+* 소개
+* 목적
+* 대상
+* 내용
+  * [컨테이너 기술의 이해](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day1/README.md)
+  * [스트림 데이터 수집](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day2/README.md)
+  * [스파크 배치 튜닝](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day3/README.md)
+  * [스파크 스트리밍](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day4/README.md)
+  * [스트리밍 파이프라인 설계](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day5/README.md)
+* 맺음말
 

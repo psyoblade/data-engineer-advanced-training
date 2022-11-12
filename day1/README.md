@@ -30,6 +30,7 @@
 ```
 
 ### 1-2. 패키지 설치 여부를 확인합니다
+
 ```bash
 docker --version
 docker-compose --version
@@ -47,6 +48,39 @@ git version 2.17.1
 ```
 
 </details>
+
+### 1-3. 유용한 팁
+
+```bash
+# cat ~/.bashrc
+
+export EDITOR="vim"
+alias d="docker-compose"
+alias dps="docker ps -a"
+alias drm="docker rm -f"
+
+alias gl="git log --all --graph --oneline --decorate"
+alias gs="git status"
+alias gd="git diff"
+alias gb="git branch"
+alias gp="git pull"
+```
+
+> `/etc/hosts` 파일에 등록된 내용이며, `<IP>` 항목과 `vm<number>` 항목을 변경해 두시면 접속 시에 편합니다
+
+```bash
+...
+<IP> vm<number>.koreacentral.cloudapp.azure.com vm<number>
+```
+
+> 도커 컨테이너에 문제가 생겼을 때에 도커 서비스 상태 확인 및 재시작 하는 방법
+
+```bash
+sudo systemctl status docker.service
+sudo systemctl restart docker.service
+```
+
+
 
 [목차로 돌아가기](#1일차-데이터-엔지니어링-고급)
 
