@@ -1,17 +1,40 @@
 ## 데이터 엔지니어링 고급
 
-> 
+>   이제는 대용량 데이터를 저장과 가공을 하는 것 만으로는 비즈니스의 요구사항을 만족시킬 수 없는 시대라고 말할 수 있습니다. 즉, 스트리밍 데이터를 활용한 보다 빠르고 기민한 대응이 필요한 시점입니다.  `스트리밍 데이터` 는 제한된 시간 내에 처리 및 전달 되어야 더 가치 있는 정보를 소비자에게 제공하는 것이 가장 중요한 데이터라고 말할 수 있습니다. 
+>   이러한 실시간 혹은 스트리밍 데이터 처리를 위한 도구는 많지만, 그 중에 가장 널리 사용되는 도구 들에 대해 이해하고, 직접 스트리밍 데이터 파이프라인을 직접 구축하면서 스트리밍 데이터를 통해서 지표를 생성하고 만드는 과정을 학습할 수 있습니다
 
-* 저자
-  * 기업 내외에서 발생하는 다양한 형태의 데이터를 수집, 변환 및 적재를 위한 다양한 기술을 연구하고 이러한 작업을 좀 더 자동화 할 수 있는 서비스와 플랫폼을 개발하는 업무를 하고 있습니다
-* 소개
-* 목적
-* 대상
-* 내용
-  * [컨테이너 기술의 이해](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day1/README.md)
-  * [스트림 데이터 수집](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day2/README.md)
-  * [스파크 배치 튜닝](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day3/README.md)
-  * [스파크 스트리밍](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day4/README.md)
-  * [스트리밍 파이프라인 설계](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day5/README.md)
-* 맺음말
+### 저자
+
+* 기업 내외에서 발생하는 다양한 형태의 데이터를 수집, 변환 및 적재를 위한 다양한 기술을 연구하고 이러한 작업을 좀 더 자동화 할 수 있는 서비스와 플랫폼을 개발하는 업무를 하고 있습니다
+
+### 소개
+
+* 스트리밍과 상반된 데이터 처리인 배치 처리의 경우 처리해야 하는 데이터의 범위를 사전에 정하고, 처리해야 할 데이터의 크기와 범위를 알고 있기 때문에 분산 처리 혹은 최적화에 대해 보다 유연하게 처리할 수 있고, 급격하게 늘어난 데이터에 대해서도 분할정복 등의 기법을 통해 우회하는 방법도 있습니다
+* 하지만, 스트리밍 데이터 처리는 24시간 지속적인 서비스를 제공해야 하기 때문에 데이터의 범위가 고정되지 않아 항상 변하는 Unbounded Data 특성을 가지고 있기 때문에 단위 시간 내에 인입되는 데이터의 크기에 큰 영향을 받게 됩니다. 또한 동적으로 리소스를 관리하기에 어려운 상황이 많습니다
+* 다양한 오픈소스의 종류에 따라 성능 개선과 데이터 처리 방법이 상당히 달라질 수 있기 때문에 다양한 오픈소스를 경험하는 방향 보다는 손에 익은 도구와 인프라를 잘 활용하는 전략을 취하는 것이 유용할 수 있습니다
+
+### 목적
+
+* 스트리밍 데이터의 수집부터, 데이터 변환 및 가공 그리고 적재를 위한 인프라까지 스트리밍 파이프라인을 생성합니다
+* 저장된 스트리밍 데이터를 통해서 실시간 조회가 가능한 서빙 레이어에 적재 후 시각화 도구를 통해 다양한 관점의 지표를 조회할 수 있습니다
+* 도커 컨테이너 환경에서 다양한 인프라를 직접 경험해 볼 수 있고, 개별 컴포넌트의 구현을 해보면서 전체 파이프라인을 이해할 수 있습니다
+* Docker, Fluentd, Spark Streaming, Kafka, Druid, Turnilo
+
+### 대상
+
+* 실시간 데이터 처리 및 스트리밍 데이터 지표 생성에 관심을 두신 분
+* 배치 처리를 몰라도 프로그래밍 지식이 있다면 수강이 가능하지만, 스파크에 대한 기본 지식이 있어야 원활한 학습이 가능합니다
+* 스파크의 경우 스칼라, 파이썬, R 등 다양한 언어를 지원하므로 이 가운데 하나 이상은 익숙한 프로그래밍 언어가 필요합니다
+
+### 내용
+
+* [컨테이너 기술의 이해](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day1/README.md) : 컨테이너 기술에 대한 기본적인 이해와 컨테이너 이미지를 빌드하고 직접 빌드한 이미지를 사용하는 다양한 예제를 실습합니다
+* [스트림 데이터 수집](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day2/README.md) : 스트리밍 데이터 기술에 대한 이해 그리고 트레져데이터 플루언트디를 통한 스트리밍 데이터 수집 및 적재에 대해 실습합니다
+* [스파크 배치 튜닝](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day3/README.md) : 스파크 프레임워크의 성능 개선에 대한 기본적인 이해와, 튜닝을 위한 패턴과 예제를 통한 학습을 합니다
+* [스파크 스트리밍](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day4/README.md) : 스트리밍 데이터 처리에 대한 기본 개념과 아키텍처를 이해하고, 카프카와 스파크 스트리밍을 통한 스트리밍 애플리케이션을 개발합니다
+* [스트리밍 파이프라인 설계](https://github.com/psyoblade/data-engineer-advanced-training/tree/master/day5/README.md) : 학습했던 스트리밍 데이터 수집, 변환 그리고 적재에 이르기까지 모든 파이프라인을 하나로 통합해서 실습하고 적재된 데이터를 통해 드루이드 엔진을 통해 색인하고 시각화 도구를 통해 다양한 관점에서 실습을 할 수 있습니다
+
+### 맺음말
+
+* 스트리밍 데이터의 경우 배치 처리와 개념이 상이한 부분이 많기 때문에 본 과정을 통해서 그러한 부분들이 해소되셨으면 좋겠습니다
 
