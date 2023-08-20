@@ -8,8 +8,6 @@ services:
     tty: true
     volumes:
       - ./fluent.conf:/etc/fluentd/fluent.conf
-      - ./apache_logs:/home/root/apache_logs
-      - ./flush_logs.py:/home/root/flush_logs.py
       - ./source:/fluentd/source
       - ./target:/fluentd/target
     working_dir: /home/root
