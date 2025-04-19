@@ -18,7 +18,7 @@ services:
       - ./mysql/etc:/etc/mysql/conf.d
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:3.1
     user: root
     restart: always
     depends_on:
@@ -27,5 +27,5 @@ services:
     ports:
       - 9880:9880
     volumes:
-      - ./fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluent.conf:/fluentd/etc/fluent.conf
       - ./target:/fluentd/target

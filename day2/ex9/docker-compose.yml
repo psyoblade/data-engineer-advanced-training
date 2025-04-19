@@ -1,14 +1,14 @@
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:3.1
     depends_on: 
       - namenode
       - datanode
     user: root
     tty: true
     volumes:
-      - ./fluentd/fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluentd/fluent.conf:/fluentd/etc/fluent.conf
     ports:
       - 9880:9880
     networks:

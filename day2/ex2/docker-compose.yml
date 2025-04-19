@@ -1,12 +1,12 @@
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:3.1
     user: root
     stdin_open: true
     tty: true
     volumes:
-      - ./fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluent.conf:/fluentd/etc/fluent.conf
       - ./target:/fluentd/target
     working_dir: /home/root
 

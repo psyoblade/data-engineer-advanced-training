@@ -1,15 +1,15 @@
 services:
   fluentd:
     container_name: fluentd
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:3.1
     user: root
     stdin_open: true
     tty: true
     ports:
       - 8080-8088:8080-8088
     volumes:
-      - ./fluent.conf:/etc/fluentd/fluent.conf
-      - ./fluent-ext.conf:/etc/fluentd/fluent-ext.conf
+      - ./fluent.conf:/fluentd/etc/fluent.conf
+      - ./fluent-ext.conf:/fluentd/etc/fluent-ext.conf
     working_dir: /home/root
     environment:
       - TZ=Asia/Seoul

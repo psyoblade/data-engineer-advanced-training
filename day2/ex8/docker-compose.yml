@@ -1,10 +1,10 @@
 services:
   fluentd:
     container_name: multi-process-ex
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:3.1
     user: root
     volumes:
-      - ./fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluent.conf:/fluentd/etc/fluent.conf
       - ./source:/fluentd/source
       - ./target:/fluentd/target
     ports:

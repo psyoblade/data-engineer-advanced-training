@@ -1,12 +1,12 @@
 services:
   fluentd:
     container_name: multi-process
-    image: psyoblade/data-engineer-fluentd:2.2
+    image: psyoblade/data-engineer-fluentd:3.1
     stdin_open: true
     tty: true
     user: root
     volumes:
-      - ./fluent.conf:/etc/fluentd/fluent.conf
+      - ./fluent.conf:/fluentd/etc/fluent.conf
       - ./source:/fluentd/source
       - ./target:/fluentd/target
     ports:
