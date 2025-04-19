@@ -800,9 +800,8 @@ netstat -a | grep LISTEN | grep -V LISTENING
 * 위의 결과에서 보여주는 모든 `LISTEN` 포트는 사용 중이므로 주의가 필요합니다.
 
 ```python
-# 파이썬 버전 별 심플 웹서버
-python -m SimpleHTTPServer 8080
-python3 -m http.server 8080
+# 파이썬 심플 웹서버
+docker run --rm -it -p 8080:8080 -v $(pwd):/app -w /app python:3.12-alpine python -m http.server 8080
 ```
 
 * 기존 서버를 종료하거나, 현재 컨테이너의 포트를 변경하는 방법이 있습니다

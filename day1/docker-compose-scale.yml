@@ -1,6 +1,6 @@
 services:
   ubuntu:
-    image: psyoblade/data-engineer-ubuntu:20.04
+    image: psyoblade/data-engineer-ubuntu:22.04-slim
     restart: always
     tty: true
 
