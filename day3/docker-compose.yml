@@ -1,13 +1,13 @@
 services:
   mysql:
     container_name: mysql
-    image: psyoblade/data-engineer-mysql:1.1
+    image: psyoblade/data-engineer-mysql:1.4
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: sqoop
-      MYSQL_PASSWORD: sqoop
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
       - '3306:3306'
     networks:
@@ -20,7 +20,7 @@ services:
     volumes:
       - ./mysql/etc:/etc/mysql/conf.d
   mongo:
-    image: mongo:4.4.2
+    image: mongo:6.0.22
     container_name: mongo
     restart: always
     ports:
@@ -29,42 +29,43 @@ services:
     container_name: notebook
     user: root
     privileged: true
-    image: psyoblade/data-engineer-notebook:1.6
+    image: psyoblade/data-engineer-notebook:1.9.0
     restart: always
     volumes:
       - ./notebooks:/home/jovyan/work
     environment:
       - GRANT_SUDO=yes
+      - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
     ports:
       - "4040-4049:4040-4049"
       - "8080:8080"
       - "8888:8888"
   zookeeper:
     container_name: zookeeper
-    image: psyoblade/data-engineer-zookeeper:1.0
+    image: zookeeper:3.5.9
     ports:
       - "2181:2181"
   kafka:
     container_name: kafka
-    image: psyoblade/data-engineer-kafka:1.0
-    depends_on:
-      - zookeeper
+    image: psyoblade/data-engineer-kafka:1.1
+    restart: always
     ports:
       - "9092:9092"
-    expose:
-      - "9093"
     environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CREATE_TOPICS: "events:1:1"
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_LISTENERS: INTERNAL://kafka:9093,EXTERNAL://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9093,EXTERNAL://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: INTERNAL
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./kafka-data:/tmp/kraft-combined-logs
   cassandra:
     container_name: cassandra
-    image: psyoblade/data-engineer-cassandra:1.0
+    image: cassandra:4.1.8
     ports:
       - "7001:7000"
 

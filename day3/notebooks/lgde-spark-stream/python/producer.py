@@ -16,11 +16,11 @@ def produce(port):
         )
         data = {}
         for seq in range(9999):
-            print("Sequence", seq)
             first_name = names.get_first_name()
             last_name = names.get_last_name()
             data["first"] = first_name
             data["last"] = last_name
+            print("Sequence %d, %s" % (seq, data))
             producer.send('events', value=data)
             sleep(0.5)
     except:
