@@ -1157,7 +1157,7 @@ version: "3"
 services:
   web:
     container_name: web
-    image: httpd
+    image: httpd:2.4.63
     ports:
       - 80:80
     links:

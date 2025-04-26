@@ -1,7 +1,7 @@
 services:
   ubuntu:
     container_name: ubuntu
-    image: psyoblade/data-engineer-ubuntu:20.04
+    image: psyoblade/data-engineer-ubuntu:22.04-slim
     restart: always
     tty: true
     deploy:
@@ -13,13 +13,13 @@ services:
       - ./example:/example
   mysql:
     container_name: mysql
-    image: psyoblade/data-engineer-mysql:1.1
+    image: psyoblade/data-engineer-mysql:1.4
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: sqoop
-      MYSQL_PASSWORD: sqoop
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
       - '3306:3306'
     cap_add:
@@ -27,5 +27,5 @@ services:
 
 networks:
   default:
-    name: default_network
+    name: advanced_day1_ubuntu_network
 

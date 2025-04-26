@@ -985,13 +985,13 @@ cat docker-compose.yml | grep -ia20 'mysql:' docker-compose.yml
 # docker-compose.yml
   mysql:
     container_name: mysql
-    image: psyoblade/data-engineer-mysql:1.1
+    image: psyoblade/data-engineer-mysql:1.4
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: sqoop
-      MYSQL_PASSWORD: sqoop
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     ports:
       - '3306:3306'
     networks:

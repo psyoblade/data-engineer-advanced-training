@@ -3,7 +3,7 @@ version: '3'
 services:
   ubuntu:
     container_name: ubuntu
-    image: psyoblade/data-engineer-ubuntu:20.04
+    image: psyoblade/data-engineer-ubuntu:22.04-slim
     stdin_open: true
     tty: true
     restart: always

@@ -2,13 +2,13 @@ version: "3"
 services:
   mysql:
     container_name: mysql
-    image: psyoblade/data-engineer-mysql:1.1
+    image: psyoblade/data-engineer-mysql:1.4
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: sqoop
-      MYSQL_PASSWORD: sqoop
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 3s

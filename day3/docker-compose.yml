@@ -47,7 +47,7 @@ services:
       - "2181:2181"
   kafka:
     container_name: kafka
-    image: psyoblade/data-engineer-kafka:1.1
+    image: psyoblade/data-engineer-kafka:1.2
     restart: always
     ports:
       - "9092:9092"

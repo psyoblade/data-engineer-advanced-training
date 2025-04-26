@@ -1,7 +1,7 @@
 services:
   web:
     container_name: web
-    image: httpd
+    image: httpd:2.4.63
     ports:
       - 80:80
     links:
@@ -31,7 +31,7 @@ services:
 
   kibana:
     container_name: kibana
-    image: kibana:7.8.0
+    image: kibana:7.17.28
     links:
       - elasticsearch
     depends_on:
@@ -41,7 +41,7 @@ services:
 
   elasticsearch:
     container_name: elasticsearch
-    image: elasticsearch:7.8.0
+    image: elasticsearch:7.17.28
     command: elasticsearch
     environment:
       - cluster.name=demo-es
