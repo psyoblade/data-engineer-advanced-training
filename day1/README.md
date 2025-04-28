@@ -393,19 +393,20 @@ cat > Dockerfile
 * 아래의 내용을 복사해서 붙여넣고, 엔터를 친 다음, <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 명령으로 나오면 파일이 생성됩니다
 ```bash
 FROM ubuntu:18.04
-LABEL maintainer="student@modulabs.com"
+LABEL maintainer="student@bigbrother.com"
 
 RUN apt-get update && apt-get install -y rsync tree
 
 EXPOSE 22 873
 CMD ["/bin/bash"]
+
 ```
 
 * [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint)와 `CMD`의 차이점 비교
 
 ```bash
 FROM ubuntu:18.04
-LABEL maintainer="student@modulabs.com"
+LABEL maintainer="student@bigbrother.com"
 
 RUN apt-get update && apt-get install -y rsync tree
 
@@ -417,7 +418,7 @@ EXPOSE 22 873
 
 # 정상적인 프로그램 기동 시에 필수 옵션을 넣고, 옵셔널 옵션을 CMD
 # ENTRYPOINT ["/bin/echo", "mandatory-options"]
-# CMD ["lg"]
+# CMD ["big"]
 
 # 기본 우분투 서버기동 아무런 엔트리가 없음
 # ENTRYPOINT []
@@ -621,7 +622,7 @@ docker run --name mysql-volatile \
   -e MYSQL_DATABASE=testdb \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
-  -d mysql
+  -d mysql:8.4.5
 ```
 <br>
 
@@ -634,8 +635,8 @@ docker exec -it mysql-volatile mysql -uuser -ppass
 
 #### 2-8-2. 테스트용 테이블을 생성해봅니다
 
+> mysql>
 ```sql
-# mysql>
 use testdb;
 create table foo (id int, name varchar(300));
 insert into foo values (1, 'my name');
@@ -684,7 +685,7 @@ docker run --name mysql-persist \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
   -v mysql-volume:/var/lib/mysql \
-  -d mysql
+  -d mysql:8.4.5
 
 sleep 10
 docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
@@ -697,8 +698,8 @@ docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
 
 > 테이블이 존재하고 데이터가 있다면 정답입니다
 
+> mysql>
 ```sql
-# mysql>
 use testdb;
 create table foo (id int, name varchar(300));
 insert into foo values (1, 'my name');
@@ -724,7 +725,7 @@ docker run --name mysql-persist \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
   -v mysql-volume:/var/lib/mysql \
-  -d mysql
+  -d mysql:8.4.5
 
 sleep 10
 docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
@@ -760,7 +761,7 @@ docker run --name mysql-bind \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
   -v `pwd`/mysql/bind:/var/lib/mysql \
-  -d mysql
+  -d mysql:8.4.5
 
 sleep 10
 docker exec -it mysql-bind mysql --port=3308 -uuser -ppass
@@ -1028,17 +1029,16 @@ for dir in `echo "custom init"`; do mkdir -p $dir; done
 > cat > custom/my.cnf
 ```bash
 [client]
-default-character-set=utf8
+default-character-set = utf8mb4
 
 [mysqld]
-character-set-client-handshake=FALSE
-init_connect="SET collation_connection = utf8_general_ci"
-init_connect="SET NAMES utf8"
-character-set-server=utf8
-collation-server=utf8_general_ci
+init_connect = "SET collation_connection = utf8mb4_general_ci"
+init_connect = "SET NAMES utf8mb4"
+character-set-server = utf8mb4
+collation-server = utf8mb4_general_ci
 
 [mysql]
-default-character-set=utf8
+default-character-set = utf8mb4
 ```
 <br>
 
@@ -1054,7 +1054,7 @@ version: "3"
 services:
   mysql:
     container_name: mysql
-    image: local/mysql:5.7
+    image: local/mysql:8.4.5
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
@@ -1098,15 +1098,16 @@ UNLOCK TABLES;
 
 > cat > Dockerfile
 ```Dockerfile
-ARG BASE_CONTAINER=mysql:5.7
+ARG BASE_CONTAINER=mysql:8.4.5
 FROM $BASE_CONTAINER
-LABEL maintainer="student@modulabs.com"
+LABEL maintainer="student@bigbrother.com"
 
 ADD ./init /docker-entrypoint-initdb.d
 
 EXPOSE 3306
 
 CMD ["mysqld"]
+
 ```
 <br>
 
@@ -1114,7 +1115,7 @@ CMD ["mysqld"]
 #### 3-5-3. 로컬에서 도커 이미지를 빌드합니다
 
 ```bash
-docker build -t local/mysql:5.7 .
+docker build -t local/mysql:8.4.5 .
 ```
 <br>
 
@@ -1159,7 +1160,7 @@ version: "3"
 
 services:
   mysql:
-    image: local/mysql:5.7
+    image: local/mysql:8.4.5
     container_name: mysql
     restart: always
     environment:
@@ -1217,7 +1218,7 @@ version: "3"
 
 services:
   mysql:
-    image: local/mysql:5.7
+    image: local/mysql:8.4.5
     container_name: mysql
     restart: always
     environment:
