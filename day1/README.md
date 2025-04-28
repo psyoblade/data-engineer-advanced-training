@@ -1133,7 +1133,7 @@ services:
     volumes:
       - ./custom:/etc/mysql/conf.d
   php:
-    image: phpmyadmin/phpmyadmin
+    image: library/phpmyadmin:5.2
     container_name: phpmyadmin
     links:
       - mysql
@@ -1155,7 +1155,7 @@ networks:
 docker-compose up -d
 ```
 
-> phpMyAdmin(http://`vm{###}.koreacentral.cloudapp.azure.com`) 사이트에 접속하여 서버: `mysql`, 사용자명: `user`, 암호: `pass` 로 접속합니다
+> `http://localhost` 접속하여 서버: `mysql`, 사용자명: `user`, 암호: `pass` 로 접속합니다
 
 <br>
 
@@ -1196,7 +1196,7 @@ services:
     volumes:
       - ./custom:/etc/mysql/conf.d
   php:
-    image: phpmyadmin/phpmyadmin
+    image: library/phpmyadmin:5.2
     container_name: phpmyadmin
     depends_on:
       - mysql
@@ -1209,6 +1209,10 @@ services:
     restart: always
     ports:
       - 80:80
+
+networks:
+  default:
+    name: default_network
 ```
 
 #### 3-7-2. 실습이 완료되었으므로 모든 컨테이너를 종료합니다
