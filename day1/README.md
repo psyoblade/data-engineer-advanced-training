@@ -56,8 +56,8 @@ git version 2.17.1
 
 export EDITOR="vim"
 alias d="docker-compose"
-alias dps="docker ps -a"
-alias drm="docker rm -f"
+alias dps='docker ps | grep -v 'k8s''
+alias dpa='docker ps -a | grep -v 'k8s''
 
 alias gl="git log --all --graph --oneline --decorate"
 alias gs="git status"
