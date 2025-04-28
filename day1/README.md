@@ -17,20 +17,10 @@
   <br>
 
 
-## 1. 클라우드 장비에 접속
+## 1. 데스크톱 장비에 접속
 
-> 개인 별로 할당 받은 `ubuntu@my-cloud.host.com` 에 putty 혹은 terminal 을 이용하여 접속합니다
-
-### 1-1. 원격 서버로 접속합니다
-
-```bash
-# terminal
-# ssh ubuntu@my-cloud.host.com
-# password: ******
-```
-
-### 1-2. 패키지 설치 여부를 확인합니다
-
+### 1-1. 패키지 설치 여부를 확인합니다
+> 터미널을 열고 아래의 명령을 수행합니다
 ```bash
 docker --version
 docker-compose --version
@@ -39,7 +29,7 @@ git --version
 
 <details><summary>[실습] 출력 결과 확인</summary>
 
-> 출력 결과가 오류가 발생하지 않고, 아래와 같다면 성공입니다
+> 출력 결과가 오류가 발생하지 않고, 아래의 버전보다 상위버전이면 괜찮습니다
 
 ```text
 Docker version 20.10.6, build 370c289
@@ -49,7 +39,7 @@ git version 2.17.1
 
 </details>
 
-### 1-3. 유용한 팁
+### 1-2. 유용한 팁
 
 ```bash
 # cat ~/.bashrc
@@ -66,20 +56,7 @@ alias gb="git branch"
 alias gp="git pull"
 ```
 
-> `/etc/hosts` 파일에 등록된 내용이며, `<IP>` 항목과 `vm<number>` 항목을 변경해 두시면 접속 시에 편합니다
-
-```bash
-...
-<IP> vm<number>.koreacentral.cloudapp.azure.com vm<number>
-```
-
-> 도커 컨테이너에 문제가 생겼을 때에 도커 서비스 상태 확인 및 재시작 하는 방법
-
-```bash
-sudo systemctl status docker.service
-sudo systemctl restart docker.service
-```
-
+> 컨테이너가 비정상적으로 동작하는 경우, Rancher Desktop UI 화면에서 재기동합니다
 
 
 [목차로 돌아가기](#1일차-데이터-엔지니어링-고급)
@@ -117,7 +94,6 @@ cd ~/work/helloworld
   - 생성된 컨테이너는 실행 중이 아니라면 `docker ps -a` 실행으로만 확인이 가능합니다
 
 ```bash
-# docker create <image>:<tag>
 docker create -it ubuntu:18.04
 ```
 <br>
@@ -137,12 +113,11 @@ container_name="<목록에서_출력된_NAME을_입력하세요>"
 ```
 
 ```bash
-# docker start <container_name> 
 docker start ${container_name}
 ```
 
+> 해당 컨테이너의 우분투 버전을 확인합니다
 ```bash
-# 해당 컨테이너의 우분투 버전을 확인합니다
 docker exec -it ${container_name} bash
 cat /etc/issue
 exit
