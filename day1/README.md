@@ -184,8 +184,8 @@ docker run --rm -p 8888:80 --name nginx -dit nginx
 docker logs nginx
 ```
 
+> terminal
 ```bash
-# terminal
 curl localhost:8888
 ```
 > 혹은 `http://vm001.aiffelbiz.co.kr:8888` 브라우저로 접속하셔도 됩니다 (여기서 vm001 은 개인 클라우드 컴퓨터의 호스트 이름이므로 각자의 호스트 이름으로 접근하셔야 합니다)
@@ -233,6 +233,18 @@ docker exec ubuntu20 /tmp/helloworld.sh
 #### 2-3-4. 사용한 모든 컨테이너를 종료합니다
 
 * 직접 도커로 실행한 작업은 도커 명령을 이용해 종료합니다
+
+> 현재 실행중인 모든 컨테이너 확인
+```bash
+docker ps -a
+```
+
+> 헤더 출력을 제거하고, 첫 번째 컨테이너ID 만출력 
+```bash
+docker ps -a | grep -v CONTAINER | awk '{ print $1 }'
+```
+
+> 해당 컨테이너ID를 통해 컨테이너 삭제(종료)
 ```bash
 docker rm -f `docker ps -a | grep -v CONTAINER | awk '{ print $1 }'`
 ```
@@ -273,8 +285,8 @@ docker images
 
 #### 2-4-2. `commit` : 현재 컨테이너를 별도의 이미지로 저장합니다 
 
+> 실습을 위해 우분투 컨테이너를 생성합니다
 ```bash
-# 실습을 위해 우분투 컨테이너를 생성합니다
 docker run --rm --name ubuntu -dit ubuntu:18.04
 ```
 
@@ -326,7 +338,7 @@ docker run --rm ubuntu:hello /tmp/helloworld.sh
 
 > docker pull repository[:tag]
 ```bash
-docker pull psyoblade/data-engineer-ubuntu:18.04
+docker pull psyoblade/data-engineer-ubuntu:22.04-slim
 ```
 
 #### 2-5-2. `push` : 대상 이미지를 레포지토리로 업로드합니다
@@ -334,7 +346,7 @@ docker pull psyoblade/data-engineer-ubuntu:18.04
 
 ```bash
 # docker push repository[:tag]
-# docker push psyoblade/data-engineer-ubuntu:18.04
+# docker push psyoblade/data-engineer-ubuntu:22.04-slim
 # errors:
 # denied: requested access to the resource is denied
 # unauthorized: authentication required
