@@ -713,7 +713,7 @@ docker rm -f mysql-persist
 
 > 볼륨이 존재하는지 확인합니다
 ```bash
-docker volume ls
+docker volume ls | grep mysql-volume
 ```
 
 > terminal : 새로이 컨테이너를 생성하고 볼륨은 그대로 연결합니다
@@ -740,13 +740,17 @@ select * from foo;
 ```
 
 </details>
+
+> 실행된 컨테이너는 동일한 포트를 사용하기 때문에 반드시 이전 컨테이너를 종료해야 합니다
+```bash
+docker rm -f `docker ps -a | grep -v CONTAINER | awk '{ print $1 }'`
+```
 <br>
 
 
 ### 2-10. 바인드 마운트 통한 MySQL 서버 기동하기
 
-#### 2-10-1. 바인드 마운트를 추가하여 저장소 관리하기 
-
+#### 2-10-1. 바인드 마운트를 추가하여 저장소 관리하기 (Mac+RancherDesktop 에서는 동작하지 않음, Permission Denied)
 > 이번에는 호스트 장비의 경로에 직접 저장하는 바인드 마운트에 대해 실습합니다
 
 * 아래와 같이 상대 혹은 절대 경로를 포함한 볼륨의 이름을 명시하여 마운트하는 것을 [Bind Mount](https://docs.docker.com/storage/bind-mounts/) 방식이라고 합니다
@@ -760,7 +764,7 @@ docker run --name mysql-bind \
   -e MYSQL_DATABASE=testdb \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
-  -v `pwd`/mysql/bind:/var/lib/mysql \
+  -v $(pwd)/mysql/bind:/var/lib/mysql \
   -d mysql:8.4.5
 
 sleep 10
@@ -784,7 +788,7 @@ docker rm -f `docker ps -aq`
 >  경우에 따라서 포트가 충돌이 나서 실행이 되지 않는 경우가 있으므로 이전에 구성되어 있는 서버나 호스트 장비에 이미 서비스 되고 있는 포트를 확인해보면 좋습니다
 
 ```bash
-netstat -a | grep LISTEN | grep -V LISTENING
+netstat -an | grep LISTEN | grep -v LISTENING
 ```
 
 * 위의 결과에서 보여주는 모든 `LISTEN` 포트는 사용 중이므로 주의가 필요합니다.
