@@ -809,16 +809,7 @@ docker run --rm -it -p 8080:8080 -v $(pwd):/app -w /app python:3.12-alpine pytho
 ## 3. Docker Compose 명령어 실습
 
 > 도커 컴포즈는 **도커의 명령어들을 반복적으로 수행되지 않도록 yml 파일로 저장해두고 활용**하기 위해 구성되었고, *여러개의 컴포넌트를 동시에 기동하여, 하나의 네트워크에서 동작하도록 구성*한 것이 특징입니다. 내부 서비스들 간에는 컨테이너 이름으로 통신할 수 있어 테스트 환경을 구성하기에 용이합니다. 
-<br>
 
-### 실습을 위한 기본 환경을 가져옵니다
-
-> terminal
-```bash
-cd ~/work
-git clone https://github.com/psyoblade/data-engineer-advanced-training.git
-cd ~/work/data-engineer-advanced-training/day1
-```
 <br>
 
 
@@ -955,7 +946,6 @@ docker-compose ps -a
 
 > docker-compose top <services>
 ```bash
-docker-compose top mysql
 docker-compose top ubuntu
 ```
 
@@ -977,40 +967,7 @@ docker-compose down
 
 ### 3-3. 컴포즈 파일을 통한 실습
 
-#### 3-3-1. 도커 컴포즈를 통해서 커맨드라인 옵션을 설정을 통해 수행할 수 있습니다
-
-> mysql: 이 등장하는 이후로 20줄을 출력
-```bash
-cat docker-compose.yml | grep -ia20 'mysql:' docker-compose.yml
-```
-
-> docker-compose.yml
-```yaml
-  mysql:
-    container_name: mysql
-    image: psyoblade/data-engineer-mysql:1.4
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-    ports:
-      - '3306:3306'
-    networks:
-      - default
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      interval: 3s
-      timeout: 1s
-      retries: 3
-    volumes:
-      - ./mysql/etc:/etc/mysql/conf.d
-```
-<br>
-
-
-#### 3-3-2. 도커 컴포즈 파일(`docker-compose.yml`)을 직접 생성 합니다
+#### 3-3-1. 도커 컴포즈 파일(`docker-compose.yml`)을 직접 생성 합니다
 
 > 컴포즈 실습을 위한 경로를 생성합니다
 > terminal
@@ -1023,6 +980,7 @@ cd ~/work/compose-training
 for dir in `echo "custom init"`; do mkdir -p $dir; done
 ```
 <br>
+
 
 ### 3-4. 외부 볼륨을 통한 환경설정
 
