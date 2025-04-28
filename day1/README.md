@@ -17,20 +17,10 @@
   <br>
 
 
-## 1. 클라우드 장비에 접속
+## 1. 데스크톱 장비에 접속
 
-> 개인 별로 할당 받은 `ubuntu@my-cloud.host.com` 에 putty 혹은 terminal 을 이용하여 접속합니다
-
-### 1-1. 원격 서버로 접속합니다
-
-```bash
-# terminal
-# ssh ubuntu@my-cloud.host.com
-# password: ******
-```
-
-### 1-2. 패키지 설치 여부를 확인합니다
-
+### 1-1. 패키지 설치 여부를 확인합니다
+> 터미널을 열고 아래의 명령을 수행합니다
 ```bash
 docker --version
 docker-compose --version
@@ -39,7 +29,7 @@ git --version
 
 <details><summary>[실습] 출력 결과 확인</summary>
 
-> 출력 결과가 오류가 발생하지 않고, 아래와 같다면 성공입니다
+> 출력 결과가 오류가 발생하지 않고, 아래의 버전보다 상위버전이면 괜찮습니다
 
 ```text
 Docker version 20.10.6, build 370c289
@@ -49,7 +39,7 @@ git version 2.17.1
 
 </details>
 
-### 1-3. 유용한 팁
+### 1-2. 유용한 팁
 
 ```bash
 # cat ~/.bashrc
@@ -66,20 +56,7 @@ alias gb="git branch"
 alias gp="git pull"
 ```
 
-> `/etc/hosts` 파일에 등록된 내용이며, `<IP>` 항목과 `vm<number>` 항목을 변경해 두시면 접속 시에 편합니다
-
-```bash
-...
-<IP> vm<number>.koreacentral.cloudapp.azure.com vm<number>
-```
-
-> 도커 컨테이너에 문제가 생겼을 때에 도커 서비스 상태 확인 및 재시작 하는 방법
-
-```bash
-sudo systemctl status docker.service
-sudo systemctl restart docker.service
-```
-
+> 컨테이너가 비정상적으로 동작하는 경우, Rancher Desktop UI 화면에서 재기동합니다
 
 
 [목차로 돌아가기](#1일차-데이터-엔지니어링-고급)
@@ -117,8 +94,7 @@ cd ~/work/helloworld
   - 생성된 컨테이너는 실행 중이 아니라면 `docker ps -a` 실행으로만 확인이 가능합니다
 
 ```bash
-# docker create <image>:<tag>
-docker create -it ubuntu:18.04
+docker create --name ubuntu18 -it ubuntu:18.04
 ```
 <br>
 
@@ -129,21 +105,17 @@ docker create -it ubuntu:18.04
 docker ps -a
 ```
 
-* 예제의 `busy_herschel` 는 자동으로 생성된 컨테이너 이름이며, 변수에 담아둡니다
 ```bash
-# CONTAINER ID   IMAGE          COMMAND   CREATED         STATUS    PORTS     NAMES
-# e8f66e162fdd   ubuntu:18.04   "bash"    2 seconds ago   Created             busy_herschel
-container_name="<목록에서_출력된_NAME을_입력하세요>"
+docker start ubuntu18
 ```
 
+> 해당 컨테이너의 우분투 버전을 확인합니다
 ```bash
-# docker start <container_name> 
-docker start ${container_name}
+docker exec -it ubuntu18 bash
 ```
 
+> 운영체제의 버전을 확인하고 종료합니다
 ```bash
-# 해당 컨테이너의 우분투 버전을 확인합니다
-docker exec -it ${container_name} bash
 cat /etc/issue
 exit
 ```
@@ -153,8 +125,7 @@ exit
 #### 2-1-3. `stop` : 컨테이너를 잠시 중지시킵니다
   - 해당 컨테이너가 삭제되는 것이 아니라 잠시 실행만 멈추게 됩니다
 ```bash
-# docker stop <container_name>
-docker stop ${container_name} 
+docker stop ubuntu18
 ```
 <br>
 
@@ -162,8 +133,7 @@ docker stop ${container_name}
 #### 2-1-4. `rm` : 중단된 컨테이너를 삭제합니다
   - <kbd>-f, --force</kbd> : 실행 중인 컨테이너도 강제로 종료합니다 (실행 중인 컨테이너는 삭제되지 않습니다)
 ```bash
-# docker rm <container_name>
-docker rm ${container_name} 
+docker rm ubuntu18
 ```
 <br>
 
@@ -174,12 +144,12 @@ docker rm ${container_name}
   - <kbd>-i, --interactive</kbd> : 인터액티브하게 표준 입출력을 키보드로 동작하게 합니다
   - <kbd>-t, --tty</kbd> : 텍스트 기반의 터미널을 에뮬레이션 하게 합니다
 ```bash
-# docker run <options> <image>:<tag>
 docker run --rm --name ubuntu20 -dit ubuntu:20.04
 ```
 ```bash
-# 터미널에 접속하여 우분투 버전을 확인합니다
 docker exec -it ubuntu20 bash
+```
+```bash
 cat /etc/issue
 ```
 <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 명령으로 터미널에서 빠져나올 수 있습니다
@@ -189,7 +159,6 @@ cat /etc/issue
 
 #### 2-1-6. `kill` : 컨테이너를 종료합니다
 ```bash
-# docker kill <container_name>
 docker kill ubuntu20
 ```
 <br>
@@ -212,12 +181,11 @@ docker run --rm -p 8888:80 --name nginx -dit nginx
 ```
 
 ```bash
-# docker logs <container_name>
 docker logs nginx
 ```
 
+> terminal
 ```bash
-# terminal
 curl localhost:8888
 ```
 > 혹은 `http://vm001.aiffelbiz.co.kr:8888` 브라우저로 접속하셔도 됩니다 (여기서 vm001 은 개인 클라우드 컴퓨터의 호스트 이름이므로 각자의 호스트 이름으로 접근하셔야 합니다)
@@ -226,10 +194,13 @@ curl localhost:8888
 
 #### 2-2-3. `top` : 컨테이너에 떠 있는 프로세스를 확인합니다
 
-* 실행 확인 후 종료합니다
+* 실행 확인
 ```bash
-# docker top <container_name> <ps options>
 docker top nginx
+```
+
+* 컨테이너 종료 & 삭제
+```bash
 docker rm -f nginx
 ```
 <br>
@@ -244,16 +215,17 @@ docker run --rm --name ubuntu20 -dit ubuntu:20.04
 ```
 
 #### 2-3-1. `cp` :  호스트에서 컨테이너로 혹은 반대로 파일을 복사합니다
+> `docker cp <container_name>:<path> <host_path> and vice-versa`
 
 ```bash
-# docker cp <container_name>:<path> <host_path> and vice-versa
 docker cp ./helloworld.sh ubuntu20:/tmp
 ```
 <br>
 
 #### 2-3-3. `exec` : 컨테이너 내부에 명령을 실행합니다 
+> `docker exec <container_name> <args>`
+
 ```bash
-# docker exec <container_name> <args>
 docker exec ubuntu20 /tmp/helloworld.sh
 ```
 <br>
@@ -261,6 +233,18 @@ docker exec ubuntu20 /tmp/helloworld.sh
 #### 2-3-4. 사용한 모든 컨테이너를 종료합니다
 
 * 직접 도커로 실행한 작업은 도커 명령을 이용해 종료합니다
+
+> 현재 실행중인 모든 컨테이너 확인
+```bash
+docker ps -a
+```
+
+> 헤더 출력을 제거하고, 첫 번째 컨테이너ID 만출력 
+```bash
+docker ps -a | grep -v CONTAINER | awk '{ print $1 }'
+```
+
+> 해당 컨테이너ID를 통해 컨테이너 삭제(종료)
 ```bash
 docker rm -f `docker ps -a | grep -v CONTAINER | awk '{ print $1 }'`
 ```
@@ -301,19 +285,19 @@ docker images
 
 #### 2-4-2. `commit` : 현재 컨테이너를 별도의 이미지로 저장합니다 
 
+> 실습을 위해 우분투 컨테이너를 생성합니다
 ```bash
-# 실습을 위해 우분투 컨테이너를 생성합니다
 docker run --rm --name ubuntu -dit ubuntu:18.04
 ```
 
+> helloworld.sh 스크립트를 컨테이너 내부에 복사합니다
 ```bash
-# helloworld.sh 스크립트를 컨테이너 내부에 복사합니다
 docker cp ./helloworld.sh ubuntu:/tmp
 ```
 
+> `docker commit <container_name> <repository>:<tag>`
+> 현재 helloworld.sh 가 복사된 컨테이너를 ubuntu:hello 로 저장해봅니다
 ```bash
-# docker commit <container_name> <repository>:<tag>
-# 현재 helloworld.sh 가 복사된 컨테이너를 ubuntu:hello 로 저장해봅니다
 docker commit ubuntu ubuntu:hello
 ```
 <br>
@@ -321,14 +305,14 @@ docker commit ubuntu ubuntu:hello
 
 #### 2-4-3. `rmi` : 해당 이미지를 삭제합니다
 
+> 이전에 `ubuntu:18.04` 기반의 컨테이너를 종료하고, 이미지도 삭제합니다
 ```bash
-# 이전에 `ubuntu:18.04` 기반의 컨테이너를 종료하고, 이미지도 삭제합니다
 docker rm -f ubuntu
 docker rmi ubuntu:18.04
 ```
 
+> ubuntu:hello 가 남아있는지 확인합니다
 ```bash
-# ubuntu:hello 가 남아있는지 확인합니다
 docker image ls | grep ubuntu | grep hello
 ```
 <br>
@@ -336,11 +320,10 @@ docker image ls | grep ubuntu | grep hello
 <details><summary> :green_book: 2. [기본] ubuntu:hello 이미지를 이용하여 helloworld.sh 을 실행하세요</summary>
 
 
-> 출력 결과가 오류가 발생하지 않고, 아래와 유사하다면 성공입니다
+> 출력 결과가 오류가 발생하지 않고, 결과가 오류없이 출력되면 성공입니다
 
 ```bash
 docker run --rm ubuntu:hello /tmp/helloworld.sh
-# hello world
 ```
 
 </details>
@@ -352,16 +335,18 @@ docker run --rm ubuntu:hello /tmp/helloworld.sh
 > 본 명령은 dockerhub.com 과 같은 docker registry 계정이 있어야 실습이 가능하므로 실습에서는 제외합니다
 
 #### 2-5-1. `pull` : 대상 이미지를 레포지토리에서 로컬로 다운로드합니다
+
+> docker pull repository[:tag]
 ```bash
-# docker pull repository[:tag]
-docker pull psyoblade/data-engineer-ubuntu:18.04
+docker pull psyoblade/data-engineer-ubuntu:22.04-slim
 ```
 
 #### 2-5-2. `push` : 대상 이미지를 레포지토리로 업로드합니다
 > push 명령은 계정 연동이 되어 있지 않으므로 현재는 동작하지 않습니다
+
 ```bash
 # docker push repository[:tag]
-# docker push psyoblade/data-engineer-ubuntu:18.04
+# docker push psyoblade/data-engineer-ubuntu:22.04-slim
 # errors:
 # denied: requested access to the resource is denied
 # unauthorized: authentication required
@@ -408,19 +393,20 @@ cat > Dockerfile
 * 아래의 내용을 복사해서 붙여넣고, 엔터를 친 다음, <kbd><samp>Ctrl</samp>+<samp>D</samp></kbd> 명령으로 나오면 파일이 생성됩니다
 ```bash
 FROM ubuntu:18.04
-LABEL maintainer="student@modulabs.com"
+LABEL maintainer="student@bigbrother.com"
 
 RUN apt-get update && apt-get install -y rsync tree
 
 EXPOSE 22 873
 CMD ["/bin/bash"]
+
 ```
 
 * [`ENTRYPOINT`](https://docs.docker.com/engine/reference/builder/#entrypoint)와 `CMD`의 차이점 비교
 
 ```bash
 FROM ubuntu:18.04
-LABEL maintainer="student@modulabs.com"
+LABEL maintainer="student@bigbrother.com"
 
 RUN apt-get update && apt-get install -y rsync tree
 
@@ -432,7 +418,7 @@ EXPOSE 22 873
 
 # 정상적인 프로그램 기동 시에 필수 옵션을 넣고, 옵셔널 옵션을 CMD
 # ENTRYPOINT ["/bin/echo", "mandatory-options"]
-# CMD ["lg"]
+# CMD ["big"]
 
 # 기본 우분투 서버기동 아무런 엔트리가 없음
 # ENTRYPOINT []
@@ -455,8 +441,8 @@ EXPOSE 22 873
   - <kbd>-q, --quiet</kbd> : 빌드 로그의 출력을 하지 않습니다
   - <kbd>.</kbd> : 현재 경로에서 빌드를 합니다 
 
+> terminal
 ```bash
-# terminal
 docker build -t ubuntu:local .
 ```
 
@@ -636,7 +622,7 @@ docker run --name mysql-volatile \
   -e MYSQL_DATABASE=testdb \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
-  -d mysql
+  -d mysql:8.4.5
 ```
 <br>
 
@@ -649,8 +635,8 @@ docker exec -it mysql-volatile mysql -uuser -ppass
 
 #### 2-8-2. 테스트용 테이블을 생성해봅니다
 
+> mysql>
 ```sql
-# mysql>
 use testdb;
 create table foo (id int, name varchar(300));
 insert into foo values (1, 'my name');
@@ -699,7 +685,7 @@ docker run --name mysql-persist \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
   -v mysql-volume:/var/lib/mysql \
-  -d mysql
+  -d mysql:8.4.5
 
 sleep 10
 docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
@@ -712,24 +698,26 @@ docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
 
 > 테이블이 존재하고 데이터가 있다면 정답입니다
 
+> mysql>
 ```sql
-# mysql>
 use testdb;
 create table foo (id int, name varchar(300));
 insert into foo values (1, 'my name');
 select * from foo;
 ```
 
+> terminal : 컨테이너를 삭제합니다
 ```bash
-# terminal : 컨테이너를 삭제합니다
 docker rm -f mysql-persist
-
-# 볼륨이 존재하는지 확인합니다
-docker volume ls
 ```
 
+> 볼륨이 존재하는지 확인합니다
 ```bash
-# terminal : 새로이 컨테이너를 생성하고 볼륨은 그대로 연결합니다
+docker volume ls | grep mysql-volume
+```
+
+> terminal : 새로이 컨테이너를 생성하고 볼륨은 그대로 연결합니다
+```bash
 docker run --name mysql-persist \
   -p 3307:3306 \
   -e MYSQL_ROOT_PASSWORD=rootpass \
@@ -737,41 +725,47 @@ docker run --name mysql-persist \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
   -v mysql-volume:/var/lib/mysql \
-  -d mysql
+  -d mysql:8.4.5
 
 sleep 10
 docker exec -it mysql-persist mysql --port=3307 -uuser -ppass
 ```
 
 * 컨테이너와 무관하게 데이터가 존재하는지 확인합니다
+
+> mysql>
 ```sql
-# mysql>
 use testdb;
 select * from foo;
 ```
 
 </details>
+
+> 실행된 컨테이너는 동일한 포트를 사용하기 때문에 반드시 이전 컨테이너를 종료해야 합니다
+```bash
+docker rm -f `docker ps -a | grep -v CONTAINER | awk '{ print $1 }'`
+```
 <br>
 
 
 ### 2-10. 바인드 마운트 통한 MySQL 서버 기동하기
 
-#### 2-10-1. 바인드 마운트를 추가하여 저장소 관리하기 
-
+#### 2-10-1. 바인드 마운트를 추가하여 저장소 관리하기 (Mac+RancherDesktop 에서는 동작하지 않음, Permission Denied)
 > 이번에는 호스트 장비의 경로에 직접 저장하는 바인드 마운트에 대해 실습합니다
 
 * 아래와 같이 상대 혹은 절대 경로를 포함한 볼륨의 이름을 명시하여 마운트하는 것을 [Bind Mount](https://docs.docker.com/storage/bind-mounts/) 방식이라고 합니다
   - 호스트의 특정 경로를 저장소로 사용하게 되어, 호스트에서 직접 접근 및 확인이 가능합니다
+
+> terminal : 절대경로를 위해 `pwd` 명령을 사용합니다
 ```bash
-# terminal : 절대경로를 위해 `pwd` 명령을 사용합니다
 docker run --name mysql-bind \
   -p 3308:3306 \
   -e MYSQL_ROOT_PASSWORD=rootpass \
   -e MYSQL_DATABASE=testdb \
   -e MYSQL_USER=user \
   -e MYSQL_PASSWORD=pass \
-  -v `pwd`/mysql/bind:/var/lib/mysql \
-  -d mysql
+  -v $(pwd)/mysql/bind:/var/lib/mysql \
+  -d mysql:8.4.5
 
 sleep 10
 docker exec -it mysql-bind mysql --port=3308 -uuser -ppass
@@ -794,13 +788,13 @@ docker rm -f `docker ps -aq`
 >  경우에 따라서 포트가 충돌이 나서 실행이 되지 않는 경우가 있으므로 이전에 구성되어 있는 서버나 호스트 장비에 이미 서비스 되고 있는 포트를 확인해보면 좋습니다
 
 ```bash
-netstat -a | grep LISTEN | grep -V LISTENING
+netstat -an | grep LISTEN | grep -v LISTENING
 ```
 
 * 위의 결과에서 보여주는 모든 `LISTEN` 포트는 사용 중이므로 주의가 필요합니다.
 
+> 파이썬 심플 웹서버
 ```python
-# 파이썬 심플 웹서버
 docker run --rm -it -p 8080:8080 -v $(pwd):/app -w /app python:3.12-alpine python -m http.server 8080
 ```
 
@@ -815,16 +809,7 @@ docker run --rm -it -p 8080:8080 -v $(pwd):/app -w /app python:3.12-alpine pytho
 ## 3. Docker Compose 명령어 실습
 
 > 도커 컴포즈는 **도커의 명령어들을 반복적으로 수행되지 않도록 yml 파일로 저장해두고 활용**하기 위해 구성되었고, *여러개의 컴포넌트를 동시에 기동하여, 하나의 네트워크에서 동작하도록 구성*한 것이 특징입니다. 내부 서비스들 간에는 컨테이너 이름으로 통신할 수 있어 테스트 환경을 구성하기에 용이합니다. 
-<br>
 
-### 실습을 위한 기본 환경을 가져옵니다
-
-```bash
-# terminal
-cd ~/work
-git clone https://github.com/psyoblade/data-engineer-advanced-training.git
-cd ~/work/data-engineer-advanced-training/day1
-```
 <br>
 
 
@@ -837,10 +822,9 @@ cd ~/work/data-engineer-advanced-training/day1
 * [The Compose Specification](https://github.com/psyoblade/compose-spec/blob/master/spec.md)
 * [Deployment Support](https://github.com/psyoblade/compose-spec/blob/master/deploy.md)
 
+> .bashrc 혹은 .zshrc 파일에 추가하고 source ~/.bashrc 로 등록합니다
+> 또는 직접 터미널에서 아래의 명령어를 실행하셔도 됩니다
 ```bash
-# .bashrc 혹은 .zshrc 파일에 추가하고 source ~/.bashrc 로 등록합니다
-# 또는 직접 터미널에서 아래의 명령어를 실행하셔도 됩니다
-
 alias d="docker-compose"
 ```
 
@@ -853,16 +837,18 @@ alias d="docker-compose"
   - <kbd>-d, --detach <filename></kbd> : 서비스들을 백그라운드 모드에서 수행합니다
   - <kbd>-e, --env `KEY=VAL`</kbd> : 환경변수를 전달합니다
   - <kbd>--scale [service]=[num]</kbd> : 특정 서비스를 복제하여 기동합니다 (`container_name` 충돌나지 않도록 주의)
+
+> docker-compose up <options> <services>
 ```bash
-# docker-compose up <options> <services>
 docker-compose up -d
 ```
 <br>
 
 #### 3-1-2. down : 컨테이너를 종료 시킵니다
   - <kbd>-t, --timeout [int] <filename></kbd> : 셧다운 타임아웃을 지정하여 무한정 대기(SIGTERM)하지 않고 종료(SIGKILL)합니다 (default: 10초)
+
+> docker-compose down <options> <services>
 ```bash
-# docker-compose down <options> <services>
 docker-compose down
 ```
 <br>
@@ -875,8 +861,9 @@ docker-compose down
 
 * `docker-compose` 명령어 예제입니다 
   - 컴포즈 파일에 `container_name` 이 있으면 이름이 충돌나기 때문에 별도의 파일을 만듭니다
+
+> terminal
 ```bash
-# terminal
 cat docker-compose.yml | grep -v 'container_name: ubuntu' > ubuntu-no-container-name.yml
 docker-compose -f ubuntu-no-container-name.yml up --scale ubuntu=2 -d ubuntu
 docker-compose -f ubuntu-no-container-name.yml down
@@ -884,8 +871,9 @@ docker-compose -f ubuntu-no-container-name.yml down
 
 * `ubuntu-scale.yml` 예제입니다 
   - 우분투 이미지를 기본 이미지를 사용해도 무관합니다
+
+> cat > ubuntu-replicated.yml
 ```bash
-# cat > ubuntu-replicated.yml
 version: "3"
 
 services:
@@ -919,8 +907,9 @@ docker-compose -f ubuntu-replicated.yml down
   - <kbd>-e, --env `KEY=VAL`</kbd> : 환경변수를 전달합니다
   - <kbd>-u, --user [string]</kbd> : 이용자를 지정합니다
   - <kbd>-w, --workdir [string]</kbd> : 워킹 디렉토리를 지정합니다
+
+> `docker-compose exec [options] [-e KEY=VAL...] [--] SERVICE COMMAND [ARGS...]`
 ```bash
-# docker-compose exec [options] [-e KEY=VAL...] [--] SERVICE COMMAND [ARGS...]
 docker-compose up -d
 docker-compose exec ubuntu echo hello world
 ```
@@ -928,32 +917,35 @@ docker-compose exec ubuntu echo hello world
 
 #### 3-2-2. logs : 컨테이너의 로그를 출력합니다
   - <kbd>-f, --follow</kbd> : 출력로그를 이어서 tailing 합니다
+
+> terminal
 ```bash
-# terminal
 docker-compose logs -f ubuntu
 ```
 <br>
 
 #### 3-2-3. pull : 컨테이너의 모든 이미지를 다운로드 받습니다
   - <kbd>-q, --quiet</kbd> : 다운로드 메시지를 출력하지 않습니다 
+
+> terminal
 ```bash
-# terminal
 docker-compose pull
 ```
 <br>
 
 #### 3-2-4. ps : 컨테이너 들의 상태를 확인합니다
   - <kbd>-a, --all</kbd> : 모든 서비스의 프로세스를 확인합니다
+
+> terminal
 ```bash
-# terminal
 docker-compose ps -a
 ```
 <br>
 
 #### 3-2-5. top : 컨테이너 내부에 실행되고 있는 프로세스를 출력합니다
+
+> docker-compose top <services>
 ```bash
-# docker-compose top <services>
-docker-compose top mysql
 docker-compose top ubuntu
 ```
 
@@ -975,44 +967,11 @@ docker-compose down
 
 ### 3-3. 컴포즈 파일을 통한 실습
 
-#### 3-3-1. 도커 컴포즈를 통해서 커맨드라인 옵션을 설정을 통해 수행할 수 있습니다
-
-```bash
-# mysql: 이 등장하는 이후로 20줄을 출력
-cat docker-compose.yml | grep -ia20 'mysql:' docker-compose.yml
-```
-```yaml
-# docker-compose.yml
-  mysql:
-    container_name: mysql
-    image: psyoblade/data-engineer-mysql:1.4
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: $MYSQL_DATABASE
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
-    ports:
-      - '3306:3306'
-    networks:
-      - default
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      interval: 3s
-      timeout: 1s
-      retries: 3
-    volumes:
-      - ./mysql/etc:/etc/mysql/conf.d
-```
-<br>
-
-
-#### 3-3-2. 도커 컴포즈 파일(`docker-compose.yml`)을 직접 생성 합니다
+#### 3-3-1. 도커 컴포즈 파일(`docker-compose.yml`)을 직접 생성 합니다
 
 > 컴포즈 실습을 위한 경로를 생성합니다
-
+> terminal
 ```bash
-# terminal
 mkdir -p ~/work/compose-training
 cd ~/work/compose-training
 ```
@@ -1022,26 +981,26 @@ for dir in `echo "custom init"`; do mkdir -p $dir; done
 ```
 <br>
 
+
 ### 3-4. 외부 볼륨을 통한 환경설정
 
 > 외부 볼륨을 통한 환경설정 제공 및 설정을 실습합니다
 
 #### 3-4-1. 캐릭터셋 변경 위한 `my.cnf` 생성하기
 
+> cat > custom/my.cnf
 ```bash
-# cat > custom/my.cnf
 [client]
-default-character-set=utf8
+default-character-set = utf8mb4
 
 [mysqld]
-character-set-client-handshake=FALSE
-init_connect="SET collation_connection = utf8_general_ci"
-init_connect="SET NAMES utf8"
-character-set-server=utf8
-collation-server=utf8_general_ci
+init_connect = "SET collation_connection = utf8mb4_general_ci"
+init_connect = "SET NAMES utf8mb4"
+character-set-server = utf8mb4
+collation-server = utf8mb4_general_ci
 
 [mysql]
-default-character-set=utf8
+default-character-set = utf8mb4
 ```
 <br>
 
@@ -1050,14 +1009,14 @@ default-character-set=utf8
 
 > 지정한 설정파일을 사용하고, 내부 볼륨을 통한 MySQL 기동으로 변경합니다
 
+> cat > docker-compose.yml
 ```bash
-# cat > docker-compose.yml
 version: "3"
 
 services:
   mysql:
     container_name: mysql
-    image: local/mysql:5.7
+    image: local/mysql:8.4.5
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: rootpass
@@ -1078,8 +1037,8 @@ networks:
 
 #### 3-5-1. MySQL 초기화 데이터 파일 `testb.sql` 파일을 생성합니다
 
+> cat > init/testdb.sql
 ```bash
-# cat > init/testdb.sql
 DROP TABLE IF EXISTS `seoul_popular_trip`;
 CREATE TABLE `seoul_popular_trip` (
   `category` int(11) NOT NULL,
@@ -1099,17 +1058,18 @@ UNLOCK TABLES;
 
 #### 3-5-2. 커스텀 MySQL 빌드를 위한 도커파일 `Dockerfile`을 생성합니다
 
+> cat > Dockerfile
 ```Dockerfile
-# cat > Dockerfile
-ARG BASE_CONTAINER=mysql:5.7
+ARG BASE_CONTAINER=mysql:8.4.5
 FROM $BASE_CONTAINER
-LABEL maintainer="student@modulabs.com"
+LABEL maintainer="student@bigbrother.com"
 
 ADD ./init /docker-entrypoint-initdb.d
 
 EXPOSE 3306
 
 CMD ["mysqld"]
+
 ```
 <br>
 
@@ -1117,7 +1077,7 @@ CMD ["mysqld"]
 #### 3-5-3. 로컬에서 도커 이미지를 빌드합니다
 
 ```bash
-docker build -t local/mysql:5.7 .
+docker build -t local/mysql:8.4.5 .
 ```
 <br>
 
@@ -1145,8 +1105,9 @@ select * from seoul_popular_trip;
 > MySQL 과 phpMyAdmin 2가지 서비스를 기동하는 컴포즈를 생성합니다
 
 * 기존의 컨테이너를 중단시킵니다 (삭제가 아닙니다)
+
+> terminal
 ```bash
-# terminal
 docker-compose down
 ```
 
@@ -1154,13 +1115,14 @@ docker-compose down
 
 * 기존의 컨테이너를 삭제하게 되면 볼륨 마운트가 없기 때문에 데이터를 확인할 수 없는 점 유의하시기 바랍니다
   - 아래는 기존의  `docker-compose.yml` 파일을 덮어쓰되 phpMyAdmin 만 추가합니다
+
+> cat > docker-compose.yml
 ```bash
-# cat > docker-compose.yml
 version: "3"
 
 services:
   mysql:
-    image: local/mysql:5.7
+    image: local/mysql:8.4.5
     container_name: mysql
     restart: always
     environment:
@@ -1171,7 +1133,7 @@ services:
     volumes:
       - ./custom:/etc/mysql/conf.d
   php:
-    image: phpmyadmin/phpmyadmin
+    image: library/phpmyadmin:5.2
     container_name: phpmyadmin
     links:
       - mysql
@@ -1188,12 +1150,12 @@ networks:
     name: default_network
 ```
 
+> 변경한 컴포즈를 실행합니다
 ```bash
-# 변경한 컴포즈를 실행합니다
 docker-compose up -d
 ```
 
-> phpMyAdmin(http://`vm{###}.koreacentral.cloudapp.azure.com`) 사이트에 접속하여 서버: `mysql`, 사용자명: `user`, 암호: `pass` 로 접속합니다
+> `http://localhost` 접속하여 서버: `mysql`, 사용자명: `user`, 암호: `pass` 로 접속합니다
 
 <br>
 
@@ -1202,21 +1164,23 @@ docker-compose up -d
 > 테스트 헬스체크를 통해 MySQL 이 정상 기동되었을 때에 다른 어플리케이션을 띄웁니다
 
 * 기존의 컨테이너를 중단시킵니다 (삭제가 아닙니다)
+
+> terminal
 ```bash
-# terminal
 docker-compose down
 ```
 
 #### 3-7-1. MySQL 기동이 완료되기를 기다리는 컴포즈 파일을 구성합니다
 
 * 아래와 같이 구성된 컴포즈 파일을 생성합니다
+
+> cat docker-compose.yml
 ```bash
-# cat docker-compose.yml
 version: "3"
 
 services:
   mysql:
-    image: local/mysql:5.7
+    image: local/mysql:8.4.5
     container_name: mysql
     restart: always
     environment:
@@ -1232,7 +1196,7 @@ services:
     volumes:
       - ./custom:/etc/mysql/conf.d
   php:
-    image: phpmyadmin/phpmyadmin
+    image: library/phpmyadmin:5.2
     container_name: phpmyadmin
     depends_on:
       - mysql
@@ -1245,11 +1209,16 @@ services:
     restart: always
     ports:
       - 80:80
+
+networks:
+  default:
+    name: default_network
 ```
 
 #### 3-7-2. 실습이 완료되었으므로 모든 컨테이너를 종료합니다
+
+> terminal
 ```bash
-# terminal
 docker-compose down
 ```
 
